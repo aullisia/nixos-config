@@ -76,6 +76,22 @@
     #media-session.enable = true;
   };
 
+  # Nvidia graphics drivers
+  hardware.graphics = {
+    enable = true;
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -93,6 +109,19 @@
   # services.xserver.displayManager.autoLogin.enable = true;
   # services.xserver.displayManager.autoLogin.user = "test";
 
+  # Flatpak
+  services.flatpak.enable = true;
+  # services.flatpak.remotes = [
+  #   # {
+  #   #   name = "flathub";
+  #   #   location = "https://flathub.org/repo/flathub.flatpakrepo";
+  #   # },
+  # ];
+  services.flatpak.packages = [
+    # { appId = "com.brave.Browser"; origin = "flathub"; }
+    { flatpakref = "https://sober.vinegarhq.org/sober.flatpakref"; sha256="sha256:1pj8y1xhiwgbnhrr3yr3ybpfis9slrl73i0b1lc9q89vhip6ym2l"; } # Sober
+  ];
+
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -102,10 +131,22 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     vscode
     git
+    discord
+    prismlauncher # minecraft
+  ];
+
+  nixpkgs.overlays = [
+    (self: super: {
+      discord = super.discord.overrideAttrs (
+        _: { src = builtins.fetchTarball {
+          url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+          sha256 = "sha256:1ivcw1cdxgms7dnqy46zhvg6ajykrjg2nkg91pibv60s5zqjqnj2";
+        }; }
+      );
+    })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -136,5 +177,4 @@
   system.stateVersion = "24.11"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes"  ];
-
 }

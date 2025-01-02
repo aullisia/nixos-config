@@ -7,9 +7,10 @@
       url = "github:nix-community/home-manager?ref=release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.5.2";
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, nix-flatpak }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -22,6 +23,7 @@
         aul = lib.nixosSystem {
           inherit system;
           modules = [
+            nix-flatpak.nixosModules.nix-flatpak
             ./configuration.nix
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
