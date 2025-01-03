@@ -5,11 +5,6 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -49,7 +44,20 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
+
   services.desktopManager.plasma6.enable = true;
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+  ];
+
+  # programs.wayfire = {
+  #   enable = true;
+  #   plugins = with pkgs.wayfirePlugins; [
+  #     wcm
+  #     wf-shell
+  #     wayfire-plugins-extra
+  #   ];
+  # };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -100,27 +108,7 @@
     isNormalUser = true;
     description = "aul";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      # kate
-    ];
   };
-
-  # Enable automatic login for the user.
-  # services.xserver.displayManager.autoLogin.enable = true;
-  # services.xserver.displayManager.autoLogin.user = "test";
-
-  # Flatpak
-  services.flatpak.enable = true;
-  # services.flatpak.remotes = [
-  #   # {
-  #   #   name = "flathub";
-  #   #   location = "https://flathub.org/repo/flathub.flatpakrepo";
-  #   # },
-  # ];
-  services.flatpak.packages = [
-    # { appId = "com.brave.Browser"; origin = "flathub"; }
-    { flatpakref = "https://sober.vinegarhq.org/sober.flatpakref"; sha256="sha256:1pj8y1xhiwgbnhrr3yr3ybpfis9slrl73i0b1lc9q89vhip6ym2l"; } # Sober
-  ];
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -134,19 +122,6 @@
     wget
     vscode
     git
-    discord
-    prismlauncher # minecraft
-  ];
-
-  nixpkgs.overlays = [
-    (self: super: {
-      discord = super.discord.overrideAttrs (
-        _: { src = builtins.fetchTarball {
-          url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-          sha256 = "sha256:1ivcw1cdxgms7dnqy46zhvg6ajykrjg2nkg91pibv60s5zqjqnj2";
-        }; }
-      );
-    })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

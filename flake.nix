@@ -10,7 +10,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.5.2";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-flatpak }:
+  outputs = inputs @ { self, nixpkgs, home-manager, nix-flatpak, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -18,23 +18,36 @@
         config.allowUnfree = true;
       };
       lib = nixpkgs.lib;
+      flakeRoot = toString self.repoDir;
     in {
-      nixosConfigurations = {
-        aul = lib.nixosSystem {
-          inherit system;
-          modules = [
-            nix-flatpak.nixosModules.nix-flatpak
-            ./configuration.nix
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.aul = {
-                imports = [ ./home.nix ];
-              };
-            }
-          ];
-        };
-      };
+      nixosConfigurations = (
+        import ./hosts {
+          inherit (nixpkgs) lib;
+          inherit inputs nixpkgs home-manager nix-flatpak flakeRoot;
+        }
+      );
+
+      # nixosConfigurations = {
+      #   aul = lib.nixosSystem {
+      #     inherit system;
+      #     modules = [
+      #       nix-flatpak.nixosModules.nix-flatpak
+      #       ./configuration.nix
+      #       home-manager.nixosModules.home-manager {
+      #         home-manager.useGlobalPkgs = true;
+      #         home-manager.useUserPackages = true;
+      #         home-manager.users.aul = {
+      #           imports = [
+      #             nix-flatpak.homeManagerModules.nix-flatpak
+      #             ./home.nix
+      #           ];
+      #         };
+      #       }
+      #     ];
+      #   };
+      # };
+
+
       #  hmConfig = {
       #  test = home-manager.lib.homeManagerConfiguration {
       #    inherit system pkgs;

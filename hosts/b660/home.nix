@@ -37,18 +37,8 @@
   # ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+  home.file.".config/wayfire.ini" = {
+    source = ../../dotfiles/wayfire.ini; # TODO better reference for dotfiles..
   };
 
   # Home Manager can also manage your environment variables through
@@ -74,6 +64,30 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [ neofetch ];
-  
+  # Packages
+
+  # Flatpak
+  services.flatpak.enable = true;
+  services.flatpak.packages = [
+    { flatpakref = "https://sober.vinegarhq.org/sober.flatpakref"; sha256="sha256:1pj8y1xhiwgbnhrr3yr3ybpfis9slrl73i0b1lc9q89vhip6ym2l"; } # Roblox Player
+  ];
+
+  # Nix
+  home.packages = with pkgs; [ 
+    neofetch
+    discord
+    prismlauncher
+    alacritty
+  ];
+
+  nixpkgs.overlays = [
+    (self: super: {
+      discord = super.discord.overrideAttrs (
+        _: { src = builtins.fetchTarball {
+          url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+          sha256 = "sha256:1ivcw1cdxgms7dnqy46zhvg6ajykrjg2nkg91pibv60s5zqjqnj2";
+        }; }
+      );
+    })
+  ];
 }
