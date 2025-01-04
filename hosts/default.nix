@@ -7,6 +7,8 @@ let
     config.allowUnfree = true;
   };
   lib = nixpkgs.lib;
+  dotFilesPath = "../../dotfiles";
+  modulesPath = "../../modules";
 in
 {
   b660 = lib.nixosSystem {
@@ -20,6 +22,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; };
         home-manager.users.aul = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak

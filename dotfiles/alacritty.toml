@@ -1,0 +1,17 @@
+[window]
+title = "Terminal"
+dynamic_padding = true
+opacity = 1.0
+blur = false
+decorations_theme_variant = "Dark"
+
+padding.x = 20
+padding.y = 20
+
+[font]
+size = 10.0
+
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/carbonfox.toml"
+]

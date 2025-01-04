@@ -18,12 +18,11 @@
         config.allowUnfree = true;
       };
       lib = nixpkgs.lib;
-      flakeRoot = toString self.repoDir;
     in {
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager nix-flatpak flakeRoot;
+          inherit inputs nixpkgs home-manager nix-flatpak;
         }
       );
 

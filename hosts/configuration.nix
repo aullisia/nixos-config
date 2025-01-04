@@ -8,6 +8,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
 
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -40,24 +41,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  programs.xwayland.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-
-  services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-  ];
-
-  # programs.wayfire = {
-  #   enable = true;
-  #   plugins = with pkgs.wayfirePlugins; [
-  #     wcm
-  #     wf-shell
-  #     wayfire-plugins-extra
-  #   ];
-  # };
+  # programs.xwayland.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -84,22 +68,6 @@
     #media-session.enable = true;
   };
 
-  # Nvidia graphics drivers
-  hardware.graphics = {
-    enable = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -110,11 +78,13 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # fonts
+  fonts.packages = with pkgs; [
+    nerdfonts
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -123,6 +93,12 @@
     vscode
     git
   ];
+  
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than-1w";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
