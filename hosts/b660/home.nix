@@ -67,8 +67,6 @@
     discord
     gimp
     prismlauncher # Minecraft
-    # cava # TODO config use xava instead
-    eww # TODO config
   ];
 
   # Overlays
