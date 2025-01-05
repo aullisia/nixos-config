@@ -18,5 +18,6 @@ in
 
   home.file.".config/alacritty/alacritty.toml" = {
     source = alacrittyConfigFile;
+    # onChange = builtins.readFile ./alacritty.sh; # TODO
   };
 }

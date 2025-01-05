@@ -17,15 +17,18 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   imports = [
-    ./${modulesPath}/programs/firefox
+    (import ./${modulesPath}/programs/firefox { 
+      wallpaper = ./${dotFilesPath}/wallpapers/ying-yi-72px.jpg;
+      user_js = ./${dotFilesPath}/firefox_user.js;
+    } )
     ./${modulesPath}/shell/starship.nix
-    (import ./${modulesPath}/programs/alacritty.nix { alacrittyConfigFile = ./${dotFilesPath}/alacritty.toml; } )
+    (import ./${modulesPath}/programs/alacritty { alacrittyConfigFile = ./${dotFilesPath}/alacritty.toml; } )
   ];
 
   # Wayfire dotfiles
-  home.file.".config/wayfire.ini" = {
-    source = ./${dotFilesPath}/wayfire.ini;
-  };
+  # home.file.".config/wayfire.ini" = {
+  #   source = ./${dotFilesPath}/wayfire.ini;
+  # };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -62,8 +65,9 @@
   home.packages = with pkgs; [ 
     fastfetch
     discord
+    gimp
     prismlauncher # Minecraft
-    cava # TODO config
+    # cava # TODO config use xava instead
     eww # TODO config
   ];
 

@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, home-manager, ... }:
 
 {
   imports =
   [
     ./hardware-configuration.nix
+    # (import ../../modules/desktops/wayfire.nix { wayfireConfig =  ../../dotfiles/wayfire.ini; } )
+    (import ../../modules/desktops/kde.nix { wallpaper = ../../dotfiles/wallpapers/ying-yi-72px.jpg;} )
   ];
-
   # Nvidia graphics drivers
   hardware.graphics = {
     enable = true;
@@ -22,24 +23,9 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
 
-  services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-  ];
-
-  programs.wayfire = {
-    enable = true;
-    plugins = with pkgs.wayfirePlugins; [
-      wcm
-      wf-shell
-      wayfire-plugins-extra
-    ];
-  };
-
   environment.systemPackages = with pkgs; [
-    cowsay
+    # Add system wide packages
   ];
 }
