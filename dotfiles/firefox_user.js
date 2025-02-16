@@ -123,3 +123,6 @@ user_pref("dom.event.clipboardevents.enabled", false); /* clipboard telemetry */
 user_pref("dom.battery.enabled", false); /* battery telemetry.. why???*/
 user_pref("extensions.pocket.enabled", false); 
 user_pref("datareporting.healthreport.uploadEnabled", false);
+user_pref("privacy.clearOnShutdown.cookies", false);
+user_pref("privacy.clearOnShutdown.cache", false);
+

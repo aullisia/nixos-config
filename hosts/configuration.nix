@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, vars, ... }:
 
 {
   # Bootloader.
@@ -39,10 +39,6 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  # programs.xwayland.enable = true;
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -72,10 +68,11 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.aul = {
+  users.users."${vars.user}" = {
     isNormalUser = true;
-    description = "aul";
+    description = "${vars.user}";
     extraGroups = [ "networkmanager" "wheel" ];
+    initialPassword = "password";
   };
 
   # Allow unfree packages
@@ -90,7 +87,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    vscode
     git
   ];
   

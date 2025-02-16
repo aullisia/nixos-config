@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, home-manager, nix-flatpak, ... }:
+{ inputs, nixpkgs, home-manager, nix-flatpak, vars, ... }:
 
 let
   system = "x86_64-linux";
@@ -22,8 +22,8 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; };
-        home-manager.users.aul = {
+        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; inherit vars; };
+        home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
             ./b660/home.nix
@@ -31,5 +31,28 @@ in
         };
       }
     ];
+    specialArgs = { inherit vars; };
+  };
+  vivobook = lib.nixosSystem {
+    inherit system;
+    modules = [
+      nix-flatpak.nixosModules.nix-flatpak
+
+      ./vivobook
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; inherit vars; };
+        home-manager.users."${vars.user}" = {
+          imports = [
+            nix-flatpak.homeManagerModules.nix-flatpak
+            ./vivobook/home.nix
+          ];
+        };
+      }
+    ];
+    specialArgs = { inherit vars; };
   };
 }

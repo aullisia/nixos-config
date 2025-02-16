@@ -12,17 +12,14 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, nix-flatpak, ... }:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
+      vars = {
+        user = "aul";
       };
-      lib = nixpkgs.lib;
     in {
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager nix-flatpak;
+          inherit inputs nixpkgs home-manager nix-flatpak vars;
         }
       );
 

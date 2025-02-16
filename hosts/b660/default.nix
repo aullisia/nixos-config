@@ -7,6 +7,9 @@
     # (import ../../modules/desktops/wayfire.nix { wayfireConfig =  ../../dotfiles/wayfire.ini; } )
     (import ../../modules/desktops/kde.nix { wallpaper = ../../dotfiles/wallpapers/ying-yi-72px.jpg;} )
   ];
+
+  services.xserver.enable = true;
+
   # Nvidia graphics drivers
   hardware.graphics = {
     enable = true;
