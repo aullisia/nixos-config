@@ -21,7 +21,7 @@
       wallpaper = ./${dotFilesPath}/wallpapers/ying-yi-72px.jpg;
       user_js = ./${dotFilesPath}/firefox_user.js;
     } )
-    ./${modulesPath}/shell/starship.nix
+   ./${modulesPath}/shell/starship.nix
     (import ./${modulesPath}/programs/alacritty { alacrittyConfigFile = ./${dotFilesPath}/alacritty.toml; } )
   ];
 

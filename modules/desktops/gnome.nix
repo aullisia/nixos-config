@@ -41,7 +41,8 @@
   environment.systemPackages = with pkgs; [
     vanilla-dmz
   ];
-  home-manager.users.aul = {
+
+  home-manager.users."${vars.user}" = {
     home.packages = with pkgs; [ 
 
     ];
