@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, home-manager, vars, ... }:
 
 {
   services.xserver.desktopManager.gnome.enable = true;

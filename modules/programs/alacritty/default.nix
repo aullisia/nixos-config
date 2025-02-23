@@ -4,7 +4,7 @@ let
     owner = "alacritty";
     repo = "alacritty-theme";
     rev = "master";
-    sha256 = "sha256-3SNuamNrV26KQboBBSniAF/C97E2OUNHjpnb9vGHu6I=";
+    sha256 = "sha256-ROer+oqSY/Z5PAxZFJ5U9R+kMfWb596/1CuEWTcoMIk=";
   };
 in
 {

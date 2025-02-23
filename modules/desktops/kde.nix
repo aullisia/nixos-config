@@ -6,7 +6,7 @@
     plasma-browser-integration
   ];
 
-  home-manager.users.aul = {
+  home-manager.users."${vars.user}" = {
     home.packages = with pkgs; [ 
       libsForQt5.qtstyleplugin-kvantum
     ];

@@ -87,8 +87,17 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    git
   ];
+
+  programs.git = {
+    enable = true;
+    config = {
+      user = {
+        name = "aullisia";
+        email = "aullisia.dev@gmail.com";
+      };
+    };
+  };
   
   nix.gc = {
     automatic = true;

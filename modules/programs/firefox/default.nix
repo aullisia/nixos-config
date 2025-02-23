@@ -17,7 +17,7 @@ let
   };
   
   homeDir = builtins.getEnv "HOME";
-  profilePath = "uoj4h5x6.default"; # TODO find a solution to get profilePath out of profiles.ini
+  profilePath = "0bvpg1hj.default"; # TODO find a solution to get profilePath out of profiles.ini
   
   profileDir = "${homeDir}/.librewolf/${profilePath}";
   # https://github.com/soulhotel/FF-ULTIMA
@@ -63,7 +63,7 @@ in
       DontCheckDefaultBrowser = true;
 
       ExtensionSettings = {
-        "*".installation_mode = "blocked";
+        "*".installation_mode = "allowed";
         # "userchrome-toggle-extended@n2ezr.ru" = {
         #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/userchrome-toggle-extended/latest.xpi";
         #   installation_mode = "force_installed";

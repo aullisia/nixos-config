@@ -13,6 +13,6 @@
   # boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
 
   environment.systemPackages = with pkgs; [
-    
+    dotnet-sdk_9
   ];
 }

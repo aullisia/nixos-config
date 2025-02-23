@@ -13,7 +13,7 @@
     ];
   };
 
-  home-manager.users.aul = {
+  home-manager.users."${vars.user}" = {
     home.file.".config/wayfire.ini" = {
       source = wayfireConfig;
     };
