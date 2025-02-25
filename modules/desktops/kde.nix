@@ -1,4 +1,4 @@
-{ wallpaper }: { config, pkgs, home-manager, ... }:
+{ wallpaper }: { config, pkgs, home-manager, vars, ... }:
 
 {
   services.desktopManager.plasma6.enable = true;

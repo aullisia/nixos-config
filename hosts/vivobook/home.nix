@@ -18,8 +18,7 @@
 
   imports = [
     (import ./${modulesPath}/programs/firefox { 
-      wallpaper = ./${dotFilesPath}/wallpapers/wallhaven-m3kj39.jpg;
-      user_js = ./${dotFilesPath}/firefox_user.js;
+      wallpaper = ./${dotFilesPath}/wallpapers/wallhaven-x6vjkz_1920x1080.png;
     } )
    ./${modulesPath}/shell/starship.nix
     (import ./${modulesPath}/programs/alacritty { alacrittyConfigFile = ./${dotFilesPath}/alacritty.toml; } )
@@ -35,10 +34,10 @@
   # Packages
 
   # Flatpak
-  services.flatpak.enable = true;
-  services.flatpak.packages = [
-    { flatpakref = "https://sober.vinegarhq.org/sober.flatpakref"; sha256="sha256:1pj8y1xhiwgbnhrr3yr3ybpfis9slrl73i0b1lc9q89vhip6ym2l"; } # Roblox Player
-  ];
+  # services.flatpak.enable = true;
+  # services.flatpak.packages = [
+  #   { flatpakref = "https://sober.vinegarhq.org/sober.flatpakref"; sha256="sha256:1pj8y1xhiwgbnhrr3yr3ybpfis9slrl73i0b1lc9q89vhip6ym2l"; } # Roblox Player
+  # ];
 
   # Nix
   home.packages = with pkgs; [ 
@@ -48,6 +47,7 @@
     jetbrains.idea-ultimate
     jetbrains.rider
     vscode
+    nb # notes
   ];
 
   # Overlays

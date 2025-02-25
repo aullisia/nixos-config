@@ -1,4 +1,4 @@
-{ wayfireConfig }: { config, pkgs, home-manager, ... }:
+{ wayfireConfig }: { config, pkgs, home-manager, vars, ... }:
 
 # Helpful recourses:
 # https://github.com/bluebyt/Wayfire-dots
