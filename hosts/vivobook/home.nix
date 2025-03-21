@@ -48,6 +48,13 @@
     jetbrains.rider
     vscode
     nb # notes
+    arduino-ide
+    qimgv
+
+    # Office
+    libreoffice-qt
+    hunspell
+    hunspellDicts.nl_NL
   ];
 
   # Overlays
