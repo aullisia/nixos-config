@@ -17,7 +17,7 @@ let
   };
   
   homeDir = builtins.getEnv "HOME";
-  profilePath = "em0pvh4o.default"; # TODO find a solution to get profilePath out of profiles.ini
+  profilePath = "ag7ttgx0.default"; # TODO find a solution to get profilePath out of profiles.ini
   
   profileDir = "${homeDir}/.librewolf/${profilePath}";
   # https://github.com/soulhotel/FF-ULTIMA

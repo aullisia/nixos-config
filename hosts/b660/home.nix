@@ -45,6 +45,10 @@
     vscode
     nb # notes
     qimgv
+    vesktop # discord
+    brave
+    vlc
+    spotify
   ];
 
   # Overlays
