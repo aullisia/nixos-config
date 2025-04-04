@@ -30,6 +30,13 @@
   };
   networking.firewall.allowedUDPPorts = [ 51820 ];
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
   # System Packages
   environment.systemPackages = with pkgs; [
     dotnet-sdk_9
@@ -72,7 +79,7 @@
   # System flatpaks
   services.flatpak.enable = true;
   services.flatpak.packages = [
-    { flatpakref = "https://sober.vinegarhq.org/sober.flatpakref"; sha256="sha256:1pj8y1xhiwgbnhrr3yr3ybpfis9slrl73i0b1lc9q89vhip6ym2l"; } # Roblox Player
+    { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Sober.flatpakref"; sha256="sha256:15ak2i5nk64wbmswqml2cqfgidczawqybmc7pmw94yp8wcd4yv6i"; } # Roblox Player
     { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Vinegar.flatpakref"; sha256="sha256:03l53m3hfwsqr1jbgfs67jr139zsp27nik253b8xgv3s5g59djc0"; } # Roblox Studio
     # { flatpakref = "https://dl.flathub.org/repo/appstream/org.godotengine.GodotSharp.flatpakref"; sha256="sha256:0i58wijbx20kmqz20mwip25qm7nyb8r0azx9nqzbsr3068jb97vq"; } # Godot Mono
   ];
