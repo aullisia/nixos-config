@@ -1,0 +1,30 @@
+* {
+  font-family: "JetBrains Mono", monospace;
+}
+
+window {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  background-color: rgba(30, 30, 46, 0.95); /* base */
+  border-width: 2px;
+  border-color: #cba6f7; /* mauve */
+}
+
+button image {
+  transition: 200ms;
+  -gtk-icon-transform: scale(1);
+}
+button:hover image {
+  transition: 200ms;
+  -gtk-icon-transform: scale(1.4);
+}
+
+/* All labels */
+.wf-panel label {
+  color: #cdd6f4; /* text */
+}
+
+/* Taskbar window labels specifically */
+.wf-panel .window-list .window-button label {
+  color: #cba6f7; /* mauve */
+}

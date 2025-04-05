@@ -5,16 +5,23 @@
   [
     ./hardware-configuration.nix
     (import ../../modules/desktops/gnome.nix)
-    (import ../../modules/desktops/wayfire.nix { wayfireConfig =  ../../dotfiles/wayfire.ini; } )
+    (import ../../modules/desktops/wayfire.nix { 
+      wayfireConfig =  ../../dotfiles/wayfire.ini;
+      wfShell = ../../dotfiles/wf-shell.ini;
+      wfDock = ../../dotfiles/wf-dock.css;
+      ironbarConfig = ../../dotfiles/ironbar;
+      ulauncherConfig = ../../dotfiles/ulauncher;
+      wfPanel = ../../dotfiles/wf-panel.css;
+    })
   ];
 
   # Services for Gnome
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
 
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  services.blueman.enable = true; # Bluetooth GUI
+  # hardware.bluetooth.enable = true; # enables support for Bluetooth
+  # hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  # services.blueman.enable = true; # Bluetooth GUI
 
   hardware.graphics = {
     enable = true;
@@ -68,6 +75,6 @@
     { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Vinegar.flatpakref"; sha256="sha256:03l53m3hfwsqr1jbgfs67jr139zsp27nik253b8xgv3s5g59djc0"; } # Roblox Studio
   ];
   environment.systemPackages = with pkgs; [
-
+    jdk21_headless
   ];
 }

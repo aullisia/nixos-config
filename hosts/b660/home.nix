@@ -49,6 +49,7 @@
     brave
     vlc
     spotify
+    prismlauncher
   ];
 
   # Overlays
