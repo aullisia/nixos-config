@@ -4,7 +4,6 @@
   imports =
   [
     ./hardware-configuration.nix
-    (import ../../modules/desktops/gnome.nix)
     (import ../../modules/desktops/wayfire.nix { 
       wayfireConfig =  ../../dotfiles/wayfire.ini;
       wfShell = ../../dotfiles/wf-shell.ini;
@@ -15,13 +14,29 @@
     })
   ];
 
-  # Services for Gnome
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  # KDE
+  services.xserver.enable = true; # optional
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    konsole
+    ark
+    elisa
+    gwenview
+    okular
+    kate
+    khelpcenter
+    dolphin-plugins
+    spectacle
+    ffmpegthumbs
+    krdp
+  ];
 
-  # hardware.bluetooth.enable = true; # enables support for Bluetooth
-  # hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  # services.blueman.enable = true; # Bluetooth GUI
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true; # Bluetooth GUI
 
   hardware.graphics = {
     enable = true;
@@ -75,6 +90,30 @@
     { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Vinegar.flatpakref"; sha256="sha256:03l53m3hfwsqr1jbgfs67jr139zsp27nik253b8xgv3s5g59djc0"; } # Roblox Studio
   ];
   environment.systemPackages = with pkgs; [
+    catppuccin-kde
+    kdePackages.qtmultimedia
     jdk21_headless
+    jdk17_headless
+
+    # Create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
+    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
+      pkgs.buildFHSUserEnv (base // {
+      name = "fhs";
+      targetPkgs = pkgs: 
+        # pkgs.buildFHSUserEnv provides only a minimal FHS environment,
+        # lacking many basic packages needed by most software.
+        # Therefore, we need to add them manually.
+        #
+        # pkgs.appimageTools provides basic packages required by most software.
+        (base.targetPkgs pkgs) ++ (with pkgs; [
+          pkg-config
+          ncurses
+          # Feel free to add more packages here if needed.
+        ]
+      );
+      profile = "export FHS=1";
+      runScript = "bash";
+      extraOutputsToInstall = ["dev"];
+    }))
   ];
 }

@@ -18,7 +18,7 @@
 
   imports = [
     (import ./${modulesPath}/programs/firefox { 
-      wallpaper = ./${dotFilesPath}/wallpapers/wallhaven-x6vjkz_1920x1080.png;
+      wallpaper = ./${dotFilesPath}/wallpapers/wallpaper-theme-converter3.png;
     } )
    ./${modulesPath}/shell/starship.nix
     (import ./${modulesPath}/programs/alacritty { alacrittyConfigFile = ./${dotFilesPath}/alacritty.toml; } )
@@ -50,6 +50,8 @@
     vlc
     spotify
     prismlauncher
+    ckan
+    flameshot
   ];
 
   # Overlays

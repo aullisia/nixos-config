@@ -14,6 +14,6 @@ size = 10.0
 
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/carbonfox.toml"
+    "~/.config/alacritty/themes/themes/catppuccin_mocha.toml"
 ]
 live_config_reload = true
