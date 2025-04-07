@@ -52,6 +52,7 @@
     prismlauncher
     ckan
     flameshot
+    p7zip
   ];
 
   # Overlays

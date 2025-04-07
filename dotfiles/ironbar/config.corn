@@ -3,7 +3,7 @@ let {
 
     $launcher = {
         type = "launcher"
-        favorites = ["librewolf"]
+        favorites = [ "dolphin" "spotify" "vesktop" "librewolf" ]
         show_names = false
         show_icons = true
     }
@@ -24,7 +24,7 @@ let {
 
     $clock = { type = "clock" }
 
-    $clipboard = { type = "clipboard" max_items = 3 truncate.mode = "end" truncate.length = 50 }
+    // $clipboard = { type = "clipboard" max_items = 3 truncate.mode = "end" truncate.length = 50 }
 
     $volume = {
         type = "volume"
@@ -51,7 +51,7 @@ let {
                     { type = "button" class="power-btn" label = "<span font-size='40pt'></span>" on_click = "!reboot" }
                 ]
             }
-            { type = "label" name = "uptime" label = "Uptime: {{30000:uptime -p | cut -d ' ' -f2-}}" }
+            // { type = "label" name = "uptime" label = "Uptime: {{30000:uptime -p | cut -d ' ' -f2-}}" }
         ]
     }
 
@@ -62,13 +62,13 @@ let {
         bar = [ $button ]
         popup = [ $popup ]
 
-        tooltip = "Up: {{30000:uptime -p | cut -d ' ' -f2-}}"
+        // tooltip = "Up: {{30000:uptime -p | cut -d ' ' -f2-}}"
     }
     // -- end custom --
 
     $left = []
     $center = [ $launcher ]
-    $right = [ $volume $clipboard $power_menu $clock $notifications ]
+    $right = [ $volume $power_menu $clock $notifications ]
 }
 in {
     monitors.DP-1 = {

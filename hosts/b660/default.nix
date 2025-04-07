@@ -75,6 +75,12 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 25565 24454 ];
+    allowedUDPPorts = [ 24454 25565 ];
+  };
+
   # Steam
   programs.steam = {
     enable = true;

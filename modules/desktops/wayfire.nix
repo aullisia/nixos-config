@@ -17,6 +17,7 @@
     ironbar
     # sfwbar
     ulauncher
+    swaynotificationcenter
   ];
 
   home-manager.users."${vars.user}" = {
