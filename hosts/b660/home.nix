@@ -44,6 +44,7 @@
     fastfetch
     vscode
     nb # notes
+    trilium-desktop
     qimgv
     vesktop # discord
     brave
@@ -53,6 +54,12 @@
     ckan
     flameshot
     p7zip
+    jetbrains-toolbox
+    jetbrains.idea-ultimate
+    gimp
+    obs-studio
+    blender
+    shotcut
   ];
 
   # Overlays

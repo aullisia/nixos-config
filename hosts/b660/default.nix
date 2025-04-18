@@ -22,13 +22,11 @@
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
     konsole
-    ark
     elisa
     gwenview
     okular
     kate
     khelpcenter
-    dolphin-plugins
     spectacle
     ffmpegthumbs
     krdp
@@ -81,6 +79,12 @@
     allowedUDPPorts = [ 24454 25565 ];
   };
 
+  # Shell aliases
+  programs.bash.shellAliases = {
+    nixb = "sudo nixos-rebuild switch --flake .#b660";
+    ff = "fastfetch";
+  };
+
   # Steam
   programs.steam = {
     enable = true;
@@ -92,14 +96,22 @@
   # System Packages
   services.flatpak.enable = true;
   services.flatpak.packages = [
-    { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Sober.flatpakref"; sha256="sha256:15ak2i5nk64wbmswqml2cqfgidczawqybmc7pmw94yp8wcd4yv6i"; } # Roblox Player
+    # { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Sober.flatpakref"; sha256="0000000000000000000000000000000000000000000000000000"; } # Roblox Player
+    { appId = "org.vinegarhq.Sober"; origin = "flathub";  }
     { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Vinegar.flatpakref"; sha256="sha256:03l53m3hfwsqr1jbgfs67jr139zsp27nik253b8xgv3s5g59djc0"; } # Roblox Studio
   ];
+
+  # environment.variables.DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "true";
+
   environment.systemPackages = with pkgs; [
+    # gwe # GreenWithEnvy
+    # tuxclocker
+    # unigine-superposition
     catppuccin-kde
     kdePackages.qtmultimedia
     jdk21_headless
     jdk17_headless
+    dotnet-sdk_9
 
     # Create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
