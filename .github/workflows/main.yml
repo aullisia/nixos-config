@@ -16,6 +16,7 @@ jobs:
         with:
           determinate: true
       - name: Update flake.lock
+        id: update
         uses: DeterminateSystems/update-flake-lock@v24
         with:
           pr-title: "Update flake.lock" # Title of PR to be created
