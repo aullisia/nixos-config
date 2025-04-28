@@ -59,7 +59,10 @@
     gimp
     obs-studio
     blender
+    blockbench
     shotcut
+    xpipe
+    gamescope
   ];
 
   # Overlays

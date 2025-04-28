@@ -93,6 +93,19 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  # direnv
+  programs.direnv = {
+    enable = true;
+    package = pkgs.direnv;
+    silent = false;
+    loadInNixShell = true;
+    direnvrcExtra = "";
+    nix-direnv = {
+      enable = true;
+      package = pkgs.nix-direnv;
+    };
+  };
+
   # System Packages
   services.flatpak.enable = true;
   services.flatpak.packages = [
@@ -107,6 +120,8 @@
     # gwe # GreenWithEnvy
     # tuxclocker
     # unigine-superposition
+    winetricks
+    protontricks
     catppuccin-kde
     kdePackages.qtmultimedia
     jdk21_headless
