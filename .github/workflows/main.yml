@@ -12,11 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Install Determinate Nix
-        uses: DeterminateSystems/nix-installer-action@17
+        uses: DeterminateSystems/nix-installer-action@v17
         with:
           determinate: true
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@24
+        uses: DeterminateSystems/update-flake-lock@v24
         with:
           pr-title: "Update flake.lock" # Title of PR to be created
           pr-labels: |                  # Labels to be set on the PR
