@@ -63,6 +63,7 @@
     shotcut
     xpipe
     gamescope
+    ani-cli
   ];
 
   # Overlays

@@ -12,6 +12,7 @@
       ulauncherConfig = ../../dotfiles/ulauncher;
       wfPanel = ../../dotfiles/wf-panel.css;
     })
+    ../../modules/desktops/hyprland.nix
   ];
 
   # KDE
