@@ -1,0 +1,115 @@
+* {
+  border: none;
+  background: none;
+  box-shadow: none;
+  font-family: "FiraCode Nerd Font", sans-serif;
+}
+
+// Clock
+
+.clock_widget {
+  background-color: #28282e;
+  color: white;
+  border-bottom-right-radius: 8px;
+}
+
+.clock_inner {
+  margin: 5px; /* Adjust the value as needed */
+}
+
+.clock_icon_btn {
+  background-color: #34333a;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.time_label {
+  background-color: #14131a;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.met_btn {
+  background-color: #34333a;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 8px;
+}
+
+// Workspace
+.workspace_widget {
+  background-color: #28282e;
+  color: white;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.workspace_outer {
+  margin: 5px;
+}
+
+.workspace_inner {
+  margin: 5px;
+  background-color: #18181f;
+  border-radius: 8px;
+}
+
+.workspace_container {
+  margin-left: 20px;
+  margin-right: 20px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.workspace_label {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.3em;
+  font-size: 14px;
+  margin-top: -15px;
+  color: white;
+}
+
+.indicator_container {
+  margin-top: -40px;
+  margin-bottom: -40px;
+  min-height: 0;
+}
+
+.indicator-box_true {
+  background-image: url("./indicator.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 15px;
+}
+
+.indicator-box_false {
+  background-size: 15px;
+}
+
+.workspace_1 {
+  border-radius: 0;
+  background-color: #000000;
+  min-height: 0;
+  background-image: url("./atmosphere_lines.png");
+}
+.workspace_2 {
+  border-radius: 0;
+  background: #1e2c56;
+  min-height: 0;
+  background-image: url("./atmosphere_lines.png");
+}
+.workspace_3 {
+  border-radius: 0;
+  background: #9addff;
+  min-height: 0;
+  background-image: url("./atmosphere_lines.png");
+}
+.workspace_4 {
+  border-radius: 0;
+  background: #0073cb;
+  min-height: 0;
+  background-image: url("./atmosphere_lines.png");
+}

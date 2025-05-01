@@ -1,0 +1,84 @@
+(deflisten workspaces "hyprland-workspaces HDMI-A-1")
+(defpoll time_text :interval "1s" "date '+T+ %Yy, %mm, %dd, %H:%M'")
+
+
+(defwindow bar
+  :exclusive true
+  :monitor 0
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore false
+  :focusable false
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "5%"
+  :anchor "top center")
+  :reserve (struts :side "top" :distance "2%")
+  (bar_layout))
+
+(defwidget bar_layout []
+  (box :orientation "horizontal" :class "bar_container"
+    ;; Left Section
+    (box :orientation "horizontal" :halign "start" :hexpand true :valign "start"
+      (box :orientation "horizontal" :height 40
+        (clock)))
+    
+    
+    ;; Center Section
+    (box :orientation "horizontal" :halign "center" :hexpand false:space-evenly true
+      (workspace))
+    
+    ;; Right Section
+    (box :orientation "horizontal" :halign "end" :hexpand true
+      ;; add right widgets
+    )))
+
+(defwidget workspace []
+  (box :orientation "horizontal" :class "workspace_widget" :hexpand true :space-evenly true
+    (box :orientation "vertical" :class "workspace_outer" :halign "center" :space-evenly false
+      (box :orientation "vertical" :class "workspace_inner" :halign "center" :space-evenly false :vexpand false
+        ;; Background
+        (box :class "workspace_container" :width 500 :vexpand false
+          (for i in workspaces
+            
+            (box :orientation "vertical" :space-evenly false :vexpand false
+              ;; Button
+              (
+                button :height 1 :vexpand false
+                :onclick "hyprctl dispatch workspace ${i.id}"
+                :class "workspace_${i.id}"
+                ""
+              )
+              ; Selection
+              (
+                box
+                :height 15
+                :space-evenly false :halign "center"
+                :class "indicator_container"
+                (
+                  box
+                  :class "indicator-box_${i.active}"
+                  :width 15 :height 15
+                )
+              )
+            )
+          ))
+        ;; Text
+        (label :class "workspace_label" :text "ATMOSPHERE")
+      ))))
+
+
+(defwidget clock []
+  (box :orientation "horizontal" :class "clock_widget" :hexpand true :height 40 :valign "center"
+    (box :orientation "horizontal" :class "clock_inner" :hexpand true :space-evenly false
+      ;; Clock button
+      (box :hexpand false :halign "start"
+        (button :class "clock_icon_btn" "󰀠"))
+      ;; Time label
+      (box :hexpand true :halign "center"
+        (label :class "time_label" :text "${time_text}"))
+      ;; MET button
+      (box :hexpand false :halign "end"
+        (button :class "met_btn" "MET")))))

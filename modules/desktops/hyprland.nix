@@ -7,12 +7,14 @@
 
   environment.systemPackages = with pkgs; [
     nwg-bar
+    hyprland-workspaces
   ];
 
   home-manager.users."${vars.user}" = {
     home.file.".config/hypr/scripts/waybar-toggle.sh".source = ../../dotfiles/hyprland/scripts/waybar-toggle.sh;
     home.file.".config/waybar/scripts/mic-toggle.sh".source = ../../dotfiles/hyprland/scripts/mic-toggle.sh;
     home.file.".config/waybar/scripts/volume.sh".source = ../../dotfiles/hyprland/scripts/volume.sh;
+    # home.file.".config/eww-config/atmosphere_lines.png".source = ../../dotfiles/eww-config/atmosphere_lines.png;
 
     programs = {
       rofi = {
@@ -208,6 +210,12 @@
             };
           }
         ];
+      };
+
+      eww = {
+        enable = true;
+        package = pkgs.eww;
+        configDir = ../../dotfiles/eww-config;
       };
     };
 
