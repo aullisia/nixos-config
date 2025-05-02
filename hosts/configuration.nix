@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, vars, ... }:
+{ config, pkgs, unstable, vars, specialArgs, ... }:
 
 {
   # Bootloader.
@@ -88,6 +88,7 @@
   environment.systemPackages = with pkgs; [
     htop
     wget
+    # unstable.cowsay
   ];
 
   programs.git = {

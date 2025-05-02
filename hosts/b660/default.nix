@@ -86,6 +86,10 @@
     ff = "fastfetch";
   };
 
+  environment.sessionVariables = rec {
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1"; # Allow godot mono to work
+  };
+
   # Steam
   programs.steam = {
     enable = true;

@@ -1,4 +1,4 @@
-{ config, pkgs, dotFilesPath, modulesPath, lib, vars, ... }:
+{ config, pkgs, unstable, dotFilesPath, modulesPath, lib, vars, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -26,6 +26,7 @@
 
   home.sessionVariables = {
     # EDITOR = "emacs";
+    # DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
   };
 
   # Let Home Manager install and manage itself.
@@ -47,6 +48,7 @@
     trilium-desktop
     qimgv
     vesktop # discord
+    # webcord-vencord
     brave
     vlc
     spotify
@@ -56,6 +58,7 @@
     p7zip
     jetbrains-toolbox
     jetbrains.idea-ultimate
+    jetbrains.rider
     gimp
     obs-studio
     blender
@@ -64,6 +67,8 @@
     xpipe
     gamescope
     ani-cli
+    unstable.godot_4_4-mono
+    # unstable.cowsay
   ];
 
   # Overlays

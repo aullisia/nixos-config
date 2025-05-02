@@ -1,8 +1,12 @@
-{ inputs, nixpkgs, home-manager, nix-flatpak, vars, ... }:
+{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, vars, ... }:
 
 let
   system = "x86_64-linux";
   pkgs = import nixpkgs {
+    inherit system;
+    config.allowUnfree = true;
+  };
+  unstable = import unstable-pkgs {
     inherit system;
     config.allowUnfree = true;
   };
@@ -22,7 +26,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; inherit vars; };
+        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; inherit vars unstable; };
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
@@ -31,7 +35,7 @@ in
         };
       }
     ];
-    specialArgs = { inherit vars; };
+    specialArgs = { inherit vars unstable; };
   };
   vivobook = lib.nixosSystem {
     inherit system;
@@ -44,7 +48,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; inherit vars; };
+        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; inherit vars unstable; };
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
@@ -53,6 +57,6 @@ in
         };
       }
     ];
-    specialArgs = { inherit vars; };
+    specialArgs = { inherit vars unstable; };
   };
 }
