@@ -1,4 +1,4 @@
-{ config, pkgs, dotFilesPath, modulesPath, lib, vars, ... }:
+{ config, pkgs, unstable, dotFilesPath, modulesPath, lib, vars, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -46,6 +46,7 @@
     jetbrains-toolbox
     jetbrains.idea-ultimate
     jetbrains.rider
+    unstable.godot_4_4-mono
     vscode
     nb # notes
     arduino-ide

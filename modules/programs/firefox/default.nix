@@ -25,7 +25,7 @@ let
     name = "ff-ultima";
     src = pkgs.fetchurl {
       url = "https://github.com/soulhotel/FF-ULTIMA/releases/download/2.0/ffultima2.0.zip";
-      sha256 = "sha256-OpB7z/nvWBGtlqQ9Zw3+gHvIeQeLuPDJy2O3TUhad34=";
+      sha256 = "sha256-rN5K1b22/8mB9fXF2Z1SauUlfzGfW7/R7HW44zPW2gg=";
     };
     buildInputs = [ pkgs.unzip ];
     unpackPhase = ''

@@ -21,6 +21,15 @@
     ];
   };
 
+  programs.bash.shellAliases = {
+    nixb = "sudo nixos-rebuild switch --flake .#vivobook";
+    ff = "fastfetch";
+  };
+
+  environment.sessionVariables = rec {
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1"; # Allow godot mono to work
+  };
+
   # Wireguard VPN
   networking.wg-quick.interfaces = {
     wg0 = {
