@@ -17,27 +17,27 @@ let
   };
   
   homeDir = builtins.getEnv "HOME";
-  profilePath = "ag7ttgx0.default"; # TODO find a solution to get profilePath out of profiles.ini
+  profilePath = "5dmmgw43.default"; # TODO find a solution to get profilePath out of profiles.ini
   
   profileDir = "${homeDir}/.librewolf/${profilePath}";
   # https://github.com/soulhotel/FF-ULTIMA
-  ff-ultima = pkgs.stdenv.mkDerivation {
-    name = "ff-ultima";
-    src = pkgs.fetchurl {
-      url = "https://github.com/soulhotel/FF-ULTIMA/releases/download/2.0/ffultima2.0.zip";
-      sha256 = "sha256-rN5K1b22/8mB9fXF2Z1SauUlfzGfW7/R7HW44zPW2gg=";
-    };
-    buildInputs = [ pkgs.unzip ];
-    unpackPhase = ''
-      unzip $src
-    '';
-    installPhase = ''
-      mkdir -p $out
-      cp -r * $out
-      rm -f $out/theme/pic/fullmoon.png
-      cp ${wallpaper} $out/theme/pic/fullmoon.png
-    '';
-  };
+  # ff-ultima = pkgs.stdenv.mkDerivation {
+  #   name = "ff-ultima";
+  #   src = pkgs.fetchurl {
+  #     url = "https://github.com/soulhotel/FF-ULTIMA/releases/download/2.0/ffultima2.0.zip";
+  #     sha256 = "sha256-rN5K1b22/8mB9fXF2Z1SauUlfzGfW7/R7HW44zPW2gg=";
+  #   };
+  #   buildInputs = [ pkgs.unzip ];
+  #   unpackPhase = ''
+  #     unzip $src
+  #   '';
+  #   installPhase = ''
+  #     mkdir -p $out
+  #     cp -r * $out
+  #     rm -f $out/theme/pic/fullmoon.png
+  #     cp ${wallpaper} $out/theme/pic/fullmoon.png
+  #   '';
+  # };
 in
 {
   programs.firefox = {
@@ -214,7 +214,7 @@ in
     };
   };
 
-  home.file."${profileDir}/chrome" = {
-    source = ff-ultima;
-  };
+  # home.file."${profileDir}/chrome" = {
+  #   source = ff-ultima;
+  # };
 }

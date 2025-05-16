@@ -4,13 +4,31 @@
   imports =
   [
     ./hardware-configuration.nix
-    (import ../../modules/desktops/gnome.nix)
+    # (import ../../modules/desktops/gnome.nix)
     # (import ../../modules/desktops/wayfire.nix { wayfireConfig =  ../../dotfiles/wayfire.ini; } )
   ];
 
+  # KDE
+  services.xserver.enable = true; # optional
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    konsole
+    elisa
+    gwenview
+    okular
+    kate
+    khelpcenter
+    spectacle
+    ffmpegthumbs
+    krdp
+  ];
+
   # Services for Gnome
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
   
   # Graphics Drivers
   hardware.graphics = {
@@ -44,6 +62,19 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
+  # direnv
+  programs.direnv = {
+    enable = true;
+    package = pkgs.direnv;
+    silent = false;
+    loadInNixShell = true;
+    direnvrcExtra = "";
+    nix-direnv = {
+      enable = true;
+      package = pkgs.nix-direnv;
+    };
   };
 
   # System Packages
