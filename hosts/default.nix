@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, vars, ... }:
+{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, vars, ... }:
 
 let
   system = "x86_64-linux";
@@ -30,6 +30,7 @@ in
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
+            plasma-manager.homeManagerModules.plasma-manager
             ./b660/home.nix
           ];
         };
@@ -52,6 +53,7 @@ in
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
+            plasma-manager.homeManagerModules.plasma-manager
             ./vivobook/home.nix
           ];
         };

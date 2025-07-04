@@ -49,7 +49,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -80,7 +80,8 @@
 
   # fonts
   fonts.packages = with pkgs; [
-    nerdfonts
+    pkgs.nerd-fonts._0xproto
+    pkgs.nerd-fonts.droid-sans-mono
   ];
 
   # List packages installed in system profile. To search, run:

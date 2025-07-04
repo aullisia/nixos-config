@@ -12,29 +12,31 @@
       ulauncherConfig = ../../dotfiles/ulauncher;
       wfPanel = ../../dotfiles/wf-panel.css;
     })
+    (import ../../modules/desktops/kde.nix { 
+      wallpaper =  ../../dotfiles/wallpapers/wallhaven-x6vjkz_1920x1080.png;
+    })
     ../../modules/desktops/hyprland.nix
   ];
 
   # KDE
   services.xserver.enable = true; # optional
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-    konsole
-    elisa
-    gwenview
-    okular
-    kate
-    khelpcenter
-    spectacle
-    ffmpegthumbs
-    krdp
-  ];
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+  # environment.plasma6.excludePackages = with pkgs.kdePackages; [
+  #   plasma-browser-integration
+  #   konsole
+  #   elisa
+  #   gwenview
+  #   okular
+  #   kate
+  #   khelpcenter
+  #   spectacle
+  #   ffmpegthumbs
+  #   krdp
+  # ];
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true; # Bluetooth GUI
 
   hardware.graphics = {
@@ -90,6 +92,21 @@
     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1"; # Allow godot mono to work
   };
 
+  # Ollama
+  services.ollama = {
+    enable = true;
+    # loadModels = [ "deepseek-r1:7b" ];
+    acceleration = "cuda";
+    environmentVariables = {
+      CMAKE_CUDA_ARCHITECTURES = "86";
+    };
+  };
+  
+  services.open-webui = {
+    enable = true;
+    port = 24460;
+  };
+
   # Steam
   programs.steam = {
     enable = true;
@@ -129,13 +146,13 @@
     protontricks
     catppuccin-kde
     kdePackages.qtmultimedia
-    jdk21_headless
-    jdk17_headless
+    jdk21
+    jdk17
     dotnet-sdk_9
 
     # Create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
-      pkgs.buildFHSUserEnv (base // {
+      pkgs.buildFHSEnv (base // {
       name = "fhs";
       targetPkgs = pkgs: 
         # pkgs.buildFHSUserEnv provides only a minimal FHS environment,
@@ -153,5 +170,15 @@
       runScript = "bash";
       extraOutputsToInstall = ["dev"];
     }))
+  ];
+
+  nixpkgs.overlays = [
+    (self: super: {
+      ollama = super.ollama.overrideAttrs (old: {
+        cmakeFlags = (old.cmakeFlags or []) ++ [
+          "-DCMAKE_CUDA_ARCHITECTURES=86"
+        ];
+      });
+    })
   ];
 }

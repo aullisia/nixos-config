@@ -49,12 +49,13 @@
     qimgv
     vesktop # discord
     # webcord-vencord
-    brave
+    unstable.brave
     vlc
-    spotify
+    unstable.spotify
     prismlauncher
     ckan
     flameshot
+    #satty
     p7zip
     jetbrains-toolbox
     jetbrains.idea-ultimate
@@ -67,10 +68,20 @@
     xpipe
     gamescope
     ani-cli
-    unstable.godot_4_4-mono
+    # unstable.godot_4_4-mono
+    unstable.godot_4_4
+    figma-linux
+    chntpw
+    unstable.steam-devices-udev-rules
+    qdirstat
+    webcord-vencord
     # unstable.cowsay
+    switcheroo
+    resources
+    devtoolbox
+    clapgrep
   ];
 
   # Overlays
-  nixpkgs.overlays = [];
+  # nixpkgs.overlays = [];
 }
