@@ -80,6 +80,7 @@
     resources
     devtoolbox
     clapgrep
+    usbimager
   ];
 
   # Overlays
