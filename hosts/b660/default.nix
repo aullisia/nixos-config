@@ -1,6 +1,8 @@
 { config, pkgs, home-manager, ... }:
 
 {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   imports =
   [
     ./hardware-configuration.nix
@@ -39,42 +41,56 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   services.blueman.enable = true; # Bluetooth GUI
 
+
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
   hardware.graphics = {
     enable = true;
+    extraPackages = with pkgs; [ mesa ];
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
 
-  hardware.nvidia = {
-
-    # Modesetting is required.
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
-    # of just the bare essentials.
-    powerManagement.enable = false;
-
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
-    # Only available from driver 515.43.04+
-    open = false;
-
-    # Enable the Nvidia settings menu,
-	  # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.amdgpu = {
+    amdvlk.enable = false;
+    opencl.enable = true;
   };
+
+  hardware.enableAllFirmware = true;
+  boot.kernelParams = [ "amdgpu.dc=1" ];
+
+  # services.xserver.videoDrivers = ["nvidia"];
+
+  # hardware.nvidia = {
+
+  #   # Modesetting is required.
+  #   modesetting.enable = true;
+
+  #   # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+  #   # Enable this if you have graphical corruption issues or application crashes after waking
+  #   # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+  #   # of just the bare essentials.
+  #   powerManagement.enable = false;
+
+  #   # Fine-grained power management. Turns off GPU when not in use.
+  #   # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+  #   powerManagement.finegrained = false;
+
+  #   # Use the NVidia open source kernel module (not to be confused with the
+  #   # independent third-party "nouveau" open source driver).
+  #   # Support is limited to the Turing and later architectures. Full list of 
+  #   # supported GPUs is at: 
+  #   # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+  #   # Only available from driver 515.43.04+
+  #   open = false;
+
+  #   # Enable the Nvidia settings menu,
+	#   # accessible via `nvidia-settings`.
+  #   nvidiaSettings = true;
+
+  #   # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # };
 
   networking.firewall = {
     enable = true;
@@ -96,10 +112,11 @@
   services.ollama = {
     enable = true;
     # loadModels = [ "deepseek-r1:7b" ];
-    acceleration = "cuda";
+    acceleration = "rocm";
     environmentVariables = {
-      CMAKE_CUDA_ARCHITECTURES = "86";
+      HCC_AMDGPU_TARGET = "gfx1031";
     };
+    rocmOverrideGfx = "10.3.0";
   };
   
   services.open-webui = {
@@ -114,6 +131,9 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+
+  # OpenRGB
+  services.hardware.openrgb.enable = true;
 
   # direnv
   programs.direnv = {
@@ -149,6 +169,7 @@
     jdk21
     jdk17
     dotnet-sdk_9
+    openrgb-with-all-plugins
 
     # Create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
@@ -172,13 +193,13 @@
     }))
   ];
 
-  nixpkgs.overlays = [
-    (self: super: {
-      ollama = super.ollama.overrideAttrs (old: {
-        cmakeFlags = (old.cmakeFlags or []) ++ [
-          "-DCMAKE_CUDA_ARCHITECTURES=86"
-        ];
-      });
-    })
-  ];
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     ollama = super.ollama.overrideAttrs (old: {
+  #       cmakeFlags = (old.cmakeFlags or []) ++ [
+  #         "-DCMAKE_CUDA_ARCHITECTURES=86"
+  #       ];
+  #     });
+  #   })
+  # ];
 }
