@@ -6,9 +6,23 @@
 
 {
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 10;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.configurationLimit = 10;
+
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
+    grub = {
+      enable = true;
+      efiSupport = true;
+      useOSProber = true;
+      device = "nodev";
+      theme = "${pkgs.catppuccin-grub}/";
+    };
+  };
 
 
   networking.hostName = "nixos"; # Define your hostname.

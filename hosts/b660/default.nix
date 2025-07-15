@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, lib, home-manager, ... }:
 
 {
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -6,55 +6,49 @@
   imports =
   [
     ./hardware-configuration.nix
-    (import ../../modules/desktops/wayfire.nix { 
-      wayfireConfig =  ../../dotfiles/wayfire.ini;
-      wfShell = ../../dotfiles/wf-shell.ini;
-      wfDock = ../../dotfiles/wf-dock.css;
-      ironbarConfig = ../../dotfiles/ironbar;
-      ulauncherConfig = ../../dotfiles/ulauncher;
-      wfPanel = ../../dotfiles/wf-panel.css;
-    })
+    # (import ../../modules/desktops/wayfire.nix { 
+    #   wayfireConfig =  ../../dotfiles/wayfire.ini;
+    #   wfShell = ../../dotfiles/wf-shell.ini;
+    #   wfDock = ../../dotfiles/wf-dock.css;
+    #   ironbarConfig = ../../dotfiles/ironbar;
+    #   ulauncherConfig = ../../dotfiles/ulauncher;
+    #   wfPanel = ../../dotfiles/wf-panel.css;
+    # })
     (import ../../modules/desktops/kde.nix { 
       wallpaper =  ../../dotfiles/wallpapers/wallhaven-x6vjkz_1920x1080.png;
     })
     ../../modules/desktops/hyprland.nix
   ];
 
-  # KDE
-  services.xserver.enable = true; # optional
-  # services.displayManager.sddm.enable = true;
-  # services.displayManager.sddm.wayland.enable = true;
-  # services.desktopManager.plasma6.enable = true;
-  # environment.plasma6.excludePackages = with pkgs.kdePackages; [
-  #   plasma-browser-integration
-  #   konsole
-  #   elisa
-  #   gwenview
-  #   okular
-  #   kate
-  #   khelpcenter
-  #   spectacle
-  #   ffmpegthumbs
-  #   krdp
-  # ];
-
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   services.blueman.enable = true; # Bluetooth GUI
 
+  # SDDM
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "sddm-astronaut-theme";
+  };
 
+  environment.variables.VDPAU_DRIVER = "va_gl";
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ mesa ];
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      pkgs.driversi686Linux.mesa
+      libvdpau-va-gl
+    ];
   };
 
-
-  hardware.amdgpu = {
-    amdvlk.enable = false;
-    opencl.enable = true;
-  };
+  environment.variables.AMD_VULKAN_ICD = lib.mkDefault "RADV";
+  hardware.enableRedistributableFirmware = true;
 
   hardware.enableAllFirmware = true;
   boot.kernelParams = [ "amdgpu.dc=1" ];
@@ -113,10 +107,10 @@
     enable = true;
     # loadModels = [ "deepseek-r1:7b" ];
     acceleration = "rocm";
-    environmentVariables = {
-      HCC_AMDGPU_TARGET = "gfx1031";
-    };
-    rocmOverrideGfx = "10.3.0";
+    # environmentVariables = {
+    #   HCC_AMDGPU_TARGET = "gfx1031";
+    # };
+    # rocmOverrideGfx = "10.3.0";
   };
   
   services.open-webui = {
@@ -133,7 +127,13 @@
   };
 
   # OpenRGB
-  services.hardware.openrgb.enable = true;
+  services.hardware.openrgb = { 
+    enable = true; 
+    package = pkgs.openrgb-with-all-plugins; 
+    server = { 
+      port = 6742; 
+    }; 
+  };
 
   # direnv
   programs.direnv = {
@@ -161,7 +161,10 @@
   environment.systemPackages = with pkgs; [
     # gwe # GreenWithEnvy
     # tuxclocker
-    # unigine-superposition
+    unigine-superposition
+    efibootmgr
+    wineWowPackages.stable
+    wineWowPackages.waylandFull
     winetricks
     protontricks
     catppuccin-kde
@@ -169,7 +172,9 @@
     jdk21
     jdk17
     dotnet-sdk_9
-    openrgb-with-all-plugins
+    protonup-qt
+    sddm-astronaut
+    catppuccin-grub
 
     # Create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in

@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, vars, ... }:
+{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, spicetify-nix, vars, ... }:
 
 let
   system = "x86_64-linux";
@@ -26,11 +26,12 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; inherit vars unstable; };
+        home-manager.extraSpecialArgs = { inherit dotFilesPath modulesPath vars unstable spicetify-nix; };
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
             plasma-manager.homeManagerModules.plasma-manager
+            inputs.spicetify-nix.homeManagerModules.default
             ./b660/home.nix
           ];
         };
@@ -49,11 +50,12 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit dotFilesPath; inherit modulesPath; inherit vars unstable; };
+        home-manager.extraSpecialArgs = { inherit dotFilesPath modulesPath vars unstable spicetify-nix; };
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
             plasma-manager.homeManagerModules.plasma-manager
+            inputs.spicetify-nix.homeManagerModules.default
             ./vivobook/home.nix
           ];
         };

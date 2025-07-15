@@ -3,8 +3,6 @@
 {
   services = {
     desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
   };
 
   environment.systemPackages = with pkgs;
@@ -24,6 +22,14 @@
     haruna # Open source video player built with Qt/QML and libmpv
     wayland-utils # Wayland utilities
     wl-clipboard # Command-line copy/paste utilities for Wayland
+    (catppuccin-kde.override {
+      flavour = [ "mocha" ];
+      accents = [ "lavender" "mauve" ];
+      winDecStyles = [ "modern" ];
+    })
+    bibata-cursors
+    # catppuccin-cursors
+    # lyra-cursors
   ];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
