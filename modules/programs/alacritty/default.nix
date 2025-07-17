@@ -1,4 +1,4 @@
-{ alacrittyConfigFile }: { config, pkgs, ... }:
+{ config, pkgs, ... }:
 let
   alacrittyTheme = pkgs.fetchFromGitHub {
     owner = "alacritty";
@@ -17,7 +17,6 @@ in
   };
 
   home.file.".config/alacritty/alacritty.toml" = {
-    source = alacrittyConfigFile;
-    # onChange = builtins.readFile ./alacritty.sh; # TODO
+    source = ./alacritty.toml;
   };
 }

@@ -22,7 +22,7 @@
     } )
    ./${modulesPath}/shell/starship.nix
    ./${modulesPath}/programs/ghostty.nix
-    (import ./${modulesPath}/programs/alacritty { alacrittyConfigFile = ./${dotFilesPath}/alacritty.toml; } )
+   ./${modulesPath}/programs/fastfetch
   ];
 
   home.sessionVariables = {
@@ -32,11 +32,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # Fastfetch
-  home.file.".config/fastfetch" = {
-    source = ./${dotFilesPath}/fastfetch/catppuccin;
-  };
 
   # OpenRGB autostart
   home.file."bin/openrgb-load-profile" = {
@@ -107,7 +102,6 @@
 
   # Nix
   home.packages = with pkgs; [ 
-    fastfetch
     vscode
     nb # notes
     trilium-desktop
