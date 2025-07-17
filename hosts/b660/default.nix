@@ -17,11 +17,15 @@
     (import ../../modules/desktops/kde.nix { 
       wallpaper =  ../../dotfiles/wallpapers/wallhaven-x6vjkz_1920x1080.png;
     })
-    ../../modules/desktops/hyprland.nix
+    (import ../../modules/desktops/niri { 
+      wallpaper =  ../../dotfiles/wallpapers/frier.png;
+    })
+    # ../../modules/desktops/hyprland.nix
   ];
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   services.blueman.enable = true; # Bluetooth GUI
+  # TODO: From blueman-manager, go in View->Plugins and uncheck "StatusIcon" do this declaratively
 
   # SDDM
   services.displayManager.sddm = {
@@ -30,6 +34,7 @@
     theme = "sddm-astronaut-theme";
   };
 
+  # GPU
   environment.variables.VDPAU_DRIVER = "va_gl";
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -86,6 +91,7 @@
   #   package = config.boot.kernelPackages.nvidiaPackages.stable;
   # };
 
+  # Firewall
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 25565 24454 ];
@@ -117,6 +123,11 @@
     enable = true;
     port = 24460;
   };
+
+  # Controller
+  hardware.steam-hardware.enable = true; 
+  hardware.xone.enable = true;
+  hardware.xpadneo.enable = true;
 
   # Steam
   programs.steam = {
@@ -151,9 +162,8 @@
   # System Packages
   services.flatpak.enable = true;
   services.flatpak.packages = [
-    # { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Sober.flatpakref"; sha256="0000000000000000000000000000000000000000000000000000"; } # Roblox Player
     { appId = "org.vinegarhq.Sober"; origin = "flathub";  }
-    { flatpakref = "https://dl.flathub.org/repo/appstream/org.vinegarhq.Vinegar.flatpakref"; sha256="sha256:03l53m3hfwsqr1jbgfs67jr139zsp27nik253b8xgv3s5g59djc0"; } # Roblox Studio
+    { appId = "org.vinegarhq.Vinegar"; origin = "flathub";  }
   ];
 
   # environment.variables.DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "true";
@@ -175,6 +185,7 @@
     protonup-qt
     sddm-astronaut
     catppuccin-grub
+    linuxKernel.packages.linux_6_15.xone linuxKernel.packages.linux_6_15.xpadneo # Controller
 
     # Create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in

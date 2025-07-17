@@ -21,6 +21,7 @@
       wallpaper = ./${dotFilesPath}/wallpapers/wallpaper-theme-converter3.png;
     } )
    ./${modulesPath}/shell/starship.nix
+   ./${modulesPath}/programs/ghostty.nix
     (import ./${modulesPath}/programs/alacritty { alacrittyConfigFile = ./${dotFilesPath}/alacritty.toml; } )
   ];
 
@@ -31,6 +32,11 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Fastfetch
+  home.file.".config/fastfetch" = {
+    source = ./${dotFilesPath}/fastfetch/catppuccin;
+  };
 
   # OpenRGB autostart
   home.file."bin/openrgb-load-profile" = {
