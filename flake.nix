@@ -8,12 +8,26 @@
       url = "github:nix-community/home-manager?ref=release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    plasma-manager.url = "github:nix-community/plasma-manager";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.5.2";
+
+    plasma-manager.url = "github:nix-community/plasma-manager";
+    
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri.url = "github:sodiboo/niri-flake";
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, spicetify-nix, ... }:
+  outputs = inputs @ { self, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, spicetify-nix, stylix, niri, quickshell, ... }:
     let
       vars = {
         user = "aul";
@@ -22,7 +36,7 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs unstable-pkgs home-manager nix-flatpak plasma-manager spicetify-nix vars;
+          inherit inputs nixpkgs unstable-pkgs home-manager nix-flatpak plasma-manager spicetify-nix stylix niri quickshell vars;
         }
       );
     };

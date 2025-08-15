@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, dotFilesPath, modulesPath, lib, vars, spicetify-nix, ... }:
+{ config, pkgs, unstable, dotFilesPath, modulesPath, lib, vars, spicetify-nix, quickshell, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -17,6 +17,9 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   imports = [
+    ../../modules/programs/quickshell
+    ../../modules/programs/walker
+      
     (import ./${modulesPath}/programs/firefox { 
       wallpaper = ./${dotFilesPath}/wallpapers/wallpaper-theme-converter3.png;
     } )
@@ -119,6 +122,7 @@
     jetbrains-toolbox
     jetbrains.idea-ultimate
     jetbrains.rider
+    jetbrains.clion
     gimp
     obs-studio
     blender
@@ -127,7 +131,7 @@
     xpipe
     gamescope
     ani-cli
-    # unstable.godot_4_4-mono
+    unstable.godot_4_4-mono
     unstable.godot_4_4
     figma-linux
     chntpw
@@ -141,6 +145,10 @@
     clapgrep
     usbimager
     grim slurp swappy
+    bruno
+    mangohud
+    filezilla
+    audacity
     # kdePackages.spectacle
     # gowall
   ];

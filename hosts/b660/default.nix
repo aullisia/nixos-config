@@ -6,13 +6,15 @@
   imports =
   [
     ./hardware-configuration.nix
+
+    ../../modules/desktops/niri
+    
     (import ../../modules/desktops/kde.nix { 
       wallpaper =  ../../dotfiles/wallpapers/wallhaven-x6vjkz_1920x1080.png;
     })
-    (import ../../modules/desktops/niri { 
-      wallpaper =  ../../dotfiles/wallpapers/frier.png;
-    })
   ];
+
+  networking.hostName = lib.mkForce "b660";
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   services.blueman.enable = true; # Bluetooth GUI
@@ -58,7 +60,7 @@
 
   # Shell aliases
   programs.bash.shellAliases = {
-    nixb = "sudo nixos-rebuild switch --flake .#b660";
+    # nixb = "sudo nixos-rebuild switch --flake .#b660";
     ff = "fastfetch";
   };
 

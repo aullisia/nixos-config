@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, spicetify-nix, vars, ... }:
+{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, spicetify-nix, niri, quickshell, vars, ... }:
 
 let
   system = "x86_64-linux";
@@ -26,12 +26,13 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit dotFilesPath modulesPath vars unstable spicetify-nix; };
+        home-manager.extraSpecialArgs = { inherit dotFilesPath quickshell modulesPath vars unstable spicetify-nix; };
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
             plasma-manager.homeManagerModules.plasma-manager
             inputs.spicetify-nix.homeManagerModules.default
+            niri.homeModules.niri
             ./b660/home.nix
           ];
         };

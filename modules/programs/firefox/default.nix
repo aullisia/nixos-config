@@ -64,22 +64,18 @@ in
 
       ExtensionSettings = {
         "*".installation_mode = "allowed";
-        # "userchrome-toggle-extended@n2ezr.ru" = {
-        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/userchrome-toggle-extended/latest.xpi";
+        # "{3c078156-979c-498b-8990-85f7987dd929}" = {
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi";
         #   installation_mode = "force_installed";
         # };
-        "{3c078156-979c-498b-8990-85f7987dd929}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi";
+        "FirefoxColor@mozilla.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/3643624/firefox_color-2.1.7.xpi";
           installation_mode = "force_installed";
         };
-        # "uBlock0@raymondhill.net" = {
-        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-        #   installation_mode = "force_installed";
-        # };
-        # "jid1-MnnxcxisBPnSXQ@jetpack" = {
-        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
-        #   installation_mode = "force_installed";
-        # };
+        "addon@darkreader.org" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4535824/darkreader-4.9.110.xpi";
+          installation_mode = "force_installed";
+        };
       };
 
       Preferences = {

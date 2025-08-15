@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, unstable, vars, specialArgs, ... }:
+{ config, pkgs, lib, unstable, vars, specialArgs, ... }:
 
 {
   # Bootloader.
@@ -25,7 +25,7 @@
   };
 
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = lib.mkBefore "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
