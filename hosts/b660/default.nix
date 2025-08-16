@@ -1,4 +1,4 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, lib, home-manager, quickshell, stylix, ... }:
 
 {
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -8,10 +8,13 @@
     ./hardware-configuration.nix
 
     ../../modules/desktops/niri
+    ../../modules/greeter/greetd.nix
+    ../../modules/programs/quickshell
+    ../../modules/programs/stylix.nix
     
-    (import ../../modules/desktops/kde.nix { 
-      wallpaper =  ../../dotfiles/wallpapers/wallhaven-x6vjkz_1920x1080.png;
-    })
+    # (import ../../modules/desktops/kde.nix { 
+    #   wallpaper =  ../../dotfiles/wallpapers/wallhaven-x6vjkz_1920x1080.png;
+    # })
   ];
 
   networking.hostName = lib.mkForce "b660";
@@ -21,10 +24,44 @@
   # TODO: From blueman-manager, go in View->Plugins and uncheck "StatusIcon" do this declaratively
 
   # SDDM
-  services.displayManager.sddm = {
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland.enable = true;
+  #   theme = "sddm-astronaut-theme";
+  # };
+
+  environment.variables = {
+    QT_QPA_PLATFORM = "wayland";
+    XCURSOR_SIZE = "24";
+  };
+
+  # Secrets
+  services.gnome.gnome-keyring.enable = true;
+
+  # xdg
+  xdg.portal = {
     enable = true;
-    wayland.enable = true;
-    theme = "sddm-astronaut-theme";
+    config = {
+      #common.default = "*";
+      common = {
+        default = ["gnome" "gtk"];
+        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+        "org.freedesktop.impl.portal.Screenshot" = "gnome";
+        "org.freedesktop.impl.portal.RemoteDesktop" = "gnome";
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+    };
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal
+    #  xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+
+      # Niri
+      xdg-desktop-portal-gnome
+    ];
   };
 
   # GPU
@@ -137,15 +174,15 @@
     wineWowPackages.waylandFull
     winetricks
     protontricks
-    catppuccin-kde
-    kdePackages.qtmultimedia
     jdk21
     jdk17
     dotnet-sdk_9
     protonup-qt
-    sddm-astronaut
-    catppuccin-grub
+    # sddm-astronaut
+    # catppuccin-grub
     linuxKernel.packages.linux_6_15.xone linuxKernel.packages.linux_6_15.xpadneo # Controller
+    bottles
+    xdg-utils
 
     # Create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in

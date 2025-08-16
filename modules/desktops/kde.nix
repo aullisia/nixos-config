@@ -28,6 +28,8 @@
       winDecStyles = [ "modern" ];
     })
     bibata-cursors
+    catppuccin-kde
+    kdePackages.qtmultimedia
     # catppuccin-cursors
     # lyra-cursors
   ];

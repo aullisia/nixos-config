@@ -20,7 +20,7 @@
       efiSupport = true;
       useOSProber = true;
       device = "nodev";
-      theme = "${pkgs.catppuccin-grub}/";
+      # theme = "${pkgs.catppuccin-grub}/";
     };
   };
 
@@ -94,8 +94,17 @@
 
   # fonts
   fonts.packages = with pkgs; [
-    pkgs.nerd-fonts._0xproto
-    pkgs.nerd-fonts.droid-sans-mono
+    nerd-fonts._0xproto
+    nerd-fonts.droid-sans-mono
+    fira-sans
+    roboto
+    jetbrains-mono
+    noto-fonts
+    noto-fonts-emoji
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    material-symbols
+    material-icons
   ];
 
   # List packages installed in system profile. To search, run:

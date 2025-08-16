@@ -3,10 +3,17 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
+import qs.Bar.Modules
 import qs.Settings
 import qs.Services
-import qs.Bar.Modules
+import qs.Components
+import qs.Widgets
+import qs.Widgets.Sidebar
+import qs.Widgets.Sidebar.Panel
+import qs.Helpers
+import QtQuick.Controls
+import qs.Widgets.Notification
 
 Scope {
     id: rootScope
@@ -48,7 +55,19 @@ Scope {
                         anchors.left: barBackground.left
                         anchors.leftMargin: 18
                         spacing: 12
+
+                        SystemInfo {
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Media {
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
                     }
+
+                    // ActiveWindow {
+                    //     screen: modelData
+                    // }
 
                     Workspace {
                         id: workspace
@@ -57,50 +76,166 @@ Scope {
                         anchors.verticalCenter: barBackground.verticalCenter
                     }
 
-
                     Row {
                         id: rightWidgetsRow
                         anchors.verticalCenter: barBackground.verticalCenter
                         anchors.right: barBackground.right
                         anchors.rightMargin: 18
                         spacing: 12
+
+                        NotificationIcon {
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Brightness {
+                            id: widgetsBrightness
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Volume {
+                            id: widgetsVolume
+                            shell: rootScope.shell
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        SystemTray {
+                            id: systemTrayModule
+                            shell: rootScope.shell
+                            anchors.verticalCenter: parent.verticalCenter
+                            bar: panel
+                            trayMenu: externalTrayMenu
+                        }
+
+                        CustomTrayMenu {
+                            id: externalTrayMenu
+                        }
+
+                        ClockWidget {
+                            screen: modelData
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        PanelPopup {
+                            id: sidebarPopup
+                        }
+
+                        Button {
+                            barBackground: barBackground
+                            anchors.verticalCenter: parent.verticalCenter
+                            screen: modelData
+                            sidebarPopup: sidebarPopup
+                        }
                     }
+
+                    Background {}
+                    Overview {}
                 }
 
-                PanelWindow {
-                    id: topLeftPanel
-                    anchors.top: true
-                    anchors.left: true
+                // PanelWindow {
+                //     id: topLeftPanel
+                //     anchors.top: true
+                //     anchors.left: true
 
-                    color: "transparent"
-                    screen: modelData
-                    margins.top: 36
-                    WlrLayershell.exclusionMode: ExclusionMode.Ignore
-                    visible: true
-                    WlrLayershell.layer: WlrLayer.Background
-                    aboveWindows: false
-                    WlrLayershell.namespace: "swww-daemon"
-                    implicitHeight: 24
-                }
+                //     color: "transparent"
+                //     screen: modelData
+                //     margins.top: 36
+                //     WlrLayershell.exclusionMode: ExclusionMode.Ignore
+                //     visible: true
+                //     WlrLayershell.layer: WlrLayer.Background
+                //     aboveWindows: false
+                //     WlrLayershell.namespace: "swww-daemon"
+                //     implicitHeight: 24
 
-                PanelWindow {
-                    id: topRightPanel
-                    anchors.top: true
-                    anchors.right: true
-                    color: "transparent"
-                    screen: modelData
-                    margins.top: 36
-                    WlrLayershell.exclusionMode: ExclusionMode.Ignore
-                    visible: true
-                    WlrLayershell.layer: WlrLayer.Background
-                    aboveWindows: false
-                    WlrLayershell.namespace: "swww-daemon"
+                //     Corners {
+                //         id: topLeftCorner
+                //         position: "bottomleft"
+                //         size: 1.3
+                //         fillColor: (Theme.backgroundPrimary !== undefined && Theme.backgroundPrimary !== null) ? Theme.backgroundPrimary : "#222"
+                //         offsetX: -39
+                //         offsetY: 0
+                //         anchors.top: parent.top
+                //     }
+                // }
 
-                    implicitHeight: 24
-                }
+                // PanelWindow {
+                //     id: topRightPanel
+                //     anchors.top: true
+                //     anchors.right: true
+                //     color: "transparent"
+                //     screen: modelData
+                //     margins.top: 36
+                //     WlrLayershell.exclusionMode: ExclusionMode.Ignore
+                //     visible: true
+                //     WlrLayershell.layer: WlrLayer.Background
+                //     aboveWindows: false
+                //     WlrLayershell.namespace: "swww-daemon"
+
+                //     implicitHeight: 24
+
+                //     Corners {
+                //         id: topRightCorner
+                //         position: "bottomright"
+                //         size: 1.3
+                //         fillColor: (Theme.backgroundPrimary !== undefined && Theme.backgroundPrimary !== null) ? Theme.backgroundPrimary : "#222"
+                //         offsetX: 39
+                //         offsetY: 0
+                //         anchors.top: parent.top
+                //     }
+                // }
+
+                // PanelWindow {
+                //     id: bottomLeftPanel
+                //     anchors.bottom: true
+                //     anchors.left: true
+                //     color: "transparent"
+                //     screen: modelData
+                //     WlrLayershell.exclusionMode: ExclusionMode.Ignore
+                //     visible: true
+                //     WlrLayershell.layer: WlrLayer.Background
+                //     aboveWindows: false
+                //     WlrLayershell.namespace: "swww-daemon"
+
+                //     implicitHeight: 24
+
+                //     Corners {
+                //         id: bottomLeftCorner
+                //         position: "topleft"
+                //         size: 1.3
+                //         fillColor: Theme.backgroundPrimary
+                //         offsetX: -39
+                //         offsetY: 0
+                //         anchors.top: parent.top
+                //     }
+                // }
+
+                // PanelWindow {
+                //     id: bottomRightPanel
+                //     anchors.bottom: true
+                //     anchors.right: true
+                //     color: "transparent"
+                //     screen: modelData
+                //     WlrLayershell.exclusionMode: ExclusionMode.Ignore
+                //     visible: true
+                //     WlrLayershell.layer: WlrLayer.Background
+                //     aboveWindows: false
+                //     WlrLayershell.namespace: "swww-daemon"
+
+                //     implicitHeight: 24
+
+                //     Corners {
+                //         id: bottomRightCorner
+                //         position: "topright"
+                //         size: 1.3
+                //         fillColor: Theme.backgroundPrimary
+                //         offsetX: 39
+                //         offsetY: 0
+                //         anchors.top: parent.top
+                //     }
+                // }
             }
         }
     }
 
+    // This alias exposes the visual bar's visibility to the outside world
     property alias visible: barRootItem.visible
 }

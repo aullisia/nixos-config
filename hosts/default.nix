@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, spicetify-nix, niri, quickshell, vars, ... }:
+{ inputs, nixpkgs, unstable-pkgs, home-manager, nix-flatpak, plasma-manager, niri, spicetify-nix, quickshell, stylix, vars, ... }:
 
 let
   system = "x86_64-linux";
@@ -19,20 +19,37 @@ in
     inherit system;
     modules = [
       nix-flatpak.nixosModules.nix-flatpak
+      stylix.nixosModules.stylix
 
       ./b660
       ./configuration.nix
 
+      ({pkgs, ...}: {
+        environment.systemPackages = [
+          (quickshell.packages.${pkgs.system}.default.override {
+            withJemalloc = true;
+            withQtSvg = true;
+            withWayland = true;
+            withX11 = false;
+            withPipewire = true;
+            withPam = true;
+            withHyprland = true;
+            withI3 = false;
+          })
+        ];
+      })
+
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit dotFilesPath quickshell modulesPath vars unstable spicetify-nix; };
+        home-manager.backupFileExtension = "backup";
+        home-manager.extraSpecialArgs = { inherit dotFilesPath spicetify-nix quickshell modulesPath vars unstable; };
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
             plasma-manager.homeManagerModules.plasma-manager
-            inputs.spicetify-nix.homeManagerModules.default
             niri.homeModules.niri
+            inputs.spicetify-nix.homeManagerModules.default
             ./b660/home.nix
           ];
         };
@@ -51,12 +68,11 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit dotFilesPath modulesPath vars unstable spicetify-nix; };
+        home-manager.extraSpecialArgs = { inherit dotFilesPath modulesPath vars unstable; };
         home-manager.users."${vars.user}" = {
           imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
             plasma-manager.homeManagerModules.plasma-manager
-            inputs.spicetify-nix.homeManagerModules.default
             ./vivobook/home.nix
           ];
         };

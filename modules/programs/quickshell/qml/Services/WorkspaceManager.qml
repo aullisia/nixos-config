@@ -26,7 +26,7 @@ Singleton {
                 if (Hyprland.eventSocketPath) {
                     console.log("Detected Hyprland compositor");
                     isHyprland = true;
-                    isNiri = false; 
+                    isNiri = false;
                     initHyprland();
                     return;
                 }

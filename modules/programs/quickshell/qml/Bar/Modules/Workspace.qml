@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Window
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
 import qs.Settings
@@ -124,13 +124,15 @@ Item {
         border.color: Qt.rgba(Theme.textPrimary.r, Theme.textPrimary.g, Theme.textPrimary.b, 0.1)
         border.width: 1
         layer.enabled: true
-        layer.effect: DropShadow {
-            color: "black"
-            radius: 12
-            samples: 24
-            verticalOffset: 0
-            horizontalOffset: 0
-            opacity: 0.10
+        MultiEffect {
+            anchors.fill: myRect
+            source: myRect
+            shadowEnabled: true
+            shadowColor: "black"
+            shadowBlur: 12
+            shadowOpacity: 0.1
+            shadowHorizontalOffset: 0
+            shadowVerticalOffset: 0
         }
     }
 

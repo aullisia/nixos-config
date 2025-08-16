@@ -36,7 +36,7 @@ Singleton {
         }
         JsonAdapter {
             id: settingAdapter
-            property string weatherCity: "Dinslaken"
+            property string weatherCity: "Brussels"
             property string profileImage: Quickshell.env("HOME") + "/.face"
             property bool useFahrenheit: false
             property string wallpaperFolder: "/usr/share/wallpapers"

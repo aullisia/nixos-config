@@ -1,13 +1,11 @@
 # Uses code from https://github.com/Ly-sec/nixos
+# Uses niri-flake https://github.com/sodiboo/niri-flake contains info on fixing vscode with gnome keyring
 
 { config, pkgs, home-manager, vars, inputs, ... }:
 
 {
-	programs.niri.enable = true;
-  security.polkit.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.swaylock = {};
-
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  
   home-manager.users."${vars.user}" = {
     imports = [
       ./settings.nix
@@ -20,8 +18,12 @@
     services.swww.enable = true;
 
     home.packages = with pkgs; [
+      pkgs.gcr
       xwayland-satellite
       wl-clipboard
     ];
+
+    programs.swaylock.enable = true;
+    services.swayidle.enable = true;
   };
 }

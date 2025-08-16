@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, dotFilesPath, modulesPath, lib, vars, spicetify-nix, quickshell, ... }:
+{ config, pkgs, unstable, dotFilesPath, modulesPath, lib, vars, quickshell, spicetify-nix, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -17,16 +17,15 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   imports = [
-    ../../modules/programs/quickshell
     ../../modules/programs/walker
-      
-    (import ./${modulesPath}/programs/firefox { 
-      wallpaper = ./${dotFilesPath}/wallpapers/wallpaper-theme-converter3.png;
-    } )
+    ../../modules/programs/librewolf.nix
+    ../../modules/programs/vesktop
+    ../../modules/programs/spicetify.nix
+
    ./${modulesPath}/shell/starship.nix
    ./${modulesPath}/programs/ghostty.nix
    ./${modulesPath}/programs/fastfetch
-  ];
+  ]; 
 
   home.sessionVariables = {
     # EDITOR = "emacs";
@@ -92,26 +91,14 @@
   #   { flatpakref = "https://sober.vinegarhq.org/sober.flatpakref"; sha256="sha256:1pj8y1xhiwgbnhrr3yr3ybpfis9slrl73i0b1lc9q89vhip6ym2l"; } # Roblox Player
   # ];
 
-  # Spicetify
-  programs.spicetify =
-  let
-    spicePkgs = spicetify-nix.legacyPackages.${pkgs.system};
-  in
-  {
-    enable = true;
-    theme = spicePkgs.themes.text;
-    colorScheme = "CatppuccinMacchiato";
-  };
-
   # Nix
   home.packages = with pkgs; [ 
     vscode
     nb # notes
     trilium-desktop
     qimgv
-    vesktop # discord
     # webcord-vencord
-    unstable.brave
+    # unstable.brave
     vlc
     # unstable.spotify
     prismlauncher
@@ -149,6 +136,9 @@
     mangohud
     filezilla
     audacity
+    seahorse
+    nautilus
+
     # kdePackages.spectacle
     # gowall
   ];
