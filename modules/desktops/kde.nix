@@ -1,4 +1,4 @@
-{ wallpaper }: { config, pkgs, home-manager, vars, ... }:
+{ config, pkgs, home-manager, vars, ... }:
 
 {
   services = {

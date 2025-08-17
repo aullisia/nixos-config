@@ -137,7 +137,7 @@
     filezilla
     audacity
     seahorse
-    nautilus
+    # nautilus
 
     # kdePackages.spectacle
     # gowall

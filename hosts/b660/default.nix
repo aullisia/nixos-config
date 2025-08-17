@@ -7,14 +7,12 @@
   [
     ./hardware-configuration.nix
 
-    ../../modules/desktops/niri
-    ../../modules/greeter/greetd.nix
-    ../../modules/programs/quickshell
+    # ../../modules/desktops/niri
+    # ../../modules/greeter/greetd.nix
+    # ../../modules/programs/quickshell
     ../../modules/programs/stylix.nix
-    
-    # (import ../../modules/desktops/kde.nix { 
-    #   wallpaper =  ../../dotfiles/wallpapers/wallhaven-x6vjkz_1920x1080.png;
-    # })
+    ../../modules/desktops/kde.nix
+    ../../modules/greeter/sddm.nix
   ];
 
   networking.hostName = lib.mkForce "b660";
@@ -22,13 +20,6 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   services.blueman.enable = true; # Bluetooth GUI
   # TODO: From blueman-manager, go in View->Plugins and uncheck "StatusIcon" do this declaratively
-
-  # SDDM
-  # services.displayManager.sddm = {
-  #   enable = true;
-  #   wayland.enable = true;
-  #   theme = "sddm-astronaut-theme";
-  # };
 
   environment.variables = {
     QT_QPA_PLATFORM = "wayland";
@@ -178,7 +169,7 @@
     jdk17
     dotnet-sdk_9
     protonup-qt
-    # sddm-astronaut
+    
     # catppuccin-grub
     linuxKernel.packages.linux_6_15.xone linuxKernel.packages.linux_6_15.xpadneo # Controller
     bottles
