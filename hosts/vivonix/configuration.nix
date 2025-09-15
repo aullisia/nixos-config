@@ -15,18 +15,17 @@ in
     "${self}/modules/programs/plymouth.nix"
     "${self}/modules/services/xdg.nix"
     "${self}/modules/services/environment.nix"
+    "${self}/modules/services/usb.nix"
+    "${self}/modules/programs/virt.nix"
   ];
+
+  home-manager.backupFileExtension = "bak";
 
   networking.hostName = lib.mkForce "vivonix";
 
   # Power
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
-
-  # USB
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
-  users.users."${vars.user}".extraGroups = [ "storage" ];
 
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
@@ -76,6 +75,10 @@ in
       package = pkgs.nix-direnv;
     };
   };
+
+  # Docker
+  virtualisation.docker.enable = true;
+  users.users."${vars.user}".extraGroups = [ "docker" ];
 
   # Flatpak
   services.flatpak.enable = true;

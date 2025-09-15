@@ -43,7 +43,8 @@ in {
     "super+shift+r" = { action = switch-preset-window-height; };
     "super+ctrl+r" = { action = reset-window-height; };
 
-    "print" = { action = spawn ''grim -g "$(slurp)" - | swappy -f -''; };
+    # "print" = { action = spawn ''grim -g "$(slurp)" - | swappy -f -''; };
+    "print" = { action = spawn ["sh" "-c" "grim -g \"$(slurp)\" - | swappy -f -"]; };
     # "ctrl+print" = { action = screenshot-screen; };
     # "alt+print" = { action = screenshot-window; };
 

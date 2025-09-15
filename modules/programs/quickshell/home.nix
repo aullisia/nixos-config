@@ -7,8 +7,8 @@ let
   quickshellDir = "${self}/modules/programs/quickshell/qml";
   quickshellTarget = "${homeDir}/.config/quickshell";
 
-  faceIconSource = "${self}/rsc/img/profile.png";
-  faceIconTarget = "${homeDir}/face.png";
+  faceIconSource = "${self}/rsc/img/frieren_profile.jpg";
+  faceIconTarget = "${homeDir}/face.jpg";
 in {
   home.packages = with pkgs; [
     myQuickshell

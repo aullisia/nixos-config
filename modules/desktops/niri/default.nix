@@ -22,6 +22,7 @@
       xwayland-satellite
       wl-clipboard
       whitesur-cursors
+      grim slurp swappy
     ];
 
     programs.swaylock.enable = true;

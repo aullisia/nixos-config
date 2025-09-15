@@ -4,7 +4,11 @@ with pkgs;
 
 [
   # System / Utilities
-  nemo
+  (nemo-with-extensions.override {
+    extensions = [ nemo-fileroller ];
+  })
+  nemo-fileroller
+  
 
   # Editors / IDEs / Development
   arduino-ide
@@ -12,7 +16,6 @@ with pkgs;
   jetbrains.idea-ultimate
   jetbrains.rider
   jetbrains-toolbox
-  vscode
   { isFlatpak = true; appId = "org.vinegarhq.Vinegar"; origin = "flathub";  }
 
   # Office / Productivity

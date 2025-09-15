@@ -1,4 +1,4 @@
-{ conig, pkgs, inputs, self, vars, ... }:
+{ config, pkgs, inputs, self, vars, ... }:
 let
   allPackages = import ./home-packages.nix { inherit pkgs; };
 
@@ -20,6 +20,7 @@ in
     "${self}/modules/services/wallpapers.nix"
     "${self}/modules/programs/spicetify.nix"
     "${self}/modules/programs/fastfetch"
+    "${self}/modules/programs/vscode"
   ];
 
   home.sessionVariables = {

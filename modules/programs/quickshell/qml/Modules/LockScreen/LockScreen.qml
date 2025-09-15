@@ -487,7 +487,7 @@ Loader {
                     spacing: Style.marginM * scaling
 
                     NText {
-                      text: Quickshell.env("USER") + "@" + Quickshell.env("HOSTNAME") + ":~$"
+                      text: Quickshell.env("USER") + "@" + "nixos" + ":~$"
                       color: Color.mPrimary
                       font.family: Settings.data.ui.fontFixed
                       font.pointSize: Style.fontSizeL * scaling

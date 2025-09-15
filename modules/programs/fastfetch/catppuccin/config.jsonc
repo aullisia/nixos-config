@@ -3,16 +3,14 @@
     "logo": {
         "source": "~/.config/fastfetch/logo.png",
         "type": "kitty",
-        "height": 16,
+        "height": 18,
         "width": 34,
         "padding": {
-            "top": 4,
+            "top": 1,
            "left": 4
         }
     },
   "modules": [
-    "break",
-    "break",
     "break",
     "break",
     {
