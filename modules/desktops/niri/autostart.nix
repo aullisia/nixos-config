@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 
 let
   hostname = builtins.getEnv "HOSTNAME";
@@ -11,6 +11,7 @@ in
     #{ command = ["bash" "-c" "swww-daemon & swww img ~/nixos-config/dotfiles/wallpapers/frier.png --transition-type center"]; }
     #{ command = ["qs"]; }
     { command = ["quickshell"]; }
+    { command = [ "bash" "-c" "/home/aul/.local/bin/autostart-runner.sh" ]; }
     #{ command = ["swww-daemon"]; }
     #{ command = ["${pkgs.swaybg}/bin/swaybg" "-o" "DP-1" "-i" "/home/lysec/nixos/assets/wallpapers/clouds.png" "-m" "fill"]; }
     #{ command = ["sh" "-c" "swww-daemon & swww img /home/lysec/nixos/wallpapers/cloud.png"]; }
@@ -18,5 +19,6 @@ in
   ++ (if hostname == "b660" then [
     { command = ["vesktop"]; }
     { command = ["spotify"]; }
+  ] else if hostname == "vivonix" then [
   ] else []);
 }

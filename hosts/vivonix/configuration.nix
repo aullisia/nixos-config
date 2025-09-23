@@ -17,6 +17,7 @@ in
     "${self}/modules/services/environment.nix"
     "${self}/modules/services/usb.nix"
     "${self}/modules/programs/virt.nix"
+    "${self}/modules/programs/steam.nix"
   ];
 
   home-manager.backupFileExtension = "bak";
@@ -62,6 +63,8 @@ in
     };
   };
   networking.firewall.allowedUDPPorts = [ 51820 ];
+
+  services.resolved.enable = true;
 
   # direnv
   programs.direnv = {

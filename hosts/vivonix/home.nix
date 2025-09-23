@@ -21,6 +21,7 @@ in
     "${self}/modules/programs/spicetify.nix"
     "${self}/modules/programs/fastfetch"
     "${self}/modules/programs/vscode"
+    "${self}/modules/services/autostart"
   ];
 
   home.sessionVariables = {
