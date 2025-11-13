@@ -2,11 +2,9 @@
   boot = {
     plymouth = {
       enable = true;
-      theme = lib.mkForce "infinite_seal";
+      theme = lib.mkForce "nixos-bgrt";
       themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "infinite_seal" ];
-        })
+        nixos-bgrt-plymouth
       ];
     };
 

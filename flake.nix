@@ -2,8 +2,9 @@
   description = "My personal NixOS flake for personal computers";
 
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs?ref=release-25.05";
-    nixpkgs.url = "github:nixos/nixpkgs/d8e9defc04d49cfc48edbd0ffee38f3ded52b13d";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=release-25.05";
+    #nixpkgs.url = "github:nixos/nixpkgs/d8e9defc04d49cfc48edbd0ffee38f3ded52b13d";
+
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
@@ -27,8 +28,6 @@
     };
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
   outputs = inputs @ { self, ...}: 

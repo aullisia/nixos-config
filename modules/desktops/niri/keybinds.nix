@@ -43,8 +43,17 @@ in {
     "super+shift+r" = { action = switch-preset-window-height; };
     "super+ctrl+r" = { action = reset-window-height; };
 
-    # "print" = { action = spawn ''grim -g "$(slurp)" - | swappy -f -''; };
-    "print" = { action = spawn ["sh" "-c" "grim -g \"$(slurp)\" - | swappy -f -"]; };
+    #"print" = { action = spawn ["sh" "-c" "grim -g \"$(slurp)\" - | swappy -f -"]; };
+    "print" = { action = spawn ["sh" "-c" ''
+      base=~/Pictures/Screenshots
+      dir="$base/$(date +%Y-%m)"
+      mkdir -p "$dir"
+      file="$dir/screenshot-$(date +%Y%m%d_%H%M%S).png"
+      grim -g "$(slurp)" "$file" && wl-copy < "$file"
+    '']; };
+
+
+
     # "ctrl+print" = { action = screenshot-screen; };
     # "alt+print" = { action = screenshot-window; };
 

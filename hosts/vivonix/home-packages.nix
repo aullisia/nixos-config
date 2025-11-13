@@ -26,9 +26,11 @@ with pkgs;
   # Image / Media
   qimgv
   vlc
+  pinta
 
   # Communication
   vesktop
+  { isFlatpak = true; appId = "org.ferdium.Ferdium"; origin = "flathub";  }
 
   # Gaming
   prismlauncher

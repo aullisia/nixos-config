@@ -1,5 +1,6 @@
 # Uses code from https://github.com/Ly-sec/nixos
 # Uses niri-flake https://github.com/sodiboo/niri-flake contains info on fixing vscode with gnome keyring
+# https://variety4me.github.io/niri_docs/Application-Issues/
 
 { config, pkgs, vars, inputs, ... }:
 
