@@ -52,8 +52,6 @@ in {
       grim -g "$(slurp)" "$file" && wl-copy < "$file"
     '']; };
 
-
-
     # "ctrl+print" = { action = screenshot-screen; };
     # "alt+print" = { action = screenshot-window; };
 
@@ -67,5 +65,30 @@ in {
     "super+f" = { action = maximize-column; };
     "super+shift+f" = { action = fullscreen-window; };
     "super+v" = { action = toggle-window-floating; };
+
+    ## Noctalia
+    # Volume
+    # "XF86AudioRaiseVolume".action.spawn = [
+    #   "noctalia-shell" "ipc" "call" "volume" "increase"
+    # ];
+    # "XF86AudioLowerVolume".action.spawn = [
+    #   "noctalia-shell" "ipc" "call" "volume" "decrease"
+    # ];
+    # "XF86AudioMute".action.spawn = [
+    #   "noctalia-shell" "ipc" "call" "volume" "muteOutput"
+    # ];
+
+    # # Brightness
+    # "XF86MonBrightnessUp".action.spawn = [
+    #   "noctalia-shell" "ipc" "call" "brightness" "increase"
+    # ];
+    # "XF86MonBrightnessDown".action.spawn = [
+    #   "noctalia-shell" "ipc" "call" "brightness" "decrease"
+    # ];
+
+    # Lock screen
+    "Mod+L".action.spawn = [
+      "noctalia-shell" "ipc" "call" "lockScreen" "lock"
+    ];
   };
 }

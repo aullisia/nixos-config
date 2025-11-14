@@ -8,11 +8,19 @@
       {
         matches = [
           {
-            namespace = "^quickshell-wallpaper$";
+            namespace = "^noctalia-overview*";
           }
         ];
-        #place-within-backdrop = true;
+        place-within-backdrop = true;
       }
+      # {
+      #   matches = [
+      #     {
+      #       namespace = "^quickshell-wallpaper$";
+      #     }
+      #   ];
+      #   #place-within-backdrop = true;
+      # }
       {
         matches = [
           {
@@ -53,10 +61,10 @@
       {
         matches = [{}];
         geometry-corner-radius = {
-          top-left = 0.0;
-          top-right = 0.0;
-          bottom-left = 0.0;
-          bottom-right = 0.0;
+          top-left = 15.0;
+          top-right = 15.0;
+          bottom-left = 15.0;
+          bottom-right = 15.0;
         };
         clip-to-geometry = true;
       }

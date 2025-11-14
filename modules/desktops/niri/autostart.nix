@@ -10,7 +10,7 @@ in
     { command = ["xwayland-satellite"]; }
     #{ command = ["bash" "-c" "swww-daemon & swww img ~/nixos-config/dotfiles/wallpapers/frier.png --transition-type center"]; }
     #{ command = ["qs"]; }
-    { command = ["quickshell"]; }
+    { command = ["noctalia-shell"]; }
     { command = [ "bash" "-c" "/home/aul/.local/bin/autostart-runner.sh" ]; }
     #{ command = ["swww-daemon"]; }
     #{ command = ["${pkgs.swaybg}/bin/swaybg" "-o" "DP-1" "-i" "/home/lysec/nixos/assets/wallpapers/clouds.png" "-m" "fill"]; }

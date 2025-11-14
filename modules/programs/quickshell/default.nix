@@ -1,22 +1,8 @@
-{ config, lib, pkgs, vars, ... }:
+{ config, lib, pkgs, vars, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
-    qt6Packages.qt5compat
-    kdePackages.qtbase
-    kdePackages.qtdeclarative
-    kdePackages.qtstyleplugin-kvantum
-
-    bluez
-    brightnessctl
-    cava
-    cliphist
-    file
-    findutils
-    gpu-screen-recorder
-    libnotify
-    mutagen
-    cliphist
+    inputs.noctalia.packages.${system}.default
   ];
 
   fonts.packages = with pkgs; [
@@ -27,6 +13,7 @@
 
   home-manager.users."${vars.user}" = {
     imports = [
+       inputs.noctalia.homeModules.default
       ./home.nix
     ];
   };
