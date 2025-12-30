@@ -15,6 +15,7 @@ in
     "${self}/modules/programs/plymouth.nix"
     "${self}/modules/services/xdg.nix"
     "${self}/modules/services/environment.nix"
+    "${self}/modules/services/syncthing.nix"
     "${self}/modules/services/usb.nix"
     "${self}/modules/programs/virt.nix"
     "${self}/modules/programs/steam.nix"

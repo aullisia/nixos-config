@@ -22,6 +22,7 @@ with pkgs;
   hunspell
   hunspellDicts.nl_NL
   libreoffice-qt
+  obsidian
 
   # Image / Media
   qimgv

@@ -16,7 +16,7 @@ in {
       setupCompleted = false;
       bar = {
         position = "top";
-        backgroundOpacity = 1;
+        #backgroundOpacity = 1;
         monitors = [ ];
         density = "default";
         showCapsule = true;
@@ -88,7 +88,7 @@ in {
         language = "";
       };
       ui = {
-        fontDefault = "Roboto";
+        #fontDefault = "Roboto";
         fontFixed = "DejaVu Sans Mono";
         fontDefaultScale = 1;
         fontFixedScale = 1;
@@ -139,7 +139,7 @@ in {
       appLauncher = {
         enableClipboardHistory = false;
         position = "center";
-        backgroundOpacity = 1;
+        #backgroundOpacity = 1;
         pinnedExecs = [ ];
         useApp2Unit = false;
         sortByMostUsed = true;
@@ -205,7 +205,7 @@ in {
       dock = {
         enabled = false;
         displayMode = "always_visible";
-        backgroundOpacity = 1;
+        #backgroundOpacity = 1;
         floatingRatio = 1;
         size = 1;
         onlySameOutput = true;
@@ -221,7 +221,7 @@ in {
         monitors = [ ];
         location = "top_right";
         overlayLayer = true;
-        backgroundOpacity = 1;
+        #backgroundOpacity = 1;
         respectExpireTimeout = false;
         lowUrgencyDuration = 3;
         normalUrgencyDuration = 8;

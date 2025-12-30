@@ -15,11 +15,11 @@ in {
     "super+Control+Return".action = spawn ["qs" "ipc" "call" "globalIPC" "toggleLauncher"];
     # Quickshell Keybinds End
 
-    "xf86audioraisevolume".action = volume-up;
-    "xf86audiolowervolume".action = volume-down;
+    # "xf86audioraisevolume".action = volume-up;
+    # "xf86audiolowervolume".action = volume-down;
 
-    "control+super+xf86audioraisevolume".action = spawn "brightness" "up";
-    "control+super+xf86audiolowervolume".action = spawn "brightness" "down";
+    # "control+super+xf86audioraisevolume".action = spawn "brightness" "up";
+    # "control+super+xf86audiolowervolume".action = spawn "brightness" "down";
 
     "super+q".action = close-window;
     "super+b".action = spawn apps.browser;
@@ -67,24 +67,24 @@ in {
     "super+v" = { action = toggle-window-floating; };
 
     ## Noctalia
-    # Volume
-    # "XF86AudioRaiseVolume".action.spawn = [
-    #   "noctalia-shell" "ipc" "call" "volume" "increase"
-    # ];
-    # "XF86AudioLowerVolume".action.spawn = [
-    #   "noctalia-shell" "ipc" "call" "volume" "decrease"
-    # ];
-    # "XF86AudioMute".action.spawn = [
-    #   "noctalia-shell" "ipc" "call" "volume" "muteOutput"
-    # ];
+    #Volume
+    "XF86AudioRaiseVolume".action.spawn = [
+      "noctalia-shell" "ipc" "call" "volume" "increase"
+    ];
+    "XF86AudioLowerVolume".action.spawn = [
+      "noctalia-shell" "ipc" "call" "volume" "decrease"
+    ];
+    "XF86AudioMute".action.spawn = [
+      "noctalia-shell" "ipc" "call" "volume" "muteOutput"
+    ];
 
-    # # Brightness
-    # "XF86MonBrightnessUp".action.spawn = [
-    #   "noctalia-shell" "ipc" "call" "brightness" "increase"
-    # ];
-    # "XF86MonBrightnessDown".action.spawn = [
-    #   "noctalia-shell" "ipc" "call" "brightness" "decrease"
-    # ];
+    # Brightness
+    "XF86MonBrightnessUp".action.spawn = [
+      "noctalia-shell" "ipc" "call" "brightness" "increase"
+    ];
+    "XF86MonBrightnessDown".action.spawn = [
+      "noctalia-shell" "ipc" "call" "brightness" "decrease"
+    ];
 
     # Lock screen
     "Mod+L".action.spawn = [
