@@ -63,7 +63,12 @@ in
       autostart = false;
     };
   };
-  networking.firewall.allowedUDPPorts = [ 51820 ];
+  networking.firewall.allowedUDPPorts = [ 51820 27361 ];
+
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 
   services.resolved.enable = true;
 

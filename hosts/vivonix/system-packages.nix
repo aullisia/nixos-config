@@ -13,4 +13,5 @@ with pkgs;
 
   # Other
   wireguard-tools
+  mullvad-vpn
 ]
