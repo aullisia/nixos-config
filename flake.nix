@@ -1,49 +1,59 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
-  description = "My personal NixOS flake for personal computers";
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=release-25.11";
-    #nixpkgs.url = "github:nixos/nixpkgs/c2db45be354486ed8b62672c710d665bd53824c5";
-
-    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
+    den.url = "github:vic/den";
+    flake-file.url = "github:vic/flake-file";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     home-manager = {
-      url = "github:nix-community/home-manager?ref=release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    impermanence.url = "github:nix-community/impermanence";
+    import-tree.url = "github:vic/import-tree";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/879f45ee15a3b06fdbbf9b6dc825c5fbca137fcd";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-
-    stylix = {
-      url = "github:nix-community/stylix/release-25.11";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    niri.url = "github:sodiboo/niri-flake";
-
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    nix-versions = {
+      url = "github:vic/nix-versions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-  };
-
-  outputs = inputs @ { self, ...}: 
-  let
-    vars = {
-      user = "aul";
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
-  in
-  {
-    nixosConfigurations = (
-      import ./hosts {
-        inherit self inputs vars;
-      }
-    );
+    skwd-wall = {
+      url = "github:liixini/skwd-wall/53a858b798e5da1435f15dd3ff5b7292bd77f40f";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 }

@@ -1,0 +1,46 @@
+*.nix        text eol=lf
+*.nix        diff
+*.lock       text eol=lf
+
+*.sh         text eol=lf
+*.bash       text eol=lf
+*.zsh        text eol=lf
+*.fish       text eol=lf
+
+*.conf       text eol=lf
+*.cfg        text eol=lf
+*.ini        text eol=lf
+*.toml       text eol=lf
+*.yaml       text eol=lf
+*.yml        text eol=lf
+*.json       text eol=lf
+*.xml        text eol=lf
+
+*.md         text eol=lf
+*.txt        text eol=lf
+
+*.png        binary
+*.jpg        binary
+*.jpeg       binary
+*.gif        binary
+*.webp       binary
+*.ico        binary
+*.svg        text eol=lf
+
+*.ttf        binary
+*.otf        binary
+*.woff       binary
+*.woff2      binary
+
+*.zip        binary
+*.tar        binary
+*.gz         binary
+*.xz         binary
+*.7z         binary
+
+.gitattributes text eol=lf
+.gitignore    text eol=lf
+.gitmodules   text eol=lf
+
+result*       export-ignore
+.direnv/      export-ignore
