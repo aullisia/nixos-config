@@ -5,7 +5,7 @@ set -euo pipefail
 
 # ---------------------------------------------------------------------------
 # Paths.  SCRIPT_DIR is the installer directory; REPO_DIR is the source flake
-# repository that contains it (e.g. /home/<user>/new-nix-config).  The source
+# repository that contains it (e.g. /home/<user>/nixos-config).  The source
 # repository is NEVER the target checkout under /mnt — that only exists after
 # stage 2 copies the files.
 # ---------------------------------------------------------------------------
@@ -176,18 +176,18 @@ detect_target_user() {
 # Sets TARGET_USER and TARGET_FLAKE for the resolved host. Must be called
 # after HOST is known and before TARGET_FLAKE is used.
 #
-# The flake is stored at /persistent/home/<user>/new-nix-config — i.e. on the
+# The flake is stored at /persistent/home/<user>/nixos-config — i.e. on the
 # @persistent subvolume, NOT directly under /home. Since $HOME lives inside
 # @, which is wiped back to blank on every boot (see
 # modules/system/impermanence.nix), anything written straight to /home would
 # vanish on first reboot; environment.persistence."/persistent".users.<user>
-# bind-mounts this backing path back to ~/new-nix-config after each wipe, so
+# bind-mounts this backing path back to ~/nixos-config after each wipe, so
 # it still shows up exactly where the user expects it.
 set_target_flake() {
     local host="$1"
     TARGET_USER="$(detect_target_user "$REPO_DIR" "$host")"
     [[ -n "$TARGET_USER" ]] || TARGET_USER="$DEFAULT_USER"
-    TARGET_FLAKE="$TARGET/persistent/home/$TARGET_USER/new-nix-config"
+    TARGET_FLAKE="$TARGET/persistent/home/$TARGET_USER/nixos-config"
 }
 
 # The flake under the target root — what nixos-install will actually consume.
@@ -207,7 +207,7 @@ require_source_flake() {
 # Guard against ever mistaking the target checkout for the original source.
 assert_source_is_not_target() {
     [[ "$REPO_DIR" != "$TARGET_FLAKE" ]] \
-        || die "REPO_DIR ($REPO_DIR) must NOT be $TARGET_FLAKE: the source repository has to live outside /mnt (e.g. /home/<user>/new-nix-config)."
+        || die "REPO_DIR ($REPO_DIR) must NOT be $TARGET_FLAKE: the source repository has to live outside /mnt (e.g. /home/<user>/nixos-config)."
 }
 
 valid_hostname() {

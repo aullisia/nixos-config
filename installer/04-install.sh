@@ -5,7 +5,7 @@
 # (mounts, flake, host, hardware configuration, filesystem layout, optional
 # dedicated swap) and then runs:
 #
-#   nixos-install --root /mnt --flake /mnt/persistent/home/<user>/new-nix-config#<host>
+#   nixos-install --root /mnt --flake /mnt/persistent/home/<user>/nixos-config#<host>
 #
 # It does NOT recopy the flake, does NOT delete the generated hardware
 # configuration, and does NOT touch the source repository.

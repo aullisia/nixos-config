@@ -15,7 +15,7 @@
       den.aspects.kernel
 
       # Services
-      den.aspects.ssh
+      # den.aspects.ssh
       den.aspects.swap
       den.aspects.impermanence
     ];

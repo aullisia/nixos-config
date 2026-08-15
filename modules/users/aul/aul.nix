@@ -46,22 +46,6 @@
       ...
     }:
     {
-      # TEMPORARY WORKAROUND for an upstream plasma-manager bug (confirmed
-      # still present as of the pinned rev, 2026-08-03): modules/input.nix
-      # unconditionally does `builtins.head invalidHexCodes` while building
-      # its assertion's `message` string, even when invalidHexCodes is
-      # empty — which it always is here, since this config defines no
-      # per-device mice/touchpads at all. Home Manager's own per-profile
-      # assertion wrapping (nixos/common.nix) forces every assertion's
-      # message eagerly, not just failing ones, so this throws
-      # "list index 0 is out of bounds" unconditionally, on every build.
-      # This is not caused by anything in this flake. Zeroing out this
-      # user's HM assertions is blunt (it suppresses other real HM
-      # assertion failures too), but unblocks building at all. Retry
-      # `nix flake lock --update-input plasma-manager` periodically and
-      # remove this once upstream fixes it.
-      assertions = lib.mkForce [ ];
-
       # User packages
       home.packages = with pkgs; [
         # Development

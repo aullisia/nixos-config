@@ -50,25 +50,6 @@
     {
       imports = [ inputs.impermanence.nixosModules.impermanence ];
 
-      # TEMPORARY DIAGNOSTIC WORKAROUND — not meant to stay in permanently.
-      # nixpkgs' own fileSystems topological-sort assertion
-      # (nixos/modules/tasks/filesystems.nix, the mount-ordering cycle
-      # check) throws unconditionally here — "attribute 'cycle' missing" —
-      # when its own message string is force-evaluated, regardless of
-      # whether an actual cycle exists. This is the same "eager assertion
-      # message" footgun as the plasma-manager one worked around in
-      # modules/users/aul/aul.nix, but this time it's core nixpkgs,
-      # reproduced identically across nixpkgs revisions from Jan through
-      # Aug 2026 — not something an input update fixes. It's plausibly
-      # triggered by the sheer number of interdependent bind mounts here
-      # (32 fileSystems entries, all sharing /persistent and / as common
-      # prerequisites) hitting an edge case in the sorter. This blanket
-      # override suppresses ALL system-level assertions, not just this
-      # one — a real loss of a genuine NixOS safety net, so treat this as
-      # "unblock the build for now," not "solved." Try removing this after
-      # any nixpkgs update to see if it's been fixed upstream.
-      assertions = lib.mkForce [ ];
-
       boot.initrd.systemd.enable = true;
       boot.initrd.supportedFilesystems = [ "btrfs" ];
 
@@ -182,7 +163,7 @@
             "Music"
 
             # The flake itself
-            "new-nix-config"
+            "nixos-config"
 
             # Identity / credentials
             ".ssh"

@@ -43,6 +43,8 @@ PERSIST_DIRS_SYSTEM=(
     /var/log
     /root
     /var/db/sudo/lectured
+    /var/cache/tuigreet
+    /var/lib/flatpak
 )
 
 # Existing files only — never created/modified by this script, just checked
@@ -52,7 +54,10 @@ PERSIST_DIRS_SYSTEM=(
 PERSIST_FILES_SYSTEM=(
     /etc/machine-id
     /etc/ssh/ssh_host_ed25519_key
+    /etc/ssh/ssh_host_ed25519_key.pub
     /etc/ssh/ssh_host_rsa_key
+    /etc/ssh/ssh_host_rsa_key.pub
+    /var/lib/systemd/random-seed
 )
 
 PERSIST_DIRS_USER=(
@@ -61,7 +66,7 @@ PERSIST_DIRS_USER=(
     Pictures
     Videos
     Music
-    new-nix-config
+    nixos-config
     .ssh
     .gnupg
     .config/gh
@@ -77,6 +82,8 @@ PERSIST_DIRS_USER=(
     .var/app
     .config/obsidian
     .config/zsh
+    .cache/skwd-wall
+    .config/skwd-wall
 )
 
 PERSIST_FILES_USER=()
@@ -200,6 +207,8 @@ check() {
     done
 
     echo
+    clean
+
     if [[ $failures -eq 0 ]]; then
         echo "ALL $checked CHECKS PASSED."
     else
@@ -208,11 +217,53 @@ check() {
     fi
 }
 
+# Removes every canary file this script's own `seed` created — both the
+# ones sitting in persisted directories (which, unlike the ephemeral test
+# paths, do NOT get cleaned up by a reboot; they'd otherwise sit there
+# forever) and any leftover ephemeral test artifacts (in case a previous
+# `check` failed and a reboot never actually cleared them). Called
+# automatically at the end of `check`; also available standalone if a run
+# gets interrupted between `seed` and `check`.
+clean() {
+    local removed=0
+
+    for d in "${PERSIST_DIRS_SYSTEM[@]}"; do
+        if [[ -f "$d/$CANARY_NAME" ]]; then
+            rm -f "$d/$CANARY_NAME"
+            removed=$((removed + 1))
+        fi
+    done
+
+    for d in "${PERSIST_DIRS_USER[@]}"; do
+        if [[ -f "$HOME_DIR/$d/$CANARY_NAME" ]]; then
+            rm -f "$HOME_DIR/$d/$CANARY_NAME"
+            removed=$((removed + 1))
+        fi
+    done
+
+    for d in "${EPHEMERAL_DIRS[@]}"; do
+        if [[ -e "$d" ]]; then
+            rm -rf "$d"
+            removed=$((removed + 1))
+        fi
+    done
+
+    for f in "${EPHEMERAL_FILES[@]}"; do
+        if [[ -e "$f" ]]; then
+            rm -f "$f"
+            removed=$((removed + 1))
+        fi
+    done
+
+    echo "Cleaned up $removed leftover test artifact(s)."
+}
+
 case "${1:-}" in
     seed) seed ;;
     check) check ;;
+    clean) clean ;;
     *)
-        echo "usage: $0 {seed|check}" >&2
+        echo "usage: $0 {seed|check|clean}" >&2
         exit 1
         ;;
 esac

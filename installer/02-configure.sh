@@ -5,10 +5,10 @@
 #   - verifies the /mnt mount layout and required Btrfs subvolumes
 #   - verifies the source repository ($REPO_DIR, under /home/...) is a real flake
 #   - copies the source flake into the target ($TARGET_FLAKE =
-#     /mnt/persistent/home/<user>/new-nix-config), dropping VCS metadata and
+#     /mnt/persistent/home/<user>/nixos-config), dropping VCS metadata and
 #     the installer — this is the persistent backing path;
 #     environment.persistence."/persistent".users.<user> bind-mounts it to
-#     ~/new-nix-config after each boot's root wipe
+#     ~/nixos-config after each boot's root wipe
 #   - generates a REAL hardware-configuration.nix from the mounted target with
 #     'nixos-generate-config --root /mnt --show-hardware-config' — no hardcoded
 #     CPU/PCI/GPU/firmware/UUID values
@@ -176,7 +176,7 @@ host_is_in_flake "$REPO_DIR" "$HOST" \
 # Copy source flake into the target checkout
 # ------------------------------------------------------------
 #
-# The source stays under /home/.../new-nix-config.  The target checkout is the
+# The source stays under /home/.../nixos-config.  The target checkout is the
 # copy nixos-install consumes. .git is dropped (large, not useful on the
 # target); the installer folder is deliberately KEPT this time — it'll live
 # in the same git repo going forward, and it's genuinely useful to have on

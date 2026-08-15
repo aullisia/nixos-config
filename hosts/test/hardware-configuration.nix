@@ -43,74 +43,8 @@
       options = [ "bind" ];
     };
 
-  fileSystems."/home/aul/.local/share/JetBrains" =
-    { device = "/nix/@persistent/home/aul/.local/share/JetBrains";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/Videos" =
-    { device = "/nix/@persistent/home/aul/Videos";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/root" =
-    { device = "/nix/@persistent/root";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/.vscode" =
-    { device = "/nix/@persistent/home/aul/.vscode";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/Pictures" =
-    { device = "/nix/@persistent/home/aul/Pictures";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/.gnupg" =
-    { device = "/nix/@persistent/home/aul/.gnupg";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/etc/NetworkManager/system-connections" =
-    { device = "/nix/@persistent/etc/NetworkManager/system-connections";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/.config/obsidian" =
-    { device = "/nix/@persistent/home/aul/.config/obsidian";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/.librewolf" =
-    { device = "/nix/@persistent/home/aul/.librewolf";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
   fileSystems."/home/aul/.config/JetBrains" =
     { device = "/nix/@persistent/home/aul/.config/JetBrains";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/.local/share/Steam" =
-    { device = "/nix/@persistent/home/aul/.local/share/Steam";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/.local/share/PrismLauncher" =
-    { device = "/nix/@persistent/home/aul/.local/share/PrismLauncher";
       fsType = "none";
       options = [ "bind" ];
     };
@@ -121,44 +55,14 @@
       options = [ "bind" ];
     };
 
-  fileSystems."/var/db/sudo/lectured" =
-    { device = "/nix/@persistent/var/db/sudo/lectured";
+  fileSystems."/home/aul/.local/share/Steam" =
+    { device = "/nix/@persistent/home/aul/.local/share/Steam";
       fsType = "none";
       options = [ "bind" ];
     };
 
-  fileSystems."/home/aul/.config/Code" =
-    { device = "/nix/@persistent/home/aul/.config/Code";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/Music" =
-    { device = "/nix/@persistent/home/aul/Music";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/.var/app" =
-    { device = "/nix/@persistent/home/aul/.var/app";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/Documents" =
-    { device = "/nix/@persistent/home/aul/Documents";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/Downloads" =
-    { device = "/nix/@persistent/home/aul/Downloads";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/home/aul/.config/gh" =
-    { device = "/nix/@persistent/home/aul/.config/gh";
+  fileSystems."/etc/NetworkManager/system-connections" =
+    { device = "/nix/@persistent/etc/NetworkManager/system-connections";
       fsType = "none";
       options = [ "bind" ];
     };
@@ -169,20 +73,134 @@
       options = [ "bind" ];
     };
 
+  fileSystems."/home/aul/.local/share/PrismLauncher" =
+    { device = "/nix/@persistent/home/aul/.local/share/PrismLauncher";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.gnupg" =
+    { device = "/nix/@persistent/home/aul/.gnupg";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.config/Code" =
+    { device = "/nix/@persistent/home/aul/.config/Code";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.var/app" =
+    { device = "/nix/@persistent/home/aul/.var/app";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.config/obsidian" =
+    { device = "/nix/@persistent/home/aul/.config/obsidian";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.config/gh" =
+    { device = "/nix/@persistent/home/aul/.config/gh";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.vscode" =
+    { device = "/nix/@persistent/home/aul/.vscode";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.config/skwd-wall" =
+    { device = "/nix/@persistent/home/aul/.config/skwd-wall";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.librewolf" =
+    { device = "/nix/@persistent/home/aul/.librewolf";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.local/share/JetBrains" =
+    { device = "/nix/@persistent/home/aul/.local/share/JetBrains";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/Music" =
+    { device = "/nix/@persistent/home/aul/Music";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.cache/skwd-wall" =
+    { device = "/nix/@persistent/home/aul/.cache/skwd-wall";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/.config/zsh" =
+    { device = "/nix/@persistent/home/aul/.config/zsh";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/Pictures" =
+    { device = "/nix/@persistent/home/aul/Pictures";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
   fileSystems."/home/aul/.steam" =
     { device = "/nix/@persistent/home/aul/.steam";
       fsType = "none";
       options = [ "bind" ];
     };
 
-  fileSystems."/home/aul/new-nix-config" =
-    { device = "/nix/@persistent/home/aul/new-nix-config";
+  fileSystems."/home/aul/Downloads" =
+    { device = "/nix/@persistent/home/aul/Downloads";
       fsType = "none";
       options = [ "bind" ];
     };
 
-  fileSystems."/var/lib/bluetooth" =
-    { device = "/nix/@persistent/var/lib/bluetooth";
+  fileSystems."/home/aul/Documents" =
+    { device = "/nix/@persistent/home/aul/Documents";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/nixos-config" =
+    { device = "/nix/@persistent/home/aul/nixos-config";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/root" =
+    { device = "/nix/@persistent/root";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/home/aul/Videos" =
+    { device = "/nix/@persistent/home/aul/Videos";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/var/cache/tuigreet" =
+    { device = "/nix/@persistent/var/cache/tuigreet";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/var/db/sudo/lectured" =
+    { device = "/nix/@persistent/var/db/sudo/lectured";
       fsType = "none";
       options = [ "bind" ];
     };
@@ -193,8 +211,20 @@
       options = [ "bind" ];
     };
 
+  fileSystems."/var/lib/bluetooth" =
+    { device = "/nix/@persistent/var/lib/bluetooth";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
   fileSystems."/var/lib/docker" =
     { device = "/nix/@persistent/var/lib/docker";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/var/lib/flatpak" =
+    { device = "/nix/@persistent/var/lib/flatpak";
       fsType = "none";
       options = [ "bind" ];
     };
