@@ -69,6 +69,7 @@ PERSIST_DIRS_USER=(
     nixos-config
     .ssh
     .gnupg
+    .local/share/keyrings
     .config/gh
     .librewolf
     .config/vesktop

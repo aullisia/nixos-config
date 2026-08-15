@@ -19,6 +19,19 @@
 
         # Noctalia recommended service (battery widget etc.)
         services.upower.enable = true;
+
+        # Wayland desktop portals — screen sharing/casting in niri and GTK
+        # apps. Screen cast/screenshot route through the portal to niri.
+        xdg.portal = {
+          enable = true;
+          extraPortals = [
+            pkgs.xdg-desktop-portal-gtk
+            pkgs.xdg-desktop-portal-gnome
+          ];
+        };
+
+        # Secret storage for browser/app logins (unlocked via PAM at greetd).
+        services.gnome.gnome-keyring.enable = true;
       };
 
     homeManager =

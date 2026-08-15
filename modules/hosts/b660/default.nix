@@ -10,9 +10,12 @@
       den.aspects.users
       den.aspects.overlays
       den.aspects.nixsettings
+      den.aspects.audio
+      den.aspects.printing
 
       # Hardware
       den.aspects.kernel
+      den.aspects.openrgb
 
       # Services
       # den.aspects.ssh
@@ -21,18 +24,44 @@
     ];
 
     nixos =
-      {
-        lib,
-        pkgs,
-        ...
-      }:
+      { lib, pkgs, ... }:
       {
         imports = [ (inputs.self + "/hosts/b660/hardware-configuration.nix") ];
 
-        # Host policy skeleton.  Machine specifics (CPU vendor, kernel, storage,
-        # GPU, firmware, UUIDs) are intentionally absent: the installer writes
-        # the real hardware-configuration.nix from the actual machine, and
-        # kernel / GPU choices are a host-policy decision.
+        hardware.cpu.intel.updateMicrocode = true;
+        boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+
+        hardware.graphics = {
+          enable = true;
+          enable32Bit = true;
+          extraPackages = with pkgs; [
+            libva-vdpau-driver
+            libvdpau-va-gl
+          ];
+          extraPackages32 = with pkgs.pkgsi686Linux; [
+            libvdpau-va-gl
+          ];
+        };
+        environment.variables = {
+          AMD_VULKAN_ICD = "RADV";
+          VDPAU_DRIVER = "va_gl";
+        };
+        boot.initrd.kernelModules = [ "amdgpu" ];
+        hardware.enableRedistributableFirmware = true;
+
+        services.ollama = {
+          enable = true;
+          package = pkgs.ollama-rocm;
+          # If ROCm fails to detect the 9060 XT (gfx1200), uncomment:
+          # rocmOverrideGfx = "12.0.0";
+        };
+
+        services.power-profiles-daemon.enable = true;
+
+        networking.firewall = {
+          allowedTCPPorts = [ 25565 24454 24460 ];
+          allowedUDPPorts = [ 25565 24454 ];
+        };
       };
   };
 }

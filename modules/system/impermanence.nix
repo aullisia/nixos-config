@@ -168,6 +168,7 @@
             # Identity / credentials
             ".ssh"
             ".gnupg"
+            ".local/share/keyrings"
             ".config/gh"
 
             # Apps with no Nix module

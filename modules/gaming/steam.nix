@@ -16,6 +16,8 @@
               proton-ge-bin
             ];
           };
+          # Steam controller/virtual gamepad udev rules
+          hardware.steam-hardware.enable = true;
           environment.sessionVariables = {
             # Proton settings
             PROTON_ENABLE_HDR = "1";

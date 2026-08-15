@@ -408,6 +408,7 @@ mkdir -p \
     "$TARGET/persistent/home/$TARGET_USER/Music" \
     "$TARGET/persistent/home/$TARGET_USER/.ssh" \
     "$TARGET/persistent/home/$TARGET_USER/.gnupg" \
+    "$TARGET/persistent/home/$TARGET_USER/.local/share/keyrings" \
     "$TARGET/persistent/home/$TARGET_USER/.config/gh" \
     "$TARGET/persistent/home/$TARGET_USER/.librewolf" \
     "$TARGET/persistent/home/$TARGET_USER/.config/vesktop" \
