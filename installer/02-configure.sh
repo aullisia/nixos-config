@@ -422,8 +422,10 @@ mkdir -p \
     "$TARGET/persistent/home/$TARGET_USER/.var/app" \
     "$TARGET/persistent/home/$TARGET_USER/.config/obsidian" \
     "$TARGET/persistent/home/$TARGET_USER/.config/zsh" \
-    "$TARGET/persistent/home/$TARGET_USER/.cache/skwd-wall" \
-    "$TARGET/persistent/home/$TARGET_USER/.config/skwd-wall"
+    "$TARGET/persistent/home/$TARGET_USER/.local/state/noctalia" \
+    "$TARGET/persistent/home/$TARGET_USER/.config/blender"
+
+
 
 chmod 700 "$TARGET/persistent/home/$TARGET_USER/.ssh" "$TARGET/persistent/home/$TARGET_USER/.gnupg"
 

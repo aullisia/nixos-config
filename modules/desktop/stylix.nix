@@ -82,6 +82,8 @@
 
         targets = {
           kde.enable = false;
+          gtk.enable = true;
+          qt.enable = true;
 
           librewolf = {
             enable = false;

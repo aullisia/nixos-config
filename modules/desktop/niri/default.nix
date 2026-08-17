@@ -1,21 +1,20 @@
 { den, inputs, ... }:
 {
   den.aspects.niri = {
+    includes = [
+
+    ];
     nixos =
       { pkgs, ... }:
       {
         imports = [
-          inputs.skwd-wall.nixosModules.default
+          # inputs.skwd-wall.nixosModules.default
         ];
 
         programs.niri = {
           enable = true;
           package = pkgs.niri;
         };
-
-        # Skwd-wall: wallpaper selector + skwd-daemon user service.
-        # Launched via `skwd wall toggle` (keybind) and autostart.
-        programs.skwd-wall.enable = true;
 
         # Noctalia recommended service (battery widget etc.)
         services.upower.enable = true;
@@ -84,24 +83,27 @@
             # Skip the first-run setup wizard / "here's how this works"
             # message on every boot (state dir is wiped by impermanence).
             shell.setup_wizard_enabled = false;
+
+            plugins = {
+              enabled = [
+                "noctalia/mpvpaper"
+              ];
+            };
           };
         };
 
-        # Seed the skwd-wall wallpaper directory with the flake's wallpaper so
-        # there's something to apply via `skwd wall toggle` (Super+W) or
-        # `skwd wall apply`. The daemon restores the last-applied wallpaper on
-        # boot from ~/.cache/skwd-wall (persisted in impermanence).
         home.file."Pictures/Wallpapers/${builtins.baseNameOf wall}".source = wall;
 
         home.packages = with pkgs; [
           gcr
           xwayland-satellite
           wl-clipboard
-          whitesur-cursors
           grim
           slurp
           swappy
           nemo
+          mpv
+          mpvpaper
         ];
 
         services.swayidle = {

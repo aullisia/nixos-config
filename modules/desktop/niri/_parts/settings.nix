@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   programs.niri.settings = {
     prefer-no-csd = true;
@@ -65,8 +66,33 @@
     };
 
     cursor = {
-      size = 20;
-      theme = "WhiteSur-cursors";
+      size = config.stylix.cursor.size;
+      theme = config.stylix.cursor.name;
+    };
+
+
+    outputs = {
+      "Samsung Electric Company LC34G55T HNTX201841" = {
+        mode = {
+          width = 3440;
+          height = 1440;
+          refresh = 164.999;
+        };
+        scale = 1.2;
+        position = { x = 0; y = 0; };
+      };
+
+      "LG Electronics MP59G 0x01010101" = {
+        mode = {
+          width = 1920;
+          height = 1080;
+          refresh = 74.973;
+        };
+      };
+
+      "Philips Consumer Electronics Company PHL 328E8Q 0x00002CA3" = {
+        enable = false;
+      };
     };
 
     environment = {

@@ -42,10 +42,6 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    skwd-wall = {
-      url = "github:liixini/skwd-wall/53a858b798e5da1435f15dd3ff5b7292bd77f40f";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";

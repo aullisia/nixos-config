@@ -35,13 +35,13 @@
         { pkgs, ... }:
         {
           home.packages = with pkgs; [
-            steam
             gamescope
             protontricks
             protonup-rs
             vulkan-tools
             lsfg-vk
             lsfg-vk-ui
+            proton-ge-bin
           ];
         };
     };

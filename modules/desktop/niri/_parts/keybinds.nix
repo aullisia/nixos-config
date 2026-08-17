@@ -22,10 +22,9 @@ in
     "super+t".action = spawn app.terminal;
     "super+E".action = spawn app.fileManager;
 
-    # Skwd-wall wallpaper selector
     "super+w" = {
-      action = spawn [ "skwd" "wall" "toggle" ];
-      hotkey-overlay = { title = "Skwd-wall"; };
+      action = spawn [ "noctalia" "msg" "panel-toggle noctalia/mpvpaper:picker" ];
+      hotkey-overlay = { title = "animated wallpaper"; };
     };
 
     "super+o" = { action = toggle-overview; "repeat" = false; };

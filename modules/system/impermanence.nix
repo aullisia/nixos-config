@@ -184,8 +184,8 @@
             ".var/app"
             ".config/obsidian"
             ".config/zsh"
-            ".cache/skwd-wall"
-            ".config/skwd-wall"
+            ".local/state/noctalia"
+            ".config/blender"
           ];
         };
       };

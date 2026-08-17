@@ -20,12 +20,12 @@
       den.aspects.flatpak
       den.aspects.nh
 
-
       # -- Dev --
       den.aspects.godot
       den.aspects.direnv
       den.aspects.helix
       den.aspects.jetbrains
+      den.aspects.vscode
 
       # -- Apps --
       den.aspects.librewolf
@@ -49,8 +49,7 @@
       # User packages
       home.packages = with pkgs; [
         # Development
-        blender
-        vscode
+        (blender.override { rocmSupport = true; })
         tree
         inputs.nix-versions.packages.${pkgs.stdenv.hostPlatform.system}.default
 
@@ -60,6 +59,8 @@
         pinta
         audacity
         lmms
+        unzip
+        p7zip
 
         # Office / Productivity
         hunspell
