@@ -41,6 +41,7 @@ PERSIST_DIRS_SYSTEM=(
     /var/lib/libvirt
     /var/lib/nixos
     /var/log
+    /var/lib/sbctl
     /root
     /var/db/sudo/lectured
     /var/cache/tuigreet
@@ -83,8 +84,10 @@ PERSIST_DIRS_USER=(
     .var/app
     .config/obsidian
     .config/zsh
+    .cache/antidote
     .local/state/noctalia
     .config/blender
+    .local/state/wireplumber
 )
 
 PERSIST_FILES_USER=()

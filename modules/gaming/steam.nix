@@ -41,7 +41,7 @@
             vulkan-tools
             lsfg-vk
             lsfg-vk-ui
-            proton-ge-bin
+            # proton-ge-bin
           ];
         };
     };

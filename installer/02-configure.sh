@@ -302,6 +302,7 @@ mkdir -p \
     "$TARGET/persistent/var/lib/libvirt" \
     "$TARGET/persistent/var/lib/nixos" \
     "$TARGET/persistent/var/log" \
+    "$TARGET/persistent/var/lib/sbctl" \
     "$TARGET/persistent/root" \
     "$TARGET/persistent/var/cache/tuigreet"
 
@@ -422,8 +423,10 @@ mkdir -p \
     "$TARGET/persistent/home/$TARGET_USER/.var/app" \
     "$TARGET/persistent/home/$TARGET_USER/.config/obsidian" \
     "$TARGET/persistent/home/$TARGET_USER/.config/zsh" \
+    "$TARGET/persistent/home/$TARGET_USER/.cache/antidote" \
     "$TARGET/persistent/home/$TARGET_USER/.local/state/noctalia" \
-    "$TARGET/persistent/home/$TARGET_USER/.config/blender"
+    "$TARGET/persistent/home/$TARGET_USER/.config/blender" \
+    "$TARGET/persistent/home/$TARGET_USER/.local/state/wireplumber"
 
 
 

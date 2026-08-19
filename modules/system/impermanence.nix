@@ -133,6 +133,7 @@
           "/var/lib/libvirt"
           "/var/lib/nixos"
           "/var/log"
+          "/var/lib/sbctl"
           "/root"
           "/var/db/sudo/lectured" # skip the "you've been lectured" sudo message every boot
         ];
@@ -184,8 +185,10 @@
             ".var/app"
             ".config/obsidian"
             ".config/zsh"
+            ".cache/antidote"
             ".local/state/noctalia"
             ".config/blender"
+            ".local/state/wireplumber"
           ];
         };
       };

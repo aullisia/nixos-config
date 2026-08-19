@@ -62,6 +62,12 @@
           allowedTCPPorts = [ 25565 24454 24460 ];
           allowedUDPPorts = [ 25565 24454 ];
         };
+
+        boot.loader.limine.extraEntries = ''
+          /Windows
+            protocol: efi
+            path: uuid(C018-4C3F):/EFI/Microsoft/Boot/bootmgfw.efi
+        '';
       };
   };
 }

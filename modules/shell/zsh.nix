@@ -69,6 +69,14 @@
           ];
 
           initContent = lib.mkBefore ''
+            nos() {
+              local FLAKE_DIR="$HOME/nixos-config"
+              local HOST="''${1:-$(hostname)}"
+              
+              echo "Rebuilding NixOS for host: $HOST"
+              nh os switch "$FLAKE_DIR#$HOST"
+            }
+
             zmodload zsh/nearcolor
             ZVM_INIT_MODE=sourcing
 
