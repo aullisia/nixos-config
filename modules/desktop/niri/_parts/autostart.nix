@@ -7,5 +7,7 @@
     { command = [ "xwayland-satellite" ]; }
     { command = [ "noctalia" ]; }
     { command = [ "skwd-daemon" ]; }
+    { command = ["vesktop"]; }
+    { command = ["spotify"]; }
   ];
 }

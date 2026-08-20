@@ -66,7 +66,7 @@
         boot.loader.limine.extraEntries = ''
           /Windows
             protocol: efi
-            path: uuid(C018-4C3F):/EFI/Microsoft/Boot/bootmgfw.efi
+            path: guid(8092b2db-9158-4499-a6ac-003a21fbba74):/EFI/Microsoft/Boot/bootmgfw.efi
         '';
       };
   };

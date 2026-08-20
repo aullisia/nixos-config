@@ -2,7 +2,7 @@
 {
   den.aspects.niri = {
     includes = [
-
+      den.aspects.nemo
     ];
     nixos =
       { pkgs, ... }:
@@ -101,10 +101,22 @@
           grim
           slurp
           swappy
-          nemo
           mpv
           mpvpaper
         ];
+
+        xdg.mimeApps = {
+          enable = true;
+
+          defaultApplications = {
+            "image/png" = [ "qimgv.desktop" ];
+            "image/jpeg" = [ "qimgv.desktop" ];
+            "image/gif" = [ "qimgv.desktop" ];
+            "image/webp" = [ "qimgv.desktop" ];
+            "image/bmp" = [ "qimgv.desktop" ];
+            "image/tiff" = [ "qimgv.desktop" ];
+          };
+        };
 
         services.swayidle = {
           enable = true;

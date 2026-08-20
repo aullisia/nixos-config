@@ -189,6 +189,9 @@
             ".local/state/noctalia"
             ".config/blender"
             ".local/state/wireplumber"
+            ".local/state/syncthing"
+            ".config/spotify"
+            ".cache/spotify"
           ];
         };
       };

@@ -1,42 +1,43 @@
 { den, inputs, ... }:
 {
   den.aspects.aul = {
-    includes = [
+    includes = with den.aspects; [
       # -- Desktop --
-      # den.aspects.plasma
+      # plasma
 
-      den.aspects.niri
-      den.aspects.greetd
+      niri
+      greetd
 
       # -- System stuff --
-      den.aspects.themes
-      den.aspects.stylix
-      den.aspects.zsh
-      den.aspects.lsd
-      den.aspects.git
-      den.aspects.bat
-      den.aspects.fastfetch
-      den.aspects.bluetooth
-      den.aspects.flatpak
-      den.aspects.nh
+      themes
+      stylix
+      zsh
+      lsd
+      git
+      bat
+      fastfetch
+      bluetooth
+      flatpak
+      nh
 
       # -- Dev --
-      den.aspects.godot
-      den.aspects.direnv
-      den.aspects.helix
-      den.aspects.jetbrains
-      den.aspects.vscode
+      godot
+      direnv
+      helix
+      jetbrains
+      vscode
 
       # -- Apps --
-      den.aspects.librewolf
-      den.aspects.ghostty
-      den.aspects.vesktop
-      den.aspects.spicetify
-      den.aspects.gpuscreenrecorder
+      librewolf
+      ghostty
+      vesktop
+      spicetify
+      gpuscreenrecorder
+      syncthing
 
       # -- Gaming --
-      den.aspects.steam
-      den.aspects.mangohud
+      steam
+      mangohud
     ];
 
     homeManager =

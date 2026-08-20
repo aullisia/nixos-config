@@ -88,6 +88,9 @@ PERSIST_DIRS_USER=(
     .local/state/noctalia
     .config/blender
     .local/state/wireplumber
+    .local/state/syncthing
+    .config/spotify
+    .cache/spotify
 )
 
 PERSIST_FILES_USER=()

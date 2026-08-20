@@ -36,6 +36,7 @@
         };
         clip-to-geometry = true;
       }
+
       # Noctalia settings window floats
       {
         matches = [
@@ -44,6 +45,24 @@
           }
         ];
         open-floating = true;
+      }
+
+      # Spotify
+      {
+        matches = [
+          { app-id = "spotify"; }
+        ];
+        open-on-workspace = "music";
+        open-maximized = true;
+      }
+
+      # Vesktop
+      {
+        matches = [
+          { app-id = ''vesktop''; }
+        ];
+        open-on-workspace = "chat";
+        open-maximized = true;
       }
     ];
   };

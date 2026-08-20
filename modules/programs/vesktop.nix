@@ -61,7 +61,7 @@
               consistent = "image";
             };
             AppleMusicRichPresence.enabled = false;
-            "WebRichPresence (arRPC)".enabled = false;
+            "WebRichPresence (arRPC)".enabled = true;
             BetterFolders.enabled = false;
             BetterGifAltText.enabled = true;
             BetterGifPicker.enabled = true;
@@ -287,6 +287,26 @@
           };
         };
       };
+
+      systemd.user.services.arrpc = {
+        Unit = {
+          Description = "arRPC Discord RPC daemon";
+          After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
+        };
+
+        Service = {
+          ExecStart = "${pkgs.arrpc}/bin/arrpc";
+          Restart = "on-failure";
+          RestartSec = 2;
+        };
+
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
+      };
+
+      home.packages = with pkgs; [ arrpc ];
 
       # Replace HM-managed read-only symlinks with writable copies so vesktop can write settings at runtime
       home.activation.vesktopSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

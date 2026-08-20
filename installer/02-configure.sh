@@ -426,7 +426,10 @@ mkdir -p \
     "$TARGET/persistent/home/$TARGET_USER/.cache/antidote" \
     "$TARGET/persistent/home/$TARGET_USER/.local/state/noctalia" \
     "$TARGET/persistent/home/$TARGET_USER/.config/blender" \
-    "$TARGET/persistent/home/$TARGET_USER/.local/state/wireplumber"
+    "$TARGET/persistent/home/$TARGET_USER/.local/state/wireplumber" \
+    "$TARGET/persistent/home/$TARGET_USER/.local/state/syncthing" \
+    "$TARGET/persistent/home/$TARGET_USER/.config/spotify" \
+    "$TARGET/persistent/home/$TARGET_USER/.cache/spotify"
 
 
 

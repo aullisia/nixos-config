@@ -3,6 +3,11 @@
   programs.niri.settings = {
     prefer-no-csd = true;
 
+    workspaces = {
+      "chat" = { open-on-output = "LG Electronics MP59G 0x01010101"; };
+      "music" = { open-on-output = "LG Electronics MP59G 0x01010101"; };
+    };
+
     hotkey-overlay = {
       skip-at-startup = true;
     };

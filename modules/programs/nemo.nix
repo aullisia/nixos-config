@@ -5,14 +5,15 @@
     homeManager = { pkgs, ... }:
     {
       home.packages = with pkgs; [
+        file-roller
         (nemo-with-extensions.override {
           extensions = with pkgs; [
             nemo-seahorse
             nemo-preview
-            nemo-compare
-            nemo-image-converter
             nemo-fileroller
           ];
+
+          useDefaultExtensions = true;
         })
       ];
 
