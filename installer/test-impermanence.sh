@@ -45,6 +45,8 @@ PERSIST_DIRS_SYSTEM=(
     /root
     /var/db/sudo/lectured
     /var/cache/tuigreet
+    /etc/mullvad-vpn
+    /var/lib/ollama-models
     /var/lib/flatpak
 )
 
@@ -91,6 +93,7 @@ PERSIST_DIRS_USER=(
     .local/state/syncthing
     .config/spotify
     .cache/spotify
+    .config/heroic
 )
 
 PERSIST_FILES_USER=()

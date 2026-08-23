@@ -33,8 +33,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vscode-server.url = "github:nix-community/nixos-vscode-server"; # https://github.com/nix-community/nixos-vscode-server
+    # niri = {
+    #   url = "github:sodiboo/niri-flake";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:aullisia/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia = {

@@ -26,6 +26,7 @@
       helix
       jetbrains
       vscode
+      ollama
 
       # -- Apps --
       librewolf
@@ -34,9 +35,11 @@
       spicetify
       gpuscreenrecorder
       syncthing
+      mullvad-vpn
 
       # -- Gaming --
       steam
+      heroic
       mangohud
     ];
 
@@ -62,21 +65,28 @@
         lmms
         unzip
         p7zip
+        ani-cli
 
         # Office / Productivity
         hunspell
         hunspellDicts.nl_NL
         libreoffice-qt
         obsidian
+        brave
 
         # Gaming
         prismlauncher
+
+        # Other
+        efibootmgr
+        qdirstat
       ];
 
       services.flatpak.packages = [
         "org.vinegarhq.Sober"
         "org.vinegarhq.Vinegar"
         "org.ferdium.Ferdium"
+        "app.twintaillauncher.ttl"
       ];
     };
 

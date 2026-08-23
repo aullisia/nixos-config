@@ -136,6 +136,13 @@
           "/var/lib/sbctl"
           "/root"
           "/var/db/sudo/lectured" # skip the "you've been lectured" sudo message every boot
+          "/etc/mullvad-vpn"
+          {
+            directory = "/var/lib/ollama-models";
+            user = "ollama";
+            group = "ollama";
+            mode = "0755";
+          }
         ];
 
         files = [
@@ -192,6 +199,7 @@
             ".local/state/syncthing"
             ".config/spotify"
             ".cache/spotify"
+            ".config/heroic"
           ];
         };
       };

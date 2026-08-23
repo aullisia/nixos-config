@@ -51,8 +51,68 @@
 
     noctalia = {
       mode = "dark";
-      source = "builtin";
-      builtin = "Catppuccin";
+      source = "custom";
+      customPalette = "catppuccin-mocha-custom";
+
+      customPalettes = {
+        "catppuccin-mocha-custom" = {
+          dark = {
+            # Accents
+            primary = "#b4befe";
+            onPrimary = "#11111b";
+            secondary = "#cba6f7";
+            onSecondary = "#11111b";
+            tertiary = "#f5e0dc";
+            onTertiary = "#11111b";
+
+            # Status & Alerts
+            error = "#f38ba8";
+            onError = "#11111b";
+
+            # Surfaces & Backgrounds
+            surface = "#1e1e2e";
+            onSurface = "#cdd6f4";
+            surfaceVariant = "#313244";
+            onSurfaceVariant = "#bac2de";
+
+            # Borders & Effects
+            outline = "#585b70";
+            shadow = "#11111b";
+            hover = "#45475a";
+            onHover = "#cdd6f4";
+
+            # Built-in Terminal Scheme
+            terminal = {
+              normal = {
+                black = "#45475a";
+                red = "#f38ba8";
+                green = "#a6e3a1";
+                yellow = "#f9e2af";
+                blue = "#89b4fa";
+                magenta = "#f5c2e7";
+                cyan = "#94e2d5";
+                white = "#bac2de";
+              };
+              bright = {
+                black = "#585b70";
+                red = "#f38ba8";
+                green = "#a6e3a1";
+                yellow = "#f9e2af";
+                blue = "#89b4fa";
+                magenta = "#f5c2e7";
+                cyan = "#94e2d5";
+                white = "#a6adc8";
+              };
+              foreground = "#cdd6f4";
+              background = "#1e1e2e";
+              cursor = "#f5e0dc";
+              cursorText = "#11111b";
+              selectionFg = "#cdd6f4";
+              selectionBg = "#585b70";
+            };
+          };
+        };
+      };
     };
 
     plasma = {

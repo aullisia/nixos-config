@@ -4,13 +4,14 @@
     { user, ... }:
     {
       homeManager =
-        { config, ... }:
+        { config, pkgs, ... }:
         let
           c = config.lib.stylix.colors;
         in
         {
           programs.git = {
             enable = true;
+            lfs.enable = true;
             settings = {
               user = {
                 name = user.gitName;

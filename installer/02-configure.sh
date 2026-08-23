@@ -304,7 +304,9 @@ mkdir -p \
     "$TARGET/persistent/var/log" \
     "$TARGET/persistent/var/lib/sbctl" \
     "$TARGET/persistent/root" \
-    "$TARGET/persistent/var/cache/tuigreet"
+    "$TARGET/persistent/var/cache/tuigreet" \
+    "$TARGET/persistent/etc/mullvad-vpn" \
+    "$TARGET/persistent/var/lib/ollama-models"
 
 # Pre-generate stable SSH host keys so they survive the root wipe on reboot.
 # modules/system/impermanence.nix bind-mounts these directly (safe for keys —
@@ -429,7 +431,8 @@ mkdir -p \
     "$TARGET/persistent/home/$TARGET_USER/.local/state/wireplumber" \
     "$TARGET/persistent/home/$TARGET_USER/.local/state/syncthing" \
     "$TARGET/persistent/home/$TARGET_USER/.config/spotify" \
-    "$TARGET/persistent/home/$TARGET_USER/.cache/spotify"
+    "$TARGET/persistent/home/$TARGET_USER/.cache/spotify" \
+    "$TARGET/persistent/home/$TARGET_USER/.config/heroic"
 
 
 

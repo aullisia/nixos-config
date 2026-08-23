@@ -49,12 +49,8 @@
         boot.initrd.kernelModules = [ "amdgpu" ];
         hardware.enableRedistributableFirmware = true;
 
-        services.ollama = {
-          enable = true;
-          package = pkgs.ollama-rocm;
-          # If ROCm fails to detect the 9060 XT (gfx1200), uncomment:
-          # rocmOverrideGfx = "12.0.0";
-        };
+        virtualisation.docker.enable = true;
+        users.users.aul.extraGroups = [ "docker" ];
 
         services.power-profiles-daemon.enable = true;
 
@@ -62,6 +58,18 @@
           allowedTCPPorts = [ 25565 24454 24460 ];
           allowedUDPPorts = [ 25565 24454 ];
         };
+
+        security.sudo.extraRules = [
+          {
+            users = [ "aul" ];
+            commands = [
+              {
+                command = "/run/current-system/sw/bin/efibootmgr --bootnext 0000";
+                options = [ "NOPASSWD" ];
+              }
+            ];
+          }
+        ];
 
         boot.loader.limine.extraEntries = ''
           /Windows

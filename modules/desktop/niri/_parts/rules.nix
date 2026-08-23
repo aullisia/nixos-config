@@ -37,6 +37,23 @@
         clip-to-geometry = true;
       }
 
+      # Transparent windows
+      {
+        matches = [
+          { app-id = "com.mitchellh.ghostty"; }
+          { app-id = "code"; }
+          { app-id = "vesktop"; }
+          { app-id = "spotify"; }
+          { app-id = "nemo"; }
+        ];
+        opacity = 0.88;
+        draw-border-with-background = false;
+        background-effect = {
+          xray = true;
+          blur = true;
+        };
+      }
+
       # Noctalia settings window floats
       {
         matches = [
@@ -63,6 +80,35 @@
         ];
         open-on-workspace = "chat";
         open-maximized = true;
+      }
+
+      # Steam notification
+      {
+        matches = [
+          {
+            app-id = "steam";
+            title = ''^notificationtoasts_\d+_desktop$'';
+          }
+        ];
+        default-floating-position = {
+          x = 10;
+          y = 10;
+          relative-to = "bottom-right";
+        };
+        open-focused = false;
+      }
+
+      # Satty
+      {
+        matches = [
+          {
+            app-id = "org.satty.satty";
+          }
+        ];
+
+        open-floating = true;
+        open-fullscreen = true;
+        open-focused = true;
       }
     ];
   };

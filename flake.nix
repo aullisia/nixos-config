@@ -17,7 +17,7 @@
     impermanence.url = "github:nix-community/impermanence";
     import-tree.url = "github:vic/import-tree";
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:aullisia/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/879f45ee15a3b06fdbbf9b6dc825c5fbca137fcd";

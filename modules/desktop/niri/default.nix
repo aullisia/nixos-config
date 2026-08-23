@@ -5,7 +5,7 @@
       den.aspects.nemo
     ];
     nixos =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         imports = [
           # inputs.skwd-wall.nixosModules.default
@@ -79,16 +79,137 @@
             };
 
             shell.niri_overview_type_to_launch_enabled = true;
-
-            # Skip the first-run setup wizard / "here's how this works"
-            # message on every boot (state dir is wiped by impermanence).
             shell.setup_wizard_enabled = false;
+
+            shell.panel = {
+              clipboard_placement = "attached";
+              clipboard_position = "auto";
+              control_center_position = "top_left";
+              open_near_click_clipboard = true;
+              open_near_click_session = true;
+              transparency_mode = "glass";
+            };
+
+            shell.screenshot = {
+              save_to_file = false;
+              directory = "~/Pictures/Screenshots";
+              filename_pattern = "screenshot-%Y%m%d_%H%M%S";
+              copy_to_clipboard = false;
+
+              freeze_screen = true;
+              confirm_region = false;
+              remember_last_region = false;
+              show_cursor = false;
+
+              pipe_to_command = true;
+
+              pipe_command = ''
+                base="$HOME/Pictures/Screenshots"
+                dir="$base/$(date +%Y-%m)"
+                mkdir -p "$dir"
+
+                file="$dir/screenshot-$(date +%Y%m%d_%H%M%S).png"
+
+                satty \
+                  --filename - \
+                  --output-filename "$file" \
+                  --fullscreen \
+                  --early-exit
+
+                if [ -f "$file" ]; then
+                  wl-copy < "$file"
+                fi
+              '';
+            };
+
+            shell.session = {
+              actions = [
+                { action = "lock"; }
+                { action = "logout"; }
+                { action = "lock_and_suspend"; }
+                { action = "reboot"; }
+                { action = "shutdown"; }
+                {
+                  action = "command";
+                  label = "Boot Windows";
+                  glyph = "brand-windows";
+                  command = "sudo efibootmgr --bootnext 0000 && systemctl reboot";
+                }
+              ];
+            };
 
             plugins = {
               enabled = [
                 "noctalia/mpvpaper"
+                "icefish/phone-operate"
+                "kenn/keybind-cheatsheet"
+                "noctalia/timer"
               ];
             };
+
+            bar.default = {
+              position = "top";
+              background_opacity = 0.44;
+              border = "on_surface_variant";
+              border_width = 0.5;
+              margin_edge = 12;
+              margin_ends = 12; 
+              radius = 18;
+              padding = 5;
+              widget_spacing = 4; 
+
+              start = [ "control-center" "clock" ];
+              center = [ "workspaces" "group:temps" ];
+              end = [ "group:right_icons" ];
+
+              capsule_group = [
+                {
+                  id = "temps";
+                  fill = "surface_variant";
+                  opacity = 0.5;
+                  padding = 6.0;
+                  members = [ "cpu" "temp" ];
+                }
+                {
+                  id = "right_icons";
+                  fill = "surface_variant";
+                  opacity = 0.5;
+                  padding = 6.0;
+                  members = [ "tray" "clipboard" "network" "battery" "noctalia/timer:bar" "session" ];
+                }
+              ];
+            };
+
+            widget.network = {
+              show_label = false;
+            };
+
+            widget.control-center = {
+              capsule = true;
+              capsule_opacity = 0.5;
+              glyph = "snowflake";
+            };
+
+            widget.clock = {
+              capsule = true;
+              capsule_opacity = 0.5;
+              format = "{:%H:%M} {:%a %d %b}"; 
+              font_family = "sans-serif Bold"; 
+            };
+
+            widget.workspaces = {
+              capsule = true;
+              capsule_opacity = 0.5;
+              show_labels = false;
+              
+              active_color = "primary";
+              occupied_color = "secondary";
+              empty_color = "tertiary";
+            };
+
+            widget.tray = { drawer = true; };
+            widget.cpu = { display = "text"; stat = "cpu_temp"; visualization = "none"; };
+            widget.temp = { display = "text"; stat = "gpu_temp"; visualization = "none"; };
           };
         };
 
@@ -98,17 +219,28 @@
           gcr
           xwayland-satellite
           wl-clipboard
-          grim
-          slurp
-          swappy
+          satty
+
+          # noctalia/mpvpaper
           mpv
           mpvpaper
+
+          # icefish/phone-operate
+          scrcpy
+          android-tools
+          kdePackages.kdeconnect-kde
+          sshfs
         ];
 
         xdg.mimeApps = {
           enable = true;
 
           defaultApplications = {
+            "text/html" = [ "librewolf.desktop" ];
+            "x-scheme-handler/http" = [ "librewolf.desktop" ];
+            "x-scheme-handler/https" = [ "librewolf.desktop" ];
+            "application/xhtml+xml" = [ "librewolf.desktop" ];
+
             "image/png" = [ "qimgv.desktop" ];
             "image/jpeg" = [ "qimgv.desktop" ];
             "image/gif" = [ "qimgv.desktop" ];

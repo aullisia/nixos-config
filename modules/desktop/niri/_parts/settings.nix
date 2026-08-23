@@ -113,5 +113,11 @@
       XDG_CURRENT_DESKTOP = "niri";
       DISPLAY = ":0";
     };
+
+    blur = {
+      enable = true;
+      noise = 0.05;
+      saturation = 1.15;
+    };
   };
 }

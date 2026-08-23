@@ -14,6 +14,7 @@
             localNetworkGameTransfers.openFirewall = true;
             extraCompatPackages = with pkgs; [
               proton-ge-bin
+              dwproton-bin
             ];
           };
           # Steam controller/virtual gamepad udev rules
