@@ -115,6 +115,9 @@ fi
 
 if yesno "Encrypt the NixOS partition with LUKS (recommended for full-disk encryption)?"; then
     LUKS=1
+    # Must be set BEFORE luks_open_if_needed() runs during formatting below;
+    # the raw partition is what LUKS lives on / gets opened from.
+    LUKS_PART="$ROOT_PART"
     echo
     echo "LUKS2 encryption will be applied to $ROOT_PART. btrfs (and your"
     echo "impermanence subvolumes) will live INSIDE the encrypted container at"
@@ -312,9 +315,6 @@ findmnt -R "$TARGET"
 
 echo
 info "Persisting selections for later stages..."
-if is_luks; then
-    LUKS_PART="$ROOT_PART"
-fi
 state_save TARGET HOST EFI_PART ROOT_PART SWAP_PART LUKS LUKS_PART LUKS_MAPPER
 
 echo
