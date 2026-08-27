@@ -44,11 +44,11 @@
           enable = true;
           enable32Bit = true;
 
-          extraPackages = with pkgs; [
-            vaapiVdpau
-            libvdpau-va-gl
-            nvidia-vaapi-driver
-          ];
+          # extraPackages = with pkgs; [
+          #   libva-vdpau-driver
+          #   libvdpau-va-gl
+          #   nvidia-vaapi-driver
+          # ];
 
           extraPackages32 = with pkgs.pkgsi686Linux; [
             libvdpau-va-gl
@@ -84,13 +84,13 @@
           };
         };
 
-        services.asusd = {
-          enable = true;
-          enableUserService = true;
-        };
-        services.supergfxd = {
-          enable = true;
-        };
+        # services.asusd = {
+        #   enable = true;
+        #   enableUserService = true;
+        # };
+        # services.supergfxd = {
+        #   enable = true;
+        # };
 
         hardware.enableRedistributableFirmware = true;
         services.power-profiles-daemon.enable = true;
