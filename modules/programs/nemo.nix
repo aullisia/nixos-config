@@ -2,10 +2,21 @@
 
 {
   den.aspects.nemo = {
+    nixos = { pkgs, ... }:
+    {
+      services.udisks2.enable = true;
+      services.gvfs.enable = true;
+
+      services.udev.extraRules = ''
+        KERNEL=="nvme*", ENV{UDISKS_IGNORE}="1"
+      '';
+    };
+
     homeManager = { pkgs, ... }:
     {
       home.packages = with pkgs; [
         file-roller
+        udiskie
         (nemo-with-extensions.override {
           extensions = with pkgs; [
             nemo-seahorse
@@ -40,6 +51,7 @@
           size-prefixes = "base-10";
           tooltips-in-icon-view = false;
           tooltips-in-list-view = false;
+          detect-automount-open = true;
         };
         "org/cinnamon/desktop/applications/terminal" = {
           exec = "ghostty";

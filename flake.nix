@@ -35,6 +35,7 @@
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter";
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs = {

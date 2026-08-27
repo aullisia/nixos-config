@@ -1,7 +1,3 @@
-# Ghostty terminal. The theme is generated from Stylix's active base16 palette
-# (`config.lib.stylix.colors`), so it follows whatever theme is selected in
-# modules/themes automatically; falls back to Catppuccin Mocha values if
-# Stylix isn't present.
 { den, inputs, ... }:
 {
   den.aspects.ghostty.homeManager =
@@ -16,13 +12,21 @@
         package = pkgs.ghostty;
         settings = {
           font-size = 10;
+          font-family = "FiraCode Nerd Font";
           theme = "stylix";
+          
+          # Window aesthetics & padding
           window-padding-x = 14;
           window-padding-y = 16;
-          window-height = 28;
-          window-width = 90;
           window-padding-balance = true;
           window-padding-color = "background";
+
+          # Integration with Helix modal cursors
+          cursor-style = "block";
+          cursor-style-blink = false;
+
+          # Shell integration
+          shell-integration = "detect";
         };
         themes = {
           stylix = {

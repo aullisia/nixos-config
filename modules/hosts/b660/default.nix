@@ -64,7 +64,11 @@
             users = [ "aul" ];
             commands = [
               {
-                command = "/run/current-system/sw/bin/efibootmgr --bootnext 0000";
+                command = "${pkgs.efibootmgr}/bin/efibootmgr --bootnext 0000";
+                options = [ "NOPASSWD" ];
+              }
+              {
+                command = "/run/current-system/sw/bin/systemctl reboot";
                 options = [ "NOPASSWD" ];
               }
             ];

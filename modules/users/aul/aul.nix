@@ -6,7 +6,7 @@
       # plasma
 
       niri
-      greetd
+      noctalia-greeter #greetd
 
       # -- System stuff --
       themes
@@ -36,6 +36,7 @@
       gpuscreenrecorder
       syncthing
       mullvad-vpn
+      yazi
 
       # -- Gaming --
       steam
@@ -80,6 +81,7 @@
         # Other
         efibootmgr
         qdirstat
+        impression
       ];
 
       services.flatpak.packages = [
@@ -87,6 +89,7 @@
         "org.vinegarhq.Vinegar"
         "org.ferdium.Ferdium"
         "app.twintaillauncher.ttl"
+        "com.github.tchx84.Flatseal"
       ];
     };
 

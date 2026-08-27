@@ -110,10 +110,25 @@
 
                 file="$dir/screenshot-$(date +%Y%m%d_%H%M%S).png"
 
+                trap 'noctalia msg bar-show' EXIT
+                noctalia msg bar-hide
+
+                (
+                  for _ in $(seq 1 100); do
+                    id=$(niri msg --json windows \
+                      | jq -r '.[] | select(.app_id == "com.gabm.satty") | .id' \
+                      | head -n1)
+                    if [ -n "$id" ]; then
+                      niri msg action focus-window --id "$id"
+                      break
+                    fi
+                    sleep 0.02
+                  done
+                ) &
+
                 satty \
                   --filename - \
                   --output-filename "$file" \
-                  --fullscreen \
                   --early-exit
 
                 if [ -f "$file" ]; then
@@ -133,7 +148,7 @@
                   action = "command";
                   label = "Boot Windows";
                   glyph = "brand-windows";
-                  command = "sudo efibootmgr --bootnext 0000 && systemctl reboot";
+                  command = "${pkgs.bash}/bin/bash -c 'sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootnext 0000 && systemctl reboot'";
                 }
               ];
             };
@@ -144,6 +159,7 @@
                 "icefish/phone-operate"
                 "kenn/keybind-cheatsheet"
                 "noctalia/timer"
+                "noctalia/screen_recorder"
               ];
             };
 

@@ -1,11 +1,15 @@
-{ den, ... }:
+{ den, inputs, ... }:
 {
-  den.aspects.greetd.nixos =
+  den.aspects.noctalia-greeter.nixos =
     { pkgs, ... }:
     {
-      services.greetd = {
+      imports = [
+        inputs.noctalia-greeter.nixosModules.default
+      ];
+
+      programs.noctalia-greeter = {
         enable = true;
-        settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --remember --asterisks --container-padding 2 --no-xsession-wrapper --cmd \"niri-session 2>/dev/null\"";
+        settings.session.default = "niri";
       };
 
       security.pam.services.greetd.enableGnomeKeyring = true;

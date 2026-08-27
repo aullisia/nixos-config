@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  autoReplayScript,
   ...
 }: {
   programs.niri.settings.spawn-at-startup = [

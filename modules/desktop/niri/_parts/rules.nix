@@ -40,11 +40,28 @@
       # Transparent windows
       {
         matches = [
+          # echo $XDG_DATA_DIRS | tr ':' '\n' | xargs -I {} find -L {}/applications -name "*.desktop" 2>/dev/null | xargs -n 1 basename | sed 's/\.desktop$//' | sort -u
           { app-id = "com.mitchellh.ghostty"; }
           { app-id = "code"; }
+          { app-id = "clion"; }
+          { app-id = "idea"; }
+          { app-id = "rider"; }
+          { app-id = "webstorm"; }
           { app-id = "vesktop"; }
+          { app-id = "obsidian"; }
+          { app-id = "org.ferdium.Ferdium"; }
           { app-id = "spotify"; }
           { app-id = "nemo"; }
+          { app-id = "mullvad-vpn"; }
+          { app-id = "blueman-manager"; }
+          { app-id = "org.gnome.FileRoller"; }
+          { app-id = "qdirstat"; }
+          { app-id = "org.openrgb.OpenRGB"; }
+          { app-id = "org.kde.kdeconnect.app"; }
+          { app-id = "steam"; }
+          { app-id = "com.heroicgameslauncher.hgl"; }
+          { app-id = "app.twintaillauncher.ttl"; }
+          { app-id = "audacity"; }
         ];
         opacity = 0.88;
         draw-border-with-background = false;
@@ -101,14 +118,19 @@
       # Satty
       {
         matches = [
-          {
-            app-id = "org.satty.satty";
-          }
+          { app-id = "com.gabm.satty"; }
         ];
 
         open-floating = true;
-        open-fullscreen = true;
         open-focused = true;
+        open-fullscreen = false;
+        default-column-width = { proportion = 1.0; };
+        default-window-height = { proportion = 1.0; };
+        default-floating-position = {
+          x = 0;
+          y = 0;
+          relative-to = "top-left";
+        };
       }
     ];
   };

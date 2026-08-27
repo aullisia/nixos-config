@@ -150,5 +150,27 @@ in
         title = "lock screen";
       };
     };
+
+    # GPU Screen Recorder - Noctalia
+    "super+alt+r" = {
+      action = spawn [ "noctalia" "msg" "plugin" "noctalia/screen_recorder:service" "all" "toggle" ];
+      hotkey-overlay = {
+        title = "toggle screen recording";
+      };
+    };
+
+    "super+alt+s" = {
+      action = spawn [ "noctalia" "msg" "plugin" "noctalia/screen_recorder:service" "all" "replay-save" ];
+      hotkey-overlay = {
+        title = "save replay buffer";
+      };
+    };
+
+    "super+alt+p" = {
+      action = spawn [ "noctalia" "msg" "plugin" "noctalia/screen_recorder:service" "all" "replay-toggle" ];
+      hotkey-overlay = {
+        title = "toggle replay buffer";
+      };
+    };
   };
 }

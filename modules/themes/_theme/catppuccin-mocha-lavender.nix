@@ -3,7 +3,7 @@
 # Every field here is the full theming data for the system. Consumers read
 # these via `config.modules.theme` with fallbacks, so a field can be dropped
 # from a theme file without breaking anything.
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   modules.theme = {
     name = "catppuccin-mocha-lavender";
@@ -167,6 +167,9 @@
           accent = "b4befe";
           overlay = "45475a";
         };
+      };
+      fastfetch = {
+        logo = ../../../assets/icons/nix-lavender.png;
       };
     };
   };

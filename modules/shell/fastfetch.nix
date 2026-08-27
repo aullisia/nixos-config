@@ -4,6 +4,10 @@
     { pkgs, config, ... }:
     let
       esc = builtins.fromJSON ''"\u001b"'';
+
+      themeLogo = config.modules.theme.apps.fastfetch.logo or null;
+      defaultLogo = "${inputs.self}/assets/icons/nix-lavender.png";
+      logoSource = if themeLogo != null then themeLogo else defaultLogo;
     in
     {
       programs.fastfetch = {
@@ -13,10 +17,9 @@
           "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
           logo = {
-            source = "${inputs.self}/assets/icons/nix-lavender.png";
+            source = toString logoSource;
             type = "kitty";
             height = 14;
-            width = 30;
 
             padding = {
               top = 3;

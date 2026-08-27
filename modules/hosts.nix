@@ -18,5 +18,10 @@ in
       ## Freeform attributes
       timezone = timezone;
     };
+    auronix = {
+      users.aul = aul;
+      ## Freeform attributes
+      timezone = timezone;
+    };
   };
 }

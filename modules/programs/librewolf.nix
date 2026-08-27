@@ -86,6 +86,9 @@ let
               "browser.newtabpage.activity-stream.feeds.system.topstories" = false;
               "extensions.formautofill.addresses.enabled" = false;
               "extensions.formautofill.creditCards.enabled" = false;
+              "browser.tabs.unloadOnLowMemory" = true;
+              "dom.ipc.processCount" = 4;
+              "image.mem.max_decoded_image_kb" = 256000;
             };
             extensions = {
               force = true;
