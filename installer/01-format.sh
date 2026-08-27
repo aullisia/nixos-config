@@ -110,6 +110,24 @@ if [[ -z "$SWAP_PART" ]]; then
 fi
 
 # ------------------------------------------------------------
+# Optional LUKS full-disk encryption
+# ------------------------------------------------------------
+
+if yesno "Encrypt the NixOS partition with LUKS (recommended for full-disk encryption)?"; then
+    LUKS=1
+    echo
+    echo "LUKS2 encryption will be applied to $ROOT_PART. btrfs (and your"
+    echo "impermanence subvolumes) will live INSIDE the encrypted container at"
+    echo "/dev/mapper/$LUKS_MAPPER."
+    echo
+    echo "You will set a LUKS passphrase next (this is your FALLBACK/rescue key —"
+    echo "keep it safe). TPM2 auto-unlock is configured AFTER the first boot;"
+    echo "stage 4 will print the exact command."
+    echo
+    require_cmd cryptsetup
+fi
+
+# ------------------------------------------------------------
 # Safety checks
 # ------------------------------------------------------------
 
@@ -130,7 +148,11 @@ section "FINAL WIPE PLAN"
 echo "THE FOLLOWING PARTITIONS WILL BE FORMATTED:"
 echo
 echo "  EFI:     $EFI_PART   -> FAT32"
-echo "  NixOS:   $ROOT_PART  -> Btrfs"
+if is_luks; then
+    echo "  NixOS:   $ROOT_PART  -> LUKS2 (then Btrfs inside /dev/mapper/$LUKS_MAPPER)"
+else
+    echo "  NixOS:   $ROOT_PART  -> Btrfs"
+fi
 if [[ -n "$SWAP_PART" ]]; then
     echo "  Swap:    $SWAP_PART  -> swap"
 fi
@@ -153,6 +175,10 @@ Layout after installation:
   │                                 by the impermanence module)
   └── @blank       (not mounted — pristine empty snapshot, template for @)
 EOF
+if is_luks; then
+    echo "When LUKS is enabled, the whole Btrfs tree above lives inside the"
+    echo "encrypted container ($ROOT_PART -> /dev/mapper/$LUKS_MAPPER)."
+fi
 echo
 confirm_wipe
 
@@ -165,7 +191,14 @@ info "Releasing previous mounts..."
 umount -R "$TARGET" 2>/dev/null || true
 umount "$EFI_PART" 2>/dev/null || true
 umount "$ROOT_PART" 2>/dev/null || true
-[[ -n "$SWAP_PART" ]] && swapoff "$SWAP_PART" 2>/dev/null || true
+if [[ -n "$SWAP_PART" ]]; then
+    swapoff "$SWAP_PART" 2>/dev/null || true
+fi
+if is_luks && [[ -e "/dev/mapper/$LUKS_MAPPER" ]] \
+    && cryptsetup status "$LUKS_MAPPER" >/dev/null 2>&1; then
+    info "Closing existing LUKS container..."
+    cryptsetup close "$LUKS_MAPPER"
+fi
 
 # ------------------------------------------------------------
 # Format
@@ -181,8 +214,17 @@ else
     mkfs.vfat -F 32 -n BOOT "$EFI_PART"
 fi
 
-info "Formatting NixOS partition as Btrfs..."
-mkfs.btrfs -f -L nixos "$ROOT_PART"
+if is_luks; then
+    info "Setting up LUKS2 encryption on $ROOT_PART..."
+    cryptsetup luksFormat --type luks2 --pbkdf argon2id "$ROOT_PART"
+    luks_open_if_needed
+    ROOT_BLKDEV="$(root_blkdev)"
+    info "Formatting encrypted volume as Btrfs ($ROOT_BLKDEV)..."
+    mkfs.btrfs -f -L nixos "$ROOT_BLKDEV"
+else
+    info "Formatting NixOS partition as Btrfs..."
+    mkfs.btrfs -f -L nixos "$ROOT_PART"
+fi
 
 if [[ -n "$SWAP_PART" ]]; then
     info "Formatting swap partition..."
@@ -196,7 +238,7 @@ fi
 section "BTRFS SUBVOLUMES"
 
 mkdir -p "$BTRFS_TOP"
-mount -t btrfs -o subvolid=5 "$ROOT_PART" "$BTRFS_TOP"
+mount -t btrfs -o subvolid=5 "$(root_blkdev)" "$BTRFS_TOP"
 
 for subvolume in "${REQUIRED_SUBVOLS[@]}"; do
     if btrfs_subvolume_exists "$subvolume"; then
@@ -237,7 +279,7 @@ mkdir -p "$TARGET"
 # Only after this can subdirectories be created *inside* it for the other
 # subvolumes/EFI to mount onto; creating them beforehand would just leave
 # them stranded under the old, now-unreachable tmpfs directory.
-mount -t btrfs -o subvol=@ "$ROOT_PART" "$TARGET"
+mount -t btrfs -o subvol=@ "$(root_blkdev)" "$TARGET"
 
 # /home is deliberately NOT a separate subvolume/mount — it's just an
 # ordinary directory inside @ now, wiped along with everything else under /
@@ -248,8 +290,8 @@ mkdir -p \
     "$TARGET/persistent" \
     "$TARGET/boot"
 
-mount -t btrfs -o subvol=@nix "$ROOT_PART" "$TARGET/nix"
-mount -t btrfs -o subvol=@persistent "$ROOT_PART" "$TARGET/persistent"
+mount -t btrfs -o subvol=@nix "$(root_blkdev)" "$TARGET/nix"
+mount -t btrfs -o subvol=@persistent "$(root_blkdev)" "$TARGET/persistent"
 mount "$EFI_PART" "$TARGET/boot"
 
 # Release the temporary top-level mount.
@@ -270,7 +312,10 @@ findmnt -R "$TARGET"
 
 echo
 info "Persisting selections for later stages..."
-state_save TARGET HOST EFI_PART ROOT_PART SWAP_PART
+if is_luks; then
+    LUKS_PART="$ROOT_PART"
+fi
+state_save TARGET HOST EFI_PART ROOT_PART SWAP_PART LUKS LUKS_PART LUKS_MAPPER
 
 echo
 section "STAGE 1 COMPLETE"

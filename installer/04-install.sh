@@ -135,6 +135,10 @@ fi
 
 state_save TARGET HOST EFI_PART ROOT_PART SWAP_PART
 
+# If the root is LUKS-encrypted, print the post-first-boot TPM2 auto-unlock
+# steps before telling the user to reboot.
+print_tpm_enroll_instructions
+
 echo
 section "STAGE 4 COMPLETE — READY TO REBOOT"
 echo

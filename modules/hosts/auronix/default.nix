@@ -1,4 +1,4 @@
-{ den, inputs, ... }:
+{ den, inputs, lib, ... }:
 {
   den.aspects.auronix = {
     includes = [
@@ -21,14 +21,19 @@
       # den.aspects.ssh
       den.aspects.swap
       den.aspects.impermanence
+      den.aspects.luks
     ];
 
     nixos =
       { lib, pkgs, config, ... }:
       {
-        imports = [
-          (inputs.self + "/hosts/auronix/hardware-configuration.nix")
-        ];
+        imports =
+          [
+            (inputs.self + "/hosts/auronix/hardware-configuration.nix")
+          ]
+          ++ lib.optionals (builtins.pathExists (inputs.self + "/hosts/auronix/luks-configuration.nix")) [
+            (inputs.self + "/hosts/auronix/luks-configuration.nix")
+          ];
 
         hardware.cpu.amd.updateMicrocode = true;
 

@@ -255,6 +255,45 @@ grep -Fq 'impermanence.url' "$TARGET_FLAKE/flake.nix" 2>/dev/null \
     || fail "impermanence flake input missing from flake.nix (run: nix run .#write-flake)"
 
 # ------------------------------------------------------------
+# LUKS (if the root is encrypted)
+# ------------------------------------------------------------
+
+if is_luks; then
+    section "LUKS ENCRYPTION"
+    [[ -n "$LUKS_PART" ]] \
+        && ok "LUKS requested in stage 1; partition: $LUKS_PART" \
+        || { fail "LUKS requested in stage 1 but no LUKS_PART recorded."; }
+    if [[ -n "$LUKS_PART" ]]; then
+        luks_type="$(blkid -s TYPE -o value "$LUKS_PART" 2>/dev/null || true)"
+        if [[ "$luks_type" == "crypto_LUKS" ]]; then
+            ok "LUKS container: $LUKS_PART (TYPE=crypto_LUKS)"
+        else
+            fail "LUKS container $LUKS_PART has TYPE='${luks_type:-?}' — expected crypto_LUKS"
+        fi
+    fi
+    mapper="/dev/mapper/$LUKS_MAPPER"
+    if [[ -e "$mapper" ]] && findmnt -n -o FSTYPE "$TARGET" 2>/dev/null | grep -q btrfs; then
+        ok "encrypted root open + mounted as Btrfs at $mapper"
+    else
+        fail "encrypted root not mounted at $mapper (run stage 1)"
+    fi
+    luks_uuid="$(uuid_of "$LUKS_PART")"
+    LUKS_HW="$TARGET_FLAKE/hosts/$HOST/luks-configuration.nix"
+    if [[ -f "$LUKS_HW" ]]; then
+        ok "LUKS device declaration exists: $LUKS_HW"
+        if [[ -n "$luks_uuid" ]] && grep -Fq "$luks_uuid" "$LUKS_HW"; then
+            ok "LUKS UUID $luks_uuid present in $LUKS_HW"
+        elif [[ -n "$luks_uuid" ]]; then
+            fail "LUKS UUID $luks_uuid not present in $LUKS_HW — the container won't open at boot"
+        else
+            warn "could not read a UUID for $LUKS_PART"
+        fi
+    else
+        fail "missing generated LUKS device declaration: $LUKS_HW (run stage 2) — an encrypted root will not boot"
+    fi
+fi
+
+# ------------------------------------------------------------
 # Evaluation (lightweight — evals the config, does NOT build a system)
 # ------------------------------------------------------------
 
