@@ -45,6 +45,9 @@ valid_hostname "$HOST" || die "host '$HOST' is not a valid Nix identifier."
 
 set_target_flake "$HOST"
 state_save TARGET HOST EFI_PART ROOT_PART SWAP_PART
+if is_luks; then
+    state_save LUKS LUKS_PART LUKS_MAPPER
+fi
 
 section "NIXOS INSTALLER"
 echo

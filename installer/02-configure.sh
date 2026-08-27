@@ -522,6 +522,9 @@ info "@ is rolled back to a blank snapshot on every boot (\$HOME lives inside it
 info "only the paths above (and /nix, plus /persistent itself) survive."
 
 state_save TARGET HOST EFI_PART ROOT_PART SWAP_PART
+if is_luks; then
+    state_save LUKS LUKS_PART LUKS_MAPPER
+fi
 
 echo
 section "STAGE 2 COMPLETE"

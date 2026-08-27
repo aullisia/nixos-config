@@ -151,7 +151,13 @@ state_save() {
     mkdir -p "$STATE_DIR"
     touch "$STATE_FILE"
     for var in "$@"; do
+        # Only persist non-empty values.  Persisting an empty value before its
+        # real value is known (e.g. install.sh:47 saves EFI_PART/ROOT_PART/
+        # SWAP_PART before stage 1 fills them in) would seed the state file
+        # with empties; every consumer treats a missing key the same as an
+        # empty one ([[ -n ]] / ${var:-}).
         value="${!var:-}"
+        [[ -n "$value" ]] || continue
         sed -i "/^${var}=/d" "$STATE_FILE"
         printf '%s=%s\n' "$var" "$value" >> "$STATE_FILE"
     done
