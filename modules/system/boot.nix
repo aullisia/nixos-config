@@ -22,6 +22,7 @@
             #   Enable Secure Boot in UEFI, then verify with `sudo sbctl status`.
             secureBoot.enable = builtins.elem host.name [
               "b660"
+              "auronix"
             ]; # check: nix eval .#nixosConfigurations.b660.config.boot.loader.limine.secureBoot.enable
           };
         };

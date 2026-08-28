@@ -26,7 +26,6 @@
       helix
       jetbrains
       vscode
-      ollama
 
       # -- Apps --
       librewolf

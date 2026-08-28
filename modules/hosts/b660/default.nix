@@ -21,6 +21,9 @@
       # den.aspects.ssh
       den.aspects.swap
       den.aspects.impermanence
+
+      # Other
+      den.aspects.ollama
     ];
 
     nixos =
@@ -58,6 +61,8 @@
           allowedTCPPorts = [ 25565 24454 24460 ];
           allowedUDPPorts = [ 25565 24454 ];
         };
+
+        services.ollama.package = pkgs.ollama-rocm;
 
         security.sudo.extraRules = [
           {

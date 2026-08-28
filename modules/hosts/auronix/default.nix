@@ -15,7 +15,7 @@
 
       # Hardware
       den.aspects.kernel
-      den.aspects.openrgb
+      # den.aspects.openrgb
 
       # Services
       # den.aspects.ssh
@@ -34,6 +34,10 @@
           ++ lib.optionals (builtins.pathExists (inputs.self + "/hosts/auronix/luks-configuration.nix")) [
             (inputs.self + "/hosts/auronix/luks-configuration.nix")
           ];
+
+        boot.kernelParams = [
+          "amdgpu.dcdebugmask=0x10"
+        ];
 
         hardware.cpu.amd.updateMicrocode = true;
 
@@ -97,6 +101,31 @@
 
         virtualisation.docker.enable = true;
         users.users.aul.extraGroups = [ "docker" ];
+
+        services.ollama.package = pkgs.ollama-cuda;
+
+        security.sudo.extraRules = [
+          {
+            users = [ "aul" ];
+            commands = [
+              {
+                # Boot0000 is verified as Windows Boot Manager
+                command = "${pkgs.efibootmgr}/bin/efibootmgr --bootnext 0000";
+                options = [ "NOPASSWD" ];
+              }
+              {
+                command = "/run/current-system/sw/bin/systemctl reboot";
+                options = [ "NOPASSWD" ];
+              }
+            ];
+          }
+        ];
+
+        boot.loader.limine.extraEntries = ''
+          /Windows
+            protocol: efi
+            path: guid(b588e80d-b2c9-4399-93ca-a72348fdc7e9):/EFI/Microsoft/Boot/bootmgfw.efi
+        '';
       };
   };
 }
