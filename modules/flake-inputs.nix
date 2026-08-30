@@ -46,5 +46,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter"; 
+    blender-bin.url = "github:edolstra/nix-warez?dir=blender";
   };
 }

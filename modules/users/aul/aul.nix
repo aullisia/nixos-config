@@ -53,7 +53,7 @@
       # User packages
       home.packages = with pkgs; [
         # Development
-        (blender.override { rocmSupport = true; })
+        blender
         tree
         inputs.nix-versions.packages.${pkgs.stdenv.hostPlatform.system}.default
 

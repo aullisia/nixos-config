@@ -37,6 +37,7 @@
 
         boot.kernelParams = [
           "amdgpu.dcdebugmask=0x10"
+          "acpi_backlight=native"
         ];
 
         hardware.cpu.amd.updateMicrocode = true;
@@ -88,13 +89,10 @@
           };
         };
 
-        # services.asusd = {
-        #   enable = true;
-        #   enableUserService = true;
-        # };
-        # services.supergfxd = {
-        #   enable = true;
-        # };
+        services.asusd = {
+          enable = true;
+        };
+        environment.systemPackages = with pkgs; [ asusctl ];
 
         hardware.enableRedistributableFirmware = true;
         services.power-profiles-daemon.enable = true;

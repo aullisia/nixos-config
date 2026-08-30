@@ -1,7 +1,7 @@
 { den, inputs, ... }:
 {
   den.aspects.overlays.nixos =
-    { ... }:
+    { host, ... }:
     {
       nixpkgs = {
         #NOTE: These are overlays, i.e patches etc to overwrite pkgs
@@ -17,6 +17,12 @@
 
               andromeda-launcher =
                 final.callPackage "${inputs.self}/pkgs/andromeda-launcher.nix" { };
+
+              blender =
+                if host.name == "auronix" then
+                  inputs.blender-bin.packages.${final.stdenv.hostPlatform.system}.default
+                else
+                  prev.blender.override { rocmSupport = true; };
           })
         ];
       };
