@@ -132,6 +132,7 @@
           "/var/lib/flatpak" # system-wide Flatpak repos/runtime (wiped otherwise; .var/app is per-user only)
           "/var/lib/libvirt"
           "/var/lib/nixos"
+          "/var/lib/tailscale" # node identity + login state; keeps you logged in + operator across reboots
           "/var/log"
           "/var/lib/sbctl"
           "/root"
@@ -200,6 +201,7 @@
             ".config/spotify"
             ".cache/spotify"
             ".config/heroic"
+            ".config/kdeconnect"
           ];
         };
       };

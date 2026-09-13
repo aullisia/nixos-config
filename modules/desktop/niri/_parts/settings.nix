@@ -1,12 +1,40 @@
-{ config, ... }:
+{ config, niriHost, ... }:
+let
+  workspacesByHost = {
+    b660 = {
+      "chat" = {
+        open-on-output = "LG Electronics MP59G 0x01010101";
+      };
+
+      "music" = {
+        open-on-output = "LG Electronics MP59G 0x01010101";
+      };
+    };
+
+    auronix = {
+      "1-laptop-empty" = {
+        open-on-output = "BOE NE160QDM-NYM Unknown";
+      };
+
+      "chat" = {
+        open-on-output = "BOE NE160QDM-NYM Unknown";
+      };
+
+      "music" = {
+        open-on-output = "BOE NE160QDM-NYM Unknown";
+      };
+    };
+  };
+
+  workspaces =
+    workspacesByHost.${niriHost.name}
+      or (throw "No Niri workspace configuration for host: ${niriHost.name}");
+in
 {
   programs.niri.settings = {
     prefer-no-csd = true;
 
-    workspaces = {
-      "chat" = { open-on-output = "LG Electronics MP59G 0x01010101"; };
-      "music" = { open-on-output = "LG Electronics MP59G 0x01010101"; };
-    };
+    inherit workspaces;
 
     hotkey-overlay = {
       skip-at-startup = true;
@@ -93,10 +121,6 @@
           height = 1080;
           refresh = 74.973;
         };
-      };
-
-      "Philips Consumer Electronics Company PHL 328E8Q 0x00002CA3" = {
-        enable = false;
       };
     };
 

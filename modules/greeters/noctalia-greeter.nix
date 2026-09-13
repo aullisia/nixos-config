@@ -1,7 +1,13 @@
 { den, inputs, ... }:
 {
   den.aspects.noctalia-greeter.nixos =
-    { pkgs, ... }:
+    { pkgs, lib, config, ... }:
+    let
+      theme = config.modules.theme or { };
+      greeter = theme.greeter or { };
+      cursor = greeter.cursor or { };
+      cursorPkg = ((theme.stylix or { }).cursor or { }).package or pkgs.catppuccin-cursors.mochaDark;
+    in
     {
       imports = [
         inputs.noctalia-greeter.nixosModules.default
@@ -9,8 +15,14 @@
 
       programs.noctalia-greeter = {
         enable = true;
-        settings.session.default = "niri";
+        settings = lib.recursiveUpdate
+          { session.default = "niri"; }
+          (greeter // lib.optionalAttrs (greeter ? cursor) {
+            cursor = cursor // { path = "${cursorPkg}/share/icons"; };
+          });
       };
+
+      environment.systemPackages = [ cursorPkg ];
 
       security.pam.services.greetd.enableGnomeKeyring = true;
 

@@ -134,6 +134,42 @@
       # faceIcon omitted → falls back to the default icon
     };
 
+    greeter = {
+      appearance = {
+        scheme = "Synced";
+        theme_mode = "dark";
+
+        palette = {
+          primary = "#ffffff";
+          on_primary = "#000000";
+          secondary = "#e0e0e0";
+          on_secondary = "#000000";
+          tertiary = "#d4d4d4";
+          on_tertiary = "#000000";
+          error = "#e0e0e0";
+          on_error = "#000000";
+          surface = "#000000";
+          on_surface = "#ffffff";
+          surface_variant = "#1c1c1c";
+          on_surface_variant = "#e0e0e0";
+          outline = "#666666";
+          shadow = "#000000";
+          hover = "#2a2a2a";
+          on_hover = "#ffffff";
+        };
+
+        wallpaper = {
+          path = ../../../assets/wallpaper/amoled_black_1920x1080.png;
+          fill_mode = "crop";
+        };
+      };
+
+      cursor = {
+        theme = "WhiteSur-cursors";
+        size = 24;
+      };
+    };
+
     apps = {
       browser = {
         title = "AMOLED Black & White";

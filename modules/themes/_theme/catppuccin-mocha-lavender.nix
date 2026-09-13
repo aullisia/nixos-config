@@ -145,6 +145,44 @@
       faceIcon = ../../../assets/icons/nix-lavender.png;
     };
 
+    greeter = {
+      appearance = {
+        # Declarative palette + wallpaper always win over the mutable sync.toml.
+        scheme = "Synced";
+        theme_mode = "dark";
+        font_family = "Roboto";
+
+        palette = {
+          primary = "#b4befe";
+          on_primary = "#11111b";
+          secondary = "#cba6f7";
+          on_secondary = "#11111b";
+          tertiary = "#f5e0dc";
+          on_tertiary = "#11111b";
+          error = "#f38ba8";
+          on_error = "#11111b";
+          surface = "#1e1e2e";
+          on_surface = "#cdd6f4";
+          surface_variant = "#313244";
+          on_surface_variant = "#bac2de";
+          outline = "#585b70";
+          shadow = "#11111b";
+          hover = "#45475a";
+          on_hover = "#cdd6f4";
+        };
+
+        wallpaper = {
+          path = ../../../assets/wallpaper/catppuccin_nix_1920x1080.png;
+          fill_mode = "crop";
+        };
+      };
+
+      cursor = {
+        theme = "catppuccin-mocha-dark-cursors";
+        size = 24;
+      };
+    };
+
     apps = {
       helix = {
         theme = "catppuccin_mocha-theme";

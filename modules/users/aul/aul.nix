@@ -19,6 +19,7 @@
       bluetooth
       flatpak
       nh
+      tailscale
 
       # -- Dev --
       godot
@@ -56,6 +57,7 @@
         blender
         tree
         inputs.nix-versions.packages.${pkgs.stdenv.hostPlatform.system}.default
+        filezilla
 
         # Image / Media
         qimgv

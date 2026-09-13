@@ -375,6 +375,7 @@ mkdir -p \
     "$TARGET/persistent/var/lib/flatpak" \
     "$TARGET/persistent/var/lib/libvirt" \
     "$TARGET/persistent/var/lib/nixos" \
+    "$TARGET/persistent/var/lib/tailscale" \
     "$TARGET/persistent/var/log" \
     "$TARGET/persistent/var/lib/sbctl" \
     "$TARGET/persistent/root" \
@@ -506,7 +507,9 @@ mkdir -p \
     "$TARGET/persistent/home/$TARGET_USER/.local/state/syncthing" \
     "$TARGET/persistent/home/$TARGET_USER/.config/spotify" \
     "$TARGET/persistent/home/$TARGET_USER/.cache/spotify" \
-    "$TARGET/persistent/home/$TARGET_USER/.config/heroic"
+    "$TARGET/persistent/home/$TARGET_USER/.config/heroic" \
+    "$TARGET/persistent/home/$TARGET_USER/.config/kdeconnect"
+    
 
 
 

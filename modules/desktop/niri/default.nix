@@ -34,7 +34,7 @@
       };
 
     homeManager =
-      { config, pkgs, lib, ... }:
+      { config, pkgs, lib, host, ... }:
       let
         theme = config.modules.theme or { };
         noct = theme.noctalia or { };
@@ -49,6 +49,8 @@
           ./_parts/autostart.nix
           inputs.noctalia.homeModules.default
         ];
+
+        _module.args.niriHost = host;
 
         programs.niri = {
           enable = true;
@@ -232,7 +234,8 @@
         home.file."Pictures/Wallpapers/${builtins.baseNameOf wall}".source = wall;
 
         home.packages = with pkgs; [
-          gcr
+          gcr_4
+          kdePackages.polkit-kde-agent-1
           xwayland-satellite
           wl-clipboard
           satty

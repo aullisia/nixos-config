@@ -94,6 +94,7 @@ PERSIST_DIRS_USER=(
     .config/spotify
     .cache/spotify
     .config/heroic
+    .config/kdeconnect
 )
 
 PERSIST_FILES_USER=()
