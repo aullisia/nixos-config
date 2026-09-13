@@ -76,6 +76,8 @@
 
         # Gaming
         prismlauncher
+        deadlock-mod-manager
+        spencer-macro-utilities
 
         # Other
         efibootmgr
@@ -89,6 +91,7 @@
         "org.ferdium.Ferdium"
         "app.twintaillauncher.ttl"
         "com.github.tchx84.Flatseal"
+        "im.fluffychat.Fluffychat"
       ];
     };
 

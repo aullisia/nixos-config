@@ -1,0 +1,175 @@
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  ninja,
+  pkg-config,
+  makeWrapper,
+  go,
+  alsa-lib,
+  dbus,
+  libei,
+  libdecor,
+  libGL,
+  libpulseaudio,
+  libxcb,
+  libxkbcommon,
+  libx11,
+  libxcursor,
+  libxext,
+  libxfixes,
+  libxi,
+  libxinerama,
+  libxrandr,
+  libxrender,
+  libxscrnsaver,
+  libxtst,
+  udev,
+  wayland,
+  wayland-protocols,
+  curl,
+  iproute2,
+  iptables,
+  kmod,
+  polkit,
+  pipewire,
+  xdg-desktop-portal,
+  zenity,
+}:
+
+let
+  runtimeTools = [
+    curl
+    iproute2
+    iptables
+    kmod
+    polkit
+    xdg-desktop-portal
+    zenity
+  ];
+  runtimeLibraries = [
+    alsa-lib
+    dbus
+    libei
+    libdecor
+    libGL
+    libpulseaudio
+    pipewire
+    libxkbcommon
+    udev
+    wayland
+    libx11
+    libxcursor
+    libxext
+    libxfixes
+    libxi
+    libxinerama
+    libxrandr
+    libxrender
+    libxscrnsaver
+    libxtst
+  ];
+  runtimePath = lib.makeBinPath runtimeTools;
+  runtimeLibraryPath = lib.makeLibraryPath runtimeLibraries;
+in
+stdenv.mkDerivation (finalAttrs: {
+  pname = "spencer-macro-utilities";
+  version = "3.4.0";
+
+  src = fetchFromGitHub {
+    owner = "Spencer0187";
+    repo = "Spencer-Macro-Utilities";
+    rev = "d65b3911c2dc6a5b0c5a9a529ebd6077db0e0020";
+    hash = "sha256-2JR+QZZZ+5yoX0/i72bjPcL5zpvl82ydxFmlMWURov4=";
+  };
+
+  nativeBuildInputs = [
+    cmake
+    ninja
+    pkg-config
+    makeWrapper
+    go
+  ];
+
+  buildInputs = runtimeLibraries ++ [
+    libxcb
+    wayland-protocols
+  ];
+
+  cmakeFlags = [
+    "-DCMAKE_BUILD_TYPE=Release"
+    "-DSMU_BUNDLE_SDL3=OFF"
+    "-DSMU_ENABLE_SOURCE_TREE_FALLBACK=OFF"
+    "-DSMU_LINK_SDL3_STATIC=ON"
+  ];
+  
+  preBuild = ''
+    export GOCACHE="$TMPDIR/go-cache"
+    export GOTMPDIR="$TMPDIR/go-tmp"
+    mkdir -p "$GOCACHE" "$GOTMPDIR"
+  '';
+
+  doCheck = true;
+  checkPhase = ''
+    runHook preCheck
+    ctest --output-on-failure -R '^linux-updater$'
+    runHook postCheck
+  '';
+
+  postInstall = ''
+    appDir="$out/libexec/spencer-macro-utilities"
+    mkdir -p "$appDir" "$out/bin" "$out/share/applications" \
+      "$out/share/icons/hicolor/256x256/apps" "$out/share/doc/spencer-macro-utilities"
+
+    mv "$out/Spencer-Macro-Utilities" "$appDir/Spencer-Macro-Utilities"
+    mv "$out/assets" "$appDir/assets"
+    mv "$out/nethelper" "$appDir/nethelper-unwrapped"
+
+    if [ -d "$out/scripts" ]; then
+      mv "$out/scripts" "$appDir/scripts"
+    fi
+    if [ -f "$out/LINUX_SETUP.md" ]; then
+      mv "$out/LINUX_SETUP.md" "$out/share/doc/spencer-macro-utilities/LINUX_SETUP.md"
+    fi
+    if [ -f "$out/LICENSE" ]; then
+      mv "$out/LICENSE" "$out/share/doc/spencer-macro-utilities/LICENSE"
+    fi
+    if [ -f "$out/PRIVACY.md" ]; then
+      mv "$out/PRIVACY.md" "$out/share/doc/spencer-macro-utilities/PRIVACY.md"
+    fi
+    if [ -f "$out/THIRD_PARTY_NOTICES.md" ]; then
+      mv "$out/THIRD_PARTY_NOTICES.md" \
+        "$out/share/doc/spencer-macro-utilities/THIRD_PARTY_NOTICES.md"
+    fi
+    if [ -d "$out/licenses" ]; then
+      mv "$out/licenses" "$out/share/doc/spencer-macro-utilities/licenses"
+    fi
+    rm -f "$out/run.sh"
+
+    makeWrapper "$appDir/nethelper-unwrapped" "$appDir/nethelper" \
+      --prefix PATH : "${runtimePath}"
+    makeWrapper "$appDir/Spencer-Macro-Utilities" "$out/bin/spencer-macro-utilities" \
+      --set SMU_APPDIR "$appDir" \
+      --prefix PATH : "${runtimePath}" \
+      --prefix LD_LIBRARY_PATH : "${runtimeLibraryPath}"
+
+    install -Dm644 "${finalAttrs.src}/AppImage/SMU.png" \
+      "$out/share/icons/hicolor/256x256/apps/spencer-macro-utilities.png"
+    install -Dm644 "${finalAttrs.src}/AppImage/SMU.desktop" \
+      "$out/share/applications/spencer-macro-utilities.desktop"
+  '';
+
+  passthru.runtimeDependencies = runtimeTools ++ runtimeLibraries;
+
+  meta = {
+    description = "Cross-platform macro utility for Roblox with a custom Lua scripting API";
+    homepage = "https://github.com/Spencer0187/Spencer-Macro-Utilities";
+    license = lib.licenses.gpl3Only;
+    mainProgram = "spencer-macro-utilities";
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+  };
+})

@@ -18,6 +18,9 @@
               andromeda-launcher =
                 final.callPackage "${inputs.self}/pkgs/andromeda-launcher.nix" { };
 
+              spencer-macro-utilities =
+                final.callPackage "${inputs.self}/pkgs/spencer-macro-utilities.nix" { };
+
               blender =
                 if host.name == "auronix" then
                   inputs.blender-bin.packages.${final.stdenv.hostPlatform.system}.default
