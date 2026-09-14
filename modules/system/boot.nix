@@ -26,6 +26,15 @@
             ]; # check: nix eval .#nixosConfigurations.b660.config.boot.loader.limine.secureBoot.enable
           };
         };
+
+        consoleLogLevel = 0;
+
+        kernelParams = [
+          "quiet"
+          "loglevel=3"
+          "systemd.show_status=auto"
+          "rd.udev.log_level=3"
+        ];
       };
 
       environment.systemPackages = [ pkgs.sbctl ];
