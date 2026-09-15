@@ -202,6 +202,8 @@
             ".cache/spotify"
             ".config/heroic"
             ".config/kdeconnect"
+            ".winboat"
+            "winboat"
           ];
         };
       };

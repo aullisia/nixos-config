@@ -58,6 +58,7 @@
         tree
         inputs.nix-versions.packages.${pkgs.stdenv.hostPlatform.system}.default
         filezilla
+        winboat
 
         # Image / Media
         qimgv
