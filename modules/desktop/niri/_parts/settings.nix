@@ -26,15 +26,80 @@ let
     };
   };
 
+    outputsByHost = {
+    b660 = {
+      "Samsung Electric Company LC34G55T HNTX201841" = {
+        mode = {
+          width = 3440;
+          height = 1440;
+          refresh = 164.999;
+        };
+
+        scale = 1.2;
+        position = {
+          x = 0;
+          y = 0;
+        };
+      };
+
+      "LG Electronics MP59G 0x01010101" = {
+        mode = {
+          width = 1920;
+          height = 1080;
+          refresh = 74.973;
+        };
+      };
+    };
+
+    auronix = {
+      # External Philips display on the left
+      "Philips Consumer Electronics Company PHL 328E8Q 0x00002CA3" = {
+        mode = {
+          width = 1920;
+          height = 1080;
+          refresh = 60.000;
+        };
+
+        scale = 1.0;
+
+        position = {
+          x = 0;
+          y = 0;
+        };
+      };
+
+      # Laptop display on the right
+      "BOE NE160QDM-NYM Unknown" = {
+        mode = {
+          width = 2560;
+          height = 1600;
+          refresh = 165.000;
+        };
+
+        scale = 1.5;
+
+        position = {
+          # Philips logical width: 1920
+          x = 1920;
+          y = 0;
+        };
+      };
+    };
+  };
+
   workspaces =
     workspacesByHost.${niriHost.name}
       or (throw "No Niri workspace configuration for host: ${niriHost.name}");
+
+  outputs =
+    outputsByHost.${niriHost.name}
+      or (throw "No Niri output configuration for host: ${niriHost.name}");
 in
 {
   programs.niri.settings = {
     prefer-no-csd = true;
 
-    inherit workspaces;
+    inherit workspaces outputs;
 
     hotkey-overlay = {
       skip-at-startup = true;
@@ -101,27 +166,6 @@ in
     cursor = {
       size = config.stylix.cursor.size;
       theme = config.stylix.cursor.name;
-    };
-
-
-    outputs = {
-      "Samsung Electric Company LC34G55T HNTX201841" = {
-        mode = {
-          width = 3440;
-          height = 1440;
-          refresh = 164.999;
-        };
-        scale = 1.2;
-        position = { x = 0; y = 0; };
-      };
-
-      "LG Electronics MP59G 0x01010101" = {
-        mode = {
-          width = 1920;
-          height = 1080;
-          refresh = 74.973;
-        };
-      };
     };
 
     environment = {
