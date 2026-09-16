@@ -115,6 +115,14 @@
         open-focused = false;
       }
 
+      {
+        matches = [
+          { app-id = "org.vinegarhq.Sober"; }
+        ];
+
+        open-fullscreen = true;
+      }
+
       # Satty
       {
         matches = [

@@ -70,6 +70,8 @@
             finegrained = true;
           };
 
+          dynamicBoost.enable = true;
+
           # RTX 5060 / Blackwell
           open = true;
 
