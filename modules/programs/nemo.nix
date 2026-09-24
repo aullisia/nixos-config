@@ -24,7 +24,7 @@
 
       services.udev.extraRules = ''
         KERNEL=="nvme[0-9]*", ENV{UDISKS_IGNORE}="1"
-        KERNEL=="nvme1n1p4", ENV{UDISKS_IGNORE}="0"
+        KERNEL=="nvme0n1p4", ENV{UDISKS_IGNORE}="0"
       '';
     };
 

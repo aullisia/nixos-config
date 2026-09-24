@@ -42,6 +42,7 @@
       steam
       heroic
       mangohud
+      prismlauncher
     ];
 
     homeManager =
@@ -78,14 +79,14 @@
         brave
 
         # Gaming
-        prismlauncher
         deadlock-mod-manager
         spencer-macro-utilities
 
         # Other
         efibootmgr
         qdirstat
-        impression
+        impression # USB media writer
+        mission-center
       ];
 
       services.flatpak.packages = [

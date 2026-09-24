@@ -52,12 +52,11 @@ let
     };
 
     auronix = {
-      # External Philips display on the left
-      "Philips Consumer Electronics Company PHL 328E8Q 0x00002CA3" = {
+      "PNP(AOC) 25G3ZM WKRRCHA001344" = {
         mode = {
           width = 1920;
           height = 1080;
-          refresh = 60.000;
+          refresh = 144.067;
         };
 
         scale = 1.0;
@@ -79,7 +78,7 @@ let
         scale = 1.5;
 
         position = {
-          # Philips logical width: 1920
+          # AOC logical width: 1920
           x = 1920;
           y = 0;
         };
