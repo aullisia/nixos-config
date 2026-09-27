@@ -22,6 +22,9 @@
       den.aspects.swap
       den.aspects.impermanence
       den.aspects.luks
+
+      # Apps
+      den.aspects.winboat
     ];
 
     nixos =
@@ -101,6 +104,11 @@
 
         virtualisation.docker.enable = true;
         users.users.aul.extraGroups = [ "docker" ];
+
+        # WinBoat 1.0 with the Helios WDDM bundle for guest GPU acceleration
+        # (Zink/OpenGL + DXVK + CLVK). Needs the retained bundle at the path
+        # set in modules/programs/winboat.nix; loads udmabuf kernel module.
+        winboat.helios.enable = true;
 
         services.ollama.package = pkgs.ollama-cuda;
 

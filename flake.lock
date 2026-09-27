@@ -301,6 +301,19 @@
         "type": "gitlab"
       }
     },
+    "helios-bundle": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789640828,
+        "narHash": "sha256-ZOYSl0nSNLz1w0bXi3aMIXkopKQ3uKYpJhiQhJAwtFo=",
+        "path": "/persistent/opt/helios-windows-x64-22.22.288.0",
+        "type": "path"
+      },
+      "original": {
+        "path": "/persistent/opt/helios-windows-x64-22.22.288.0",
+        "type": "path"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -744,6 +757,7 @@
         "den": "den",
         "flake-file": "flake-file",
         "flake-parts": "flake-parts",
+        "helios-bundle": "helios-bundle",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "import-tree": "import-tree",

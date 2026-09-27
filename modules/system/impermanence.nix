@@ -202,6 +202,8 @@
             ".cache/spotify"
             ".config/heroic"
             ".config/kdeconnect"
+            ".local/share/winboat-app"
+            ".config/winboat"
             ".winboat"
             "winboat"
           ];

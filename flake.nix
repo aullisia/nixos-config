@@ -5,6 +5,13 @@
 
   inputs = {
     blender-bin.url = "github:edolstra/nix-warez?dir=blender";
+    # Retained Helios GPU bundle; declared in modules/flake-inputs.nix
+    # (`hax helios-bundle`). `nix run .#write-flake` is currently broken by a
+    # flake-file/den input conflict, hence the manual entry here.
+    helios-bundle = {
+      url = "path:/persistent/opt/helios-windows-x64-22.22.288.0";
+      flake = false;
+    };
     den.url = "github:vic/den";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
