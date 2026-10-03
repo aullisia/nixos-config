@@ -9,7 +9,7 @@
     { command = [ "xwayland-satellite" ]; }
     { command = [ "noctalia" ]; }
     { command = [ "skwd-daemon" ]; }
-    { command = ["vesktop"]; }
+    { command = ["app.fluxer.Fluxer"]; }
     { command = ["spotify"]; }
     { command = [ "tailscale" "systray" ]; }
   ];

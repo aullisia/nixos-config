@@ -27,6 +27,7 @@
       helix
       jetbrains
       vscode
+      virt-manager
 
       # -- Apps --
       librewolf
@@ -98,7 +99,7 @@
         "org.ferdium.Ferdium"
         "app.twintaillauncher.ttl"
         "com.github.tchx84.Flatseal"
-        "im.fluffychat.Fluffychat"
+        "app.fluxer.Fluxer"
       ];
     };
 

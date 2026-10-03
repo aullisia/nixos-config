@@ -31,6 +31,10 @@
                 name = "flathub-beta";
                 location = "https://flathub.org/beta-repo/flathub-beta.flatpakrepo";
               }
+              {
+                name = "fluxer";
+                location = "https://pkgs.fluxer.com/flatpak/fluxer.flatpakref";
+              }
             ];
 
             overrides = {
