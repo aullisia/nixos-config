@@ -50,13 +50,13 @@ in
 buildNpmPackage (finalAttrs: {
   pname = "winboat";
   # 1.0-bleeding-edge branch; upstream package.json says 1.0.9
-  version = "1.0.9-unstable-2026-09-14";
+  version = "1.0.9-unstable-2026-10-04";
 
   src = fetchFromGitHub {
     owner = "winboat-org";
     repo = "winboat";
-    rev = "32eceedfe3fe769c87c67335b9d146d115b0c6e1";
-    hash = "sha256-ARX7YR0Hx3rECo8OvxMpci60Ok40nt9lQxYaM9Ro52A=";
+    rev = "f098ba91a45fb38183bedae2c8cdacd50af941aa";
+    hash = "sha256-e2XF8DXfNOHSL9N3luDkveKwtGwrlMCxiY6dZG7bzmA=";
   };
 
   nodejs = nodejs_24; # package.json engines: node >=23.6.0, .npmrc sets engine-strict
@@ -64,7 +64,7 @@ buildNpmPackage (finalAttrs: {
   # Upstream ships only bun.lock and has no npm lockfile. The vendored
   # package-lock.json is generated from package.json (see README.md); it must be
   # regenerated whenever upstream dependencies change.
-  npmDepsHash = "sha256-P2mnXBDI53TGywSdOnYAh8+mRMVQpYo+azWRwwdeLgM=";
+  npmDepsHash = "sha256-25Nlo0lfPZFzAF3HpMljC96Dc1SA9dGe1B4bidGHHmk=";
   makeCacheWritable = true;
 
   # The hook's `npm rebuild` would run usb's install script before the C++

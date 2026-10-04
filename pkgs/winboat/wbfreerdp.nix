@@ -17,7 +17,7 @@
 }:
 
 let
-  rev = "24b2e41269ecd04b9cd2dbea72fb8406b69b16a0";
+  rev = "9e3f5a9d49a9fbf02f449122934fdfd027dbed53";
 in
 (freerdp.override {
   buildServer = false;
@@ -31,7 +31,7 @@ src = fetchFromGitHub {
       owner = "winboat-org";
       repo = "WBFreeRDP";
       inherit rev;
-      hash = "sha256-+RpG3JdTRMC9nGXwfrcU1DEt5k6A34wa4wkJoQUhCY8=";
+      hash = "sha256-x4czU/O+TbLkCG1H+p4sp3S3YM9Y/0zb657A62UeCPg=";
     };
 
     # nixpkgs' freerdp expression tracks 3.31.x. If a substituteInPlace in its
