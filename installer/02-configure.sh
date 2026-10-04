@@ -497,6 +497,7 @@ mkdir -p \
     "$TARGET/persistent/home/$TARGET_USER/.local/share/Steam" \
     "$TARGET/persistent/home/$TARGET_USER/.steam" \
     "$TARGET/persistent/home/$TARGET_USER/.local/share/PrismLauncher" \
+    "$TARGET/persistent/home/$TARGET_USER/.local/share/flatpak" \
     "$TARGET/persistent/home/$TARGET_USER/.var/app" \
     "$TARGET/persistent/home/$TARGET_USER/.config/obsidian" \
     "$TARGET/persistent/home/$TARGET_USER/.config/zsh" \

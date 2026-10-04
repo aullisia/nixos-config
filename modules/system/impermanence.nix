@@ -153,6 +153,7 @@
           "/etc/ssh/ssh_host_rsa_key"
           "/etc/ssh/ssh_host_rsa_key.pub"
           "/var/lib/systemd/random-seed" # smooths entropy reset across boots
+          "/var/lib/systemd/credential.secret"
         ];
 
         # Per-user whitelist for $HOME. This is deliberately a whitelist,
@@ -190,6 +191,7 @@
             ".local/share/Steam"
             ".steam"
             ".local/share/PrismLauncher"
+            ".local/share/flatpak"
             ".var/app"
             ".config/obsidian"
             ".config/zsh"
