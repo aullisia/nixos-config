@@ -10,7 +10,10 @@
     {
       services.tailscale = {
         enable = true;
-        extraSetFlags = [ "--operator=aul" ];
+        extraSetFlags = [ 
+          "--operator=aul"
+           "--accept-routes=true"
+        ];
       };
       networking.nftables.enable = true;
       networking.firewall = {

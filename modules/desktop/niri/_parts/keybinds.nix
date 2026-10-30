@@ -103,6 +103,12 @@ in
         title = "screenshot region";
       };
     };
+    "super+shift+s" = {
+      action = spawn [ "noctalia" "msg" "screenshot-region" ];
+      hotkey-overlay = {
+        title = "screenshot region";
+      };
+    };
 
     # Workspace switching
     "super+wheelscrolldown" = { action = focus-workspace-down; "cooldown-ms" = 150; };

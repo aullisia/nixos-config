@@ -208,6 +208,12 @@
             ".config/winboat"
             ".winboat"
             "winboat"
+            ".local/share/dev.stormix.deadlock-mod-manager"
+            ".config/unity3d"
+            ".local/share/RimSort"
+            ".local/share/geteduroam"
+            ".config/Element"
+            ".config/libreoffice"
           ];
         };
       };

@@ -48,6 +48,7 @@
           { app-id = "rider"; }
           { app-id = "webstorm"; }
           { app-id = "vesktop"; }
+          { app-id = "app.fluxer.Fluxer"; }
           { app-id = "obsidian"; }
           { app-id = "org.ferdium.Ferdium"; }
           { app-id = "spotify"; }
@@ -94,6 +95,15 @@
       {
         matches = [
           { app-id = ''vesktop''; }
+        ];
+        open-on-workspace = "chat";
+        open-maximized = true;
+      }
+
+      # Fluxer
+      {
+        matches = [
+          { app-id = "app.fluxer.Fluxer"; }
         ];
         open-on-workspace = "chat";
         open-maximized = true;

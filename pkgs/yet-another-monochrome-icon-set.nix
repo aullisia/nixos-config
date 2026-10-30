@@ -13,7 +13,7 @@ stdenvNoCC.mkDerivation {
     owner = "dirn-typo";
     repo = "yet-another-monochrome-icon-set";
     rev = "main";
-    hash = "sha256-3BA2+Kl0LBz43Ugaaf24dKRFJq7a5R5Vzu2GiaeYxos=";
+    hash = "sha256-auY9G706HBivoGJCiUvDKouTnu2AvpJOcPVw5ZFS73c=";
   };
 
   nativeBuildInputs = [ gtk3 ];

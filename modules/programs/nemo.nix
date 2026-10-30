@@ -23,8 +23,10 @@
         '';
 
       services.udev.extraRules = ''
+        # Ignore all NVMe partitions by default so only the ones we want are shown
         KERNEL=="nvme[0-9]*", ENV{UDISKS_IGNORE}="1"
-        KERNEL=="nvme0n1p4", ENV{UDISKS_IGNORE}="0"
+        # Unignore only the shared drive by UUID (stable across drive reordering)
+        ENV{ID_FS_UUID}=="8A42029B42028BDF", ENV{UDISKS_IGNORE}="0"
       '';
     };
 

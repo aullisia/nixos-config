@@ -309,7 +309,7 @@
       home.packages = with pkgs; [ arrpc ];
 
       # Replace HM-managed read-only symlinks with writable copies so vesktop can write settings at runtime
-      home.activation.vesktopSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      home.activation.fixVesktopSettingsWritable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         for f in \
           "$HOME/.config/vesktop/settings.json" \
           "$HOME/.config/vesktop/settings/settings.json"; do

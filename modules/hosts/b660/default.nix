@@ -23,7 +23,7 @@
       den.aspects.impermanence
 
       # Apps
-      den.aspects.winboat
+      # den.aspects.winboat
 
       # Other
       den.aspects.ollama
@@ -67,7 +67,7 @@
 
         services.ollama.package = pkgs.ollama-rocm;
 
-        winboat.helios.enable = true;
+        # winboat.helios.enable = true;
 
         security.sudo.extraRules = [
           {

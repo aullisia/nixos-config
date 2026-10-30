@@ -48,7 +48,7 @@
     noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter"; 
     blender-bin.url = "github:edolstra/nix-warez?dir=blender";
     helios-bundle = {
-      url = "path:/persistent/opt/helios-windows-x64-22.22.288.0";
+      url = "path:/home/aul/.local/share/helios-bundle";
       flake = false;
     };
   };

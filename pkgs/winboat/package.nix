@@ -50,7 +50,7 @@ in
 buildNpmPackage (finalAttrs: {
   pname = "winboat";
   # 1.0-bleeding-edge branch; upstream package.json says 1.0.9
-  version = "1.0.9-unstable-2026-10-04";
+  version = "1.0.9-unstable-2026-10-16";
 
   src = fetchFromGitHub {
     owner = "winboat-org";

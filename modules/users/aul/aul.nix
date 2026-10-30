@@ -60,9 +60,6 @@
         tree
         inputs.nix-versions.packages.${pkgs.stdenv.hostPlatform.system}.default
         filezilla
-        # NOTE: winboat 1.0 (with Helios GPU bundle) is installed by the
-        # den.aspects.winboat module (modules/programs/winboat.nix) instead of
-        # the nixpkgs 0.9.x package, so it is NOT listed here.
 
         # Image / Media
         qimgv
@@ -80,6 +77,7 @@
         libreoffice-qt
         obsidian
         brave
+        thunderbird
 
         # Gaming
         deadlock-mod-manager
@@ -91,6 +89,10 @@
         impression # USB media writer
         mission-center
         qbittorrent
+        rimsort
+        geteduroam
+        element-desktop
+        commet-chat
       ];
 
       services.flatpak.packages = [

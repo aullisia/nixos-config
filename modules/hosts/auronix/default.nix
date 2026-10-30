@@ -103,11 +103,10 @@
         services.power-profiles-daemon.enable = true;
 
         virtualisation.docker.enable = true;
+        virtualisation.docker.enableNvidia = true;
         users.users.aul.extraGroups = [ "docker" ];
+        hardware.nvidia-container-toolkit.enable = true;
 
-        # WinBoat 1.0 with the Helios WDDM bundle for guest GPU acceleration
-        # (Zink/OpenGL + DXVK + CLVK). Needs the retained bundle at the path
-        # set in modules/programs/winboat.nix; loads udmabuf kernel module.
         winboat.helios.enable = true;
 
         services.ollama.package = pkgs.ollama-cuda;
